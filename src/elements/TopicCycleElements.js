@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 
 export const TopicCycleWrapper = styled.div`
   height: 80vh;
-  max-width: 50%;
+  max-width: 80%;
   display: flex;
   flex-direction: column;
   /* 

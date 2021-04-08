@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import rangeParser from "parse-numeric-range";
-import theme from "prism-react-renderer/themes/palenight"; //CHANGE THEME
+import theme from "prism-react-renderer/themes/dracula"; //CHANGE THEME
 import { MdContentCopy } from "react-icons/md";
+import { IoIosCheckmark } from "react-icons/io";
 export const Code = ({ codeString, language, metastring, ...props }) => {
   const [copied, setCopied] = useState(false);
-  console.log(codeString);
   const calculateLinesToHighlight = (meta) => {
     const RE = /{([\d,-]+)}/;
     if (RE.test(meta)) {
@@ -65,14 +65,26 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
             <div className="upper">
               <div className="displayFile">{fileName}</div>
               {copyable ? (
-                <MdContentCopy className="copyIcon" onClick={copyFunction} />
+                <>
+                  {copied ? (
+                    <>
+                      <IoIosCheckmark className="checkIcon" />
+                      <span>Copied!</span>
+                    </>
+                  ) : (
+                    <MdContentCopy
+                      className="copyIcon"
+                      onClick={copyFunction}
+                    />
+                  )}
+                </>
               ) : null}
-              {copied ? <span>Copied!</span> : null}
             </div>
           ) : null}
           <pre className={className} style={{ ...style }}>
             {tokens.map((line, index) => {
               const lineProps = getLineProps({ line, key: index });
+              console.log(lineProps);
               if (shouldHighlightLine(index)) {
                 lineProps.className = `${lineProps.className} highlight-line`;
               }

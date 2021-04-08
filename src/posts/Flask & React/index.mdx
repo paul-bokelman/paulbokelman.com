@@ -1,7 +1,7 @@
 ---
 title: Flask & React
 slug: flask-and-react
-date: 2020-05-21
+date: 2020-04-07
 featureImage: finishedPython.gif
 excerpt: Use the flask framework as a backend to a React application.
 ---
@@ -56,6 +56,8 @@ py -m venv env
 python -m virtualenv env
 ```
 
+> **Note:** The virtual environment must be activated everytime you need access to the functions of the packages installed this means that you cannot run your python project that depends on packages inside of the virtual environment without activating it first.
+
 ## At this point in time our filesystem should look like this.
 
 ```
@@ -81,6 +83,200 @@ python-react/
 <!-- > **Problems?**
 > -->
 
-> If you have any issues with this step please refer to the virtual environment documentation by [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/).
-
 ## After the virtual environment is activated we have to install our project dependencies or packages. To do this first exit the Scripts or bin directory back to the main python directory by using `cd..` or `cd -` on mac/linux (goes back 1 directory). When you are in your main python folder we need to install Flask and SQLAlchemy, to do this run `pip install flask` for flask and `pip install flask-sqlalchemy` for SQLAlchemy. This will install our packages in our virtual environment.
+
+## Now we can get into setting up our backend of our project or our python. In the "python" folder in your project create a new file and name it `app.py`, this can be done through the terminal or your code-editor.
+
+## Open the `app.py` python file in your desired text editor and import packages listed below from the two dependencies we installed. These packages from Flask and SQLAlchemy are what we are going to use to create a function api.
+
+```python
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+```
+
+## Now we need to initialize Flask and SQLAlchemy as well as setting up the config for SQLAlchemy.
+
+```python
+app = Flask(__name__) #setting App = to the Flask() class with the value of __name__ ('__main__')
+db = SQLAlchemy() #setting db (database) = the package SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db' #database location for creation and reference
+db = SQLAlchemy(app) #passing app parameter to db
+```
+
+## Here it is our `app.py` so far...
+
+<!-- ADD LINE NUMBERS -->
+
+```python [app.py]/copy/
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+db = SQLAlchemy()
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db = SQLAlchemy(app)
+```
+
+## Next we have to create a model for our database. A model very basically is our framework of our database and contains the content for how many columns we are going to have and what is in those specific columns. The way we do this through flask and SQLAlchemy is as follows.
+
+```python
+class Info(db.Model): #Defining the model as 'Info' (name of the database)
+    id = db.Column(db.Integer, primary_key=True) #creating the 'id' column which is an integer and is different for every record
+    name = db.Column(db.String(50)) #creating 'name' column which is a string with a limit of 50 characters
+    age = db.Column(db.Integer) #creating 'age' column which is a integer
+    language = db.Column(db.String(50)) #creating 'language' column which is a string with a limit of 50 characters
+```
+
+## All together so far...
+
+<!-- ADD LINE NUMBER -->
+
+```python [app.py]/copy/
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+db = SQLAlchemy()
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db = SQLAlchemy(app)
+
+class Info(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(50))
+   age = db.Column(db.Integer)
+   language = db.Column(db.String(50))
+```
+
+## Now that we have our model in place we need a way to "POST" or add information to our database from our react app. In flask we can use a `@app.route` decorator to set a route that has a function and is run when accessed. Simply, when we access our route it will run our function that will take input data from the front end and record it and store it to the database.
+
+```python
+@app.route('/add_info', methods=['POST']) #using flask app.route to set route for /add_info with ability to post
+def add_info(): #defining add_info function
+   info_data = request.get_json() #parses data to json object
+
+   new_info = Info(name=info_data['name'], age=info_data['age'], language=info_data['language'])
+   #^setting new_info variable = Info model (database) with different columns
+   db.session.add(new_info) #passes state to database
+   db.session.commit() #finalizes changes to database
+
+   return 'Done', 201 #confirmation message on sucess
+```
+
+## After creating the `/add_info` route we have a way to add information to the database but now we need to receive the information to display on the screen. Again we will use the `@app.route` decorator but this time when our function is called we want to return a json object array of our current records in our database. We will do this by first searching (query) the database and setting it equal to a variable, then setting each of the columns and their information = infos.
+
+```python
+@app.route('/info') #setting route where function can be accessed
+def info(): #defining the function
+   info_list = Info.query.all() #searching through the database
+   infos = [] #setting 'infos' to an empty array
+
+   for info in info_list: #for loop is used for iterating over the sequence
+      infos.append({'name': info.name, 'age' : info.age, 'language' : info.language}) #adds different records to array
+
+   return jsonify({'info': infos}) #converts array to json object
+```
+
+## Now that we have both of our routes the last thing to do in our app.py is to add a way to run the app. Because `__name__` is the same as `__main__` we can use it an if statement that runs the app if its true.
+
+```python
+if __name__ == '__main__': #checking if __name__ = '__main__'
+   app.run(debug=True) #if true then run the app with debug=true (reloads server on changes)
+```
+
+## All of that looks like this all together...
+
+```python [app.py]/copy/
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+db = SQLAlchemy()
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db = SQLAlchemy(app)
+
+class Info(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(50))
+   age = db.Column(db.Integer)
+   language = db.Column(db.String(50))
+
+@app.route('/add_info', methods=['POST'])
+def add_info():
+   info_data = request.get_json()
+
+   new_info = Info(name=info_data['name'], age=info_data['age'], language=info_data['language'])
+
+   db.session.add(new_info)
+   db.session.commit()
+
+   return 'Done', 201
+
+@app.route('/info')
+def info():
+   info_list = Info.query.all()
+   infos = []
+
+   for info in info_list:
+      infos.append({'name': info.name, 'age' : info.age, 'language' : info.language})
+
+   return jsonify({'info': infos})
+
+if __name__ == '__main__':
+   app.run(debug=True)
+```
+
+## Our app.py is now done! Although we still need to create our database.db this can be done through the terminal and is the last step besides running the project that needs to be done on the backend. In order to create the database go back to the terminal (make sure your env is activated) and make sure you are in the directory with your app.py. First open the python terminal through your terminal to do this run `py` on windows or `python` on mac/linux. Your terminal will show `>>>` before your text that means you are in the python terminal. The next step is to import the database from your app.py, to do this run `from app import db`. After you have imported your db run `db.create_all()` this will access your model and create the columns that you have added. After this is done you can run `exit()` to exit the python prompt.
+
+```cmd
+py
+from app import db
+db.create_all()
+exit()
+```
+
+```bash
+python
+from app import db
+db.create_all()
+exit()
+```
+
+## Our database.db is now created and should show up next to your app.py in your filesystem. You can open and view your database.db with [DB Browser](https://sqlitebrowser.org/) for sqlite and check for the table with the desired columns to insure that it was created properly. Now that we have created the database all thats left is to run the flask application, to do this run `py app.py` on windows or `python app.py` on mac/linux.
+
+## The application will be launched on [localhost:5000](http://localhost:5000/). You will see a "Not Found" page don't panic this is what is suppose to happen. The reason that there is no content is because we never returned any html and this is because we are using react to return the front end. If you want to test your database you can make GET and POST requests with [Postman](https://www.postman.com/downloads/), but I will not be covering how to use Postman here.
+
+## The python side of things or the backend of the project is now finished now we have to configure the front end of the project using ReactJS.
+
+# React
+
+## The first thing we have to do is configure our filesystem to get started. First, in the `src` directory add a `components` folder. This will house all of our components and allow for easy access. Inside of our `components` folder create a file called `DisplayInfo.js` and a file called `InfoForm.js`.
+
+- `DisplayInfo.js`
+  - will be used to display/render the contents of the JSON object that is received.
+- `InfoForm.js`
+  - will have 3 input fields that will each change the value of a corresponding value and later sending the output of the new values as a POST request to the backend.
+
+## These two files will be our components that we will later join with the rest of the UI. Your filesystem should look like this after adding the components.
+
+```
+python-react/
+├─ node_modules/...
+├─ public/...
+├─ python/...
+├─ src/
+│  ├─ components/
+│  │  ├─ DisplayInfo.js
+│  │  ├─ InfoForm.js
+│  ├─ App.css
+│  ├─ App.js
+│  ├─ App.test.js
+│  ├─ Index.css
+│  ├─ Index.js
+│  ├─ reportWebVitals.js
+│  ├─ setupTests.js
+├─ .eslintcache
+├─ .gitignore
+├─ package-lock.json
+├─ package.json
+├─ README.md
+```

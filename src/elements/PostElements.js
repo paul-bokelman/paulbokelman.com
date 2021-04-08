@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PostWrapper = styled.main`
-  margin: 6% 28%;
+  margin: 6% 23%;
   z-index: 10;
 
   //mdx themes
@@ -114,13 +114,13 @@ export const PostWrapper = styled.main`
     /* margin: 0rem auto; */
   }
 
-  blockquote strong {
+  /* blockquote strong {
     color: ${(props) => props.theme.colors.code};
     top: -5rem;
     font-size: 1.6rem;
     max-width: 38rem;
     font-weight: 600;
-  }
+  } */
 
   blockquote a {
     font-weight: bold;
