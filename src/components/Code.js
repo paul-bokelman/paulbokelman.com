@@ -20,7 +20,6 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
   const getFileName = (meta) => {
     const regex = /\[(.*)\]+/g;
     if (meta !== undefined) {
-      console.log(meta);
       return regex.exec(meta)[1];
     }
   };
@@ -43,9 +42,18 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
     setCopied(true);
   };
 
+  const getRenderLineNumbers = (meta) => {
+    if (meta !== undefined) {
+      if (meta.includes("-r-")) {
+        return true;
+      }
+    }
+  };
+
   const shouldHighlightLine = calculateLinesToHighlight(metastring);
   const fileName = getFileName(metastring);
   const copyable = getCopyable(metastring);
+  const renderLineNumber = getRenderLineNumbers(metastring);
 
   return (
     <Highlight
@@ -84,12 +92,14 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
           <pre className={className} style={{ ...style }}>
             {tokens.map((line, index) => {
               const lineProps = getLineProps({ line, key: index });
-              console.log(lineProps);
               if (shouldHighlightLine(index)) {
                 lineProps.className = `${lineProps.className} highlight-line`;
               }
               return (
                 <div key={index} {...lineProps}>
+                  {renderLineNumber ? (
+                    <span className="line-number">{index + 1}</span>
+                  ) : null}
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}

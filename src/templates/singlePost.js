@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React, { createRef, useEffect } from "react";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import {
@@ -9,7 +9,7 @@ import {
   ReadingProgress,
 } from "../components";
 
-const singlePost = ({ data }) => {
+const SinglePost = ({ data }) => {
   const target = createRef();
   const featureImage =
     data.mdx.frontmatter.featureImage.childImageSharp !== null
@@ -17,6 +17,18 @@ const singlePost = ({ data }) => {
       : data.mdx.frontmatter.featureImage.publicURL;
 
   const seoImage = data.mdx.frontmatter.featureImage.publicURL;
+
+  useEffect(() => {
+    const anchors = document
+      .getElementById("container")
+      .getElementsByTagName("a");
+    console.log(anchors);
+    for (let i = 0; i < anchors.length; i++) {
+      console.log(anchors);
+      anchors[i].setAttribute("target", "_blank");
+    }
+  }, []);
+
   return (
     <Container>
       <Seo
@@ -52,7 +64,7 @@ const singlePost = ({ data }) => {
   );
 };
 
-export default singlePost;
+export default SinglePost;
 
 export const pageQuery = graphql`
   query SinglePostQuery($id: String!) {

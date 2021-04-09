@@ -1,9 +1,8 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Container, FeatureImage, Seo, TopicCycle } from "../components";
-// import { H1, P } from "../elements";
+import { Container, Seo, TopicCycle } from "../components"; //FeatureImage
 
-const allPosts = ({ data }) => {
+const AllPosts = ({ data }) => {
   const posts = data.allMdx.edges;
   return (
     <Container>
@@ -14,7 +13,7 @@ const allPosts = ({ data }) => {
   );
 };
 
-export default allPosts;
+export default AllPosts;
 
 export const pageQuery = graphql`
   query {

@@ -5,9 +5,11 @@ export const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(false);
   return (
     <ThemeToggleWrapper>
-      <div onClick={() => setIsDark(!isDark)}>
-        {isDark === false ? <BiSun /> : <BiMoon />}
-      </div>
+      {isDark === false ? (
+        <BiSun onClick={() => setIsDark(!isDark)} />
+      ) : (
+        <BiMoon onClick={() => setIsDark(!isDark)} />
+      )}
     </ThemeToggleWrapper>
   );
 };

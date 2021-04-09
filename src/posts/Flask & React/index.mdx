@@ -105,9 +105,7 @@ db = SQLAlchemy(app) #passing app parameter to db
 
 ## Here it is our `app.py` so far...
 
-<!-- ADD LINE NUMBERS -->
-
-```python [app.py]/copy/
+```python -r-[app.py]/copy/
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 
@@ -129,9 +127,7 @@ class Info(db.Model): #Defining the model as 'Info' (name of the database)
 
 ## All together so far...
 
-<!-- ADD LINE NUMBER -->
-
-```python [app.py]/copy/
+```python -r-[app.py]/copy/
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 
@@ -241,6 +237,8 @@ db.create_all()
 exit()
 ```
 
+> **NOTE:** The python snippets must be run one at a time, do not copy and paste all together or the terminal will throw an error.
+
 ## Our database.db is now created and should show up next to your app.py in your filesystem. You can open and view your database.db with [DB Browser](https://sqlitebrowser.org/) for sqlite and check for the table with the desired columns to insure that it was created properly. Now that we have created the database all thats left is to run the flask application, to do this run `py app.py` on windows or `python app.py` on mac/linux.
 
 ## The application will be launched on [localhost:5000](http://localhost:5000/). You will see a "Not Found" page don't panic this is what is suppose to happen. The reason that there is no content is because we never returned any html and this is because we are using react to return the front end. If you want to test your database you can make GET and POST requests with [Postman](https://www.postman.com/downloads/), but I will not be covering how to use Postman here.
@@ -279,4 +277,154 @@ python-react/
 ├─ package-lock.json
 ├─ package.json
 ├─ README.md
+```
+
+## We will start in our `package.json` file in our root. Usually you wouldn't have to make changes to this file but in this case we need to proxy our request to the localhost as well as ignore the client to allow our request to pass through. Make the changes shown below for `--ignore client` and `"proxy": "https://localhost:5000"`. The newly edited `package.json` should now look like this.
+
+```json {6,17}[package.json]/copy/
+// It is not recommended that you copy and paste the entire snippet.
+{
+  "name": "python-api-and-react", // YOUR PROJECT NAME
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:5000",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts start --ignore client",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": ["react-app", "react-app/jest"]
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+```
+
+## After making the changes you can close your package.json because we do not need to make anymore changes. The next thing we are going to do is configure our `App.js`. The purpose of our `App.js` will be to create a GET request on load, and pass that information as a prop as well as display our components (`DisplayInfo.js` and `InfoForm.js`). To quickly setup our `App.js` and remove unwanted elements we will first remove line one which is `import logo from './logo.svg';` this is just a template image but we will not be using it, you can also delete it from the filesytem. In its place on line 1 we will import react with the useState and useEffect hooks, to do this add `import React, {useState, useEffect} from "react";`. Now we need to import our components in order to do this add `import DisplayInfo from "./components/DisplayInfo";` and `import InfoForm from "./components/InfoForm";` to lines 3 & 4. Lastly, we will also delete the return content so that we can add our own.
+
+```jsx -r-[app.py]/copy/
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import DisplayInfo from "./components/DisplayInfo";
+import InfoForm from "./components/InfoForm";
+
+function App() {
+  return (
+    <div>
+      <h1>Hello World!</h1>
+    </div>
+  );
+}
+
+export default App;
+```
+
+## The first thing we want to do in our empty `App.js` is add a constant variable that utilizes the `useState` hook to hold the information from our JSON object on our backend. So we will have `infos` and `setInfo` set to an empty array in order to hold the JSON to later display it.
+
+```jsx
+const [infos, setInfo] = useState([]);
+```
+
+## Now we need to actually "fetch" our JSON object or information from our api. We are going to use the `useEffect` hook in order to make this request when the page loads. Inside of our `useEffect` we will fetch from [localhost:5000/info](http://localhost:5000/info) then set that response as a JSON object and then set that JSON object equal to the variable of `infos` by using `setInfo(info.data)`.
+
+```jsx
+useEffect(() => {
+  fetch("/info").then((response) =>
+    response.json().then((data) => {
+      setInfo(data.info);
+    })
+  );
+}, []);
+```
+
+## Lets get into the JSX for the `App.js`. What we need to do is import our components in order to render them when our App function is called (on page load). To do this we can import them as short hand tags, the first component will will import is the `InfoForm.js` component to do this we can simply put `<InfoForm />` in our return section wrapped by div. Since we have two components we also need to import `DisplayInfo.js` and to do that we will put `<DisplayInfo />` below our previous component because that is the order we want them to render.
+
+## After we have identified and imported our components we need to pass props to them. This will allow our components to have access to variables defined in our main application. You can pass props by setting a name for them and then setting it to the variable you want to pass, this happens all inside of your component in your jsx. Because we want access to the `infos` variable defined above in our `DisplayInfo` component we need to pass it with props to do this can can simply import the component then pass `infos` as "infos" at the end it looks `<DisplayInfo infos={infos}/>`. Now our `DisplayInfo` component will have access to `Infos` after we import the props. The next thing that we need to do is pass a function prop into the `<InfoForm />` this function will be responsible for handling what happens when we have a new POST request the way we can do this is as follows, `<InfoForm onNewInfo={(info) => setInfo((currentInfo) => [info, ...currentInfo])}/>`.
+
+```jsx -r-{19-24}[app.py]/copy/
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import DisplayInfo from "./components/DisplayInfo";
+import InfoForm from "./components/InfoForm";
+
+function App() {
+  const [infos, setInfo] = useState([]);
+
+  useEffect(() => {
+    fetch("/info").then((response) =>
+      response.json().then((data) => {
+        setInfo(data.info);
+      })
+    );
+  }, []);
+
+  return (
+    <div>
+      <center>
+        <InfoForm
+          onNewInfo={(info) => setInfo((currentInfo) => [info, ...currentInfo])}
+        />
+        <DisplayInfo infos={infos} />
+      </center>
+    </div>
+  );
+}
+export default App;
+```
+
+## At this point our `App.js` is now finished and we now need to configure the components in our project. We will start with the `DisplayInfo.js` component. The purpose of this component will be to render the information from the database as well as update automatically when there are new records added.
+
+## Right now our component is empty so we need to manually set it up in order to do this all we have to do is import react and have an arrow function that returns our jsx and that is also exported as default. This component needs to access the `infos` variable so in order to do that we can destructure the props inside of the parameters of the arrow function.
+
+```jsx -r-[DisplayInfo.js]/copy/
+import React from "react";
+
+const DisplayInfo = ({ infos }) => {
+  return <div></div>;
+};
+
+export default DisplayInfo;
+```
+
+## The only thing left to do in this component is to actually display the information from the received array. To do this we can use the [`map()`](https://www.w3schools.com/jsref/jsref_map.asp) function to get each object in the array then display their properties in the form of a table.
+
+```jsx -r-{6-16}[DisplayInfo.js]/copy/
+import React from "react";
+
+const DisplayInfo = ({ infos }) => {
+  return (
+    <div>
+      {infos.map((info) => {
+        return (
+          <table key={info.name}>
+            <tr>
+              <td>{info.name}</td>
+              <td>{info.age}</td>
+              <td>{info.language}</td>
+            </tr>
+          </table>
+        );
+      })}
+    </div>
+  );
+};
+
+export default DisplayInfo;
 ```

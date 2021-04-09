@@ -3,7 +3,7 @@ import { ContainerWrapper } from "../elements";
 import { Nav, Footer } from "../components";
 export const Container = ({ children }) => {
   return (
-    <ContainerWrapper>
+    <ContainerWrapper id="container">
       <Nav />
       {children}
       <Footer />

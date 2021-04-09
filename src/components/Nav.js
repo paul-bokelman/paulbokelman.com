@@ -1,5 +1,5 @@
 import React from "react";
-import { useStaticQuery, Link, graphql } from "gatsby";
+import { Link } from "gatsby";
 import { NavWrapper } from "../elements";
 import { ThemeToggle } from "../components";
 

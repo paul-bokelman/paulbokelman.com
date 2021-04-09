@@ -21,7 +21,7 @@ exports.createPages = async function ({ actions, graphql }) {
 
   actions.createPage({
     path: "/",
-    component: require.resolve("./src/templates/allPosts.js"),
+    component: require.resolve("./src/templates/AllPosts.js"),
     context: { data },
   });
 
@@ -31,7 +31,7 @@ exports.createPages = async function ({ actions, graphql }) {
     const id = edge.node.id;
     actions.createPage({
       path: slug,
-      component: require.resolve("./src/templates/singlePost.js"),
+      component: require.resolve("./src/templates/SinglePost.js"),
       context: { id },
     });
   });

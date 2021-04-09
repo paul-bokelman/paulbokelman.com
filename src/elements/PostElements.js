@@ -138,13 +138,13 @@ export const PostWrapper = styled.main`
   }
 
   code {
-    font-family: ${(props) => props.theme.fonts.code};
+    /* font-family: ${(props) => props.theme.fonts.code}; */
     font-size: 1.2rem;
     color: ${(props) => props.theme.colors.code};
     background-color: ${(props) => props.theme.colors.codeBG};
     border-radius: 5px;
     padding: 2px 8px;
-    white-space: pre-line;
+    white-space: nowrap; // Wrap
   }
 
   hr {
@@ -185,7 +185,7 @@ export const PostWrapper = styled.main`
     white-space: pre;
     margin-top: 2rem;
     font-size: 1.1rem;
-    div:not(:first-child) {
+    div:not(:first-child) div:not(.highlight-line) {
       margin-top: 0.3rem;
     }
   }

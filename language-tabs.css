@@ -36,6 +36,12 @@
   color: black;
 }
 
+.gatsby-highlight pre[class~="language-jsx"]::before {
+  content: "jsx";
+  background: #5ed3f3;
+  color: rgb(0, 0, 0);
+}
+
 .gatsby-highlight pre[class~="language-html"]::before {
   content: "html";
   background: #005a9c;
@@ -66,14 +72,30 @@
   color: white;
 }
 
+.gatsby-highlight pre[class~="language-json"]::before {
+  content: "json";
+  background: #d4d4d4;
+  color: rgb(0, 0, 0);
+}
+
 .highlight-line {
-  background-color: rgb(53, 59, 69);
+  background-color: rgba(255, 255, 255, 0.06);
   display: block;
   margin-right: -0.85em;
   margin-left: -0.85em;
-  padding-right: 1em;
-  padding-left: 0.75em;
+  padding: 0.15rem 1em 0.15rem 0.75em;
   border-left: 0.5em solid #a74aff;
+}
+
+.highlight-line .line-number {
+  opacity: 0.5;
+}
+
+.line-number {
+  display: inline-block;
+  width: 2em;
+  user-select: none;
+  opacity: 0.3;
 }
 
 .upper {
