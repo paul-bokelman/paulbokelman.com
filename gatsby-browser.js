@@ -1,7 +1,7 @@
 import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
-import { light } from "./src/themes";
+import { CustomThemeProvider, light } from "./src/themes";
 import { preToCodeBlock } from "mdx-utils";
 import { Table, Code } from "./src/components";
 import "./language-tabs.css";
@@ -35,9 +35,9 @@ const components = {
 
 export const wrapRootElement = ({ element }) => (
   <MDXProvider components={components}>
-    <ThemeProvider theme={light}>
+    <CustomThemeProvider>
       <GlobalStyles />
       {element}
-    </ThemeProvider>
+    </CustomThemeProvider>
   </MDXProvider>
 );

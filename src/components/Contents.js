@@ -6,7 +6,6 @@ import "../static/main.css";
 export const Contents = () => {
   const [headers, setHeaders] = useState();
   const [scrollItems, setScrollItems] = useState();
-
   useEffect(() => {
     const headerText = [];
     const scrollItems = [];

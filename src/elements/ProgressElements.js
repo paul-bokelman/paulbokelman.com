@@ -7,7 +7,7 @@ export const Progress = styled.div`
   width: 5px;
   left: 30px;
   top: 38%;
-  background-color: #000;
+  background-color: ${(props) => props.theme.colors.primary};
   @media ${(props) => props.theme.breakpoints.tablet} {
     display: none;
   }
@@ -19,7 +19,7 @@ export const ProgressBackground = styled.div`
   height: 20%;
   left: 30px;
   top: 38%;
-  background-color: #d8d8d8;
+  background-color: ${(props) => props.theme.colors.secondary};
   z-index: -5;
   @media ${(props) => props.theme.breakpoints.tablet} {
     display: none;
@@ -33,7 +33,7 @@ export const ProgressText = styled.p`
   position: fixed;
   left: 45px;
   top: 47%;
-  color: #000;
+  color: ${(props) => props.theme.colors.primary};
   @media ${(props) => props.theme.breakpoints.tablet} {
     display: none;
   }

@@ -34,11 +34,12 @@ export const Primary = styled((props) => <Link {...props} />)`
   text-decoration: none;
   &:hover,
   &:focus {
-    color: #414141;
+    /* color: ${(props) => props.theme.colors.secondary}; */
+    filter: brightness(80%);
   }
   p {
     font-size: 1.2rem;
-    margin-top: -2%;
+    margin-top: -1.5%;
     margin-bottom: -5.9rem;
   }
 `;
@@ -50,5 +51,6 @@ export const Secondary = styled.span`
 `;
 
 export const Desc = styled.p`
+  color: ${(props) => props.theme.colors.primary};
   font-size: 1.2rem;
 `;

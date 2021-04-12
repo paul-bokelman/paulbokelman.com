@@ -11,13 +11,17 @@ export const PostWrapper = styled.main`
     margin-top: 2rem;
   }
 
+  p {
+    color: ${(props) => props.theme.colors.primary};
+  }
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    color: ${(props) => props.theme.colors.dark1};
+    color: ${(props) => props.theme.colors.primary};
   }
 
   h1:not(:first-child),
@@ -32,6 +36,7 @@ export const PostWrapper = styled.main`
   h1 {
     font-size: 2.5rem;
     /* line-height: 2.5rem; */
+    /* font-family: ${(props) => props.theme.fonts.secondary}; */
     font-weight: 400;
   }
   h2 {
@@ -197,10 +202,10 @@ export const PostWrapper = styled.main`
       margin-top: 0.3rem;
     }
   }
-  /* 
-  img:not(:first-child) {
-    margin-top: 2rem;
-  } */
+
+  img {
+    margin-top: 1.5vw;
+  }
 
   @media ${(props) => props.theme.breakpoints.tablet} {
     margin: 22% 0%;

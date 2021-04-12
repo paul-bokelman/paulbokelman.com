@@ -7,4 +7,7 @@ export const ThemeToggleWrapper = styled.div`
   cursor: pointer;
   float: right;
   font-size: 25px;
+  img {
+    width: 38%;
+  }
 `;

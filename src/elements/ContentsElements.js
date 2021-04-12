@@ -9,7 +9,7 @@ export const ContentsWrapper = styled.div`
   left: 3rem;
   top: 38%;
   /* background-color: #000; */
-  color: #d8d8d8;
+  color: ${(props) => props.theme.colors.secondary};
   font-size: 0.9rem;
   text-transform: uppercase;
   @media ${(props) => props.theme.breakpoints.tablet} {
@@ -25,6 +25,6 @@ export const ContentsWrapper = styled.div`
     margin-top: 0.5rem;
   }
   li:hover {
-    color: #9e9e9e;
+    filter: brightness(110%);
   }
 `;
