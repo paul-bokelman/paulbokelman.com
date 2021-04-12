@@ -10,3 +10,4 @@ export * from "./TableElements";
 export * from "./ThemeToggleElements";
 export * from "./TopicCycleElements";
 export * from "./ProgressElements";
+export * from "./ContentsElements";

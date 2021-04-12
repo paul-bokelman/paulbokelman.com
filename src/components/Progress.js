@@ -35,9 +35,9 @@ export const ReadingProgress = ({ target }) => {
     <div>
       <Progress height={`${readingProgress}%`} />
       <ProgressBackground />
-      <center>
+      {/* <center>
         <ProgressText>{Math.round(readingProgress * 5)}</ProgressText>
-      </center>
+      </center> */}
     </div>
   );
 };

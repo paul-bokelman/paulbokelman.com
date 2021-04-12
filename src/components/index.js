@@ -12,3 +12,4 @@ export * from "./Seo";
 export * from "./ThemeToggle";
 export * from "./TopicCycle";
 export * from "./Progress";
+export * from "./Contents";

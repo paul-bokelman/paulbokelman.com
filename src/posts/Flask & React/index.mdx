@@ -3,6 +3,7 @@ title: Flask & React
 slug: flask-and-react
 date: 2020-04-07
 featureImage: finishedPython.gif
+images: [finishedPythonStatic.png]
 excerpt: Use the flask framework as a backend to a React application.
 ---
 
@@ -10,11 +11,16 @@ excerpt: Use the flask framework as a backend to a React application.
 
 #### Final Product - [here](https://www.example.com) ADD LINK
 
+<section>
+
 # Overview
 
 ## This tutorial will show how to utilize the Flask framework for backend and ReactJS for front end. This example will show how to use Flask and SQLAlchemy to create a simple database that the front end React can access and modify.
 
 ## In this specific project we will be creating 3 input fields that will **"POST"** information in a database created in SQLAlchemy. The project will also **"GET"** information from the database and display all previous records of information as well as the new record.
+
+</section>
+<section>
 
 # Prerequisites
 
@@ -23,6 +29,9 @@ excerpt: Use the flask framework as a backend to a React application.
 - Latest version of [Node.js](https://nodejs.org/en/) installed
 - Latest version of [Python](https://www.python.org/) installed
 - [pip3](https://pip.pypa.io/en/stable/installing/) installed (already installed with latest python)
+
+</section>
+<section>
 
 # Setting Up
 
@@ -71,6 +80,9 @@ python-react/
 │  │  ├─ Lib/...
 ├─ src/...
 ```
+
+</section>
+<section>
 
 # Python
 
@@ -137,10 +149,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 class Info(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(50))
-   age = db.Column(db.Integer)
-   language = db.Column(db.String(50))
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    age = db.Column(db.Integer)
+    language = db.Column(db.String(50))
 ```
 
 ## Now that we have our model in place we need a way to "POST" or add information to our database from our react app. In flask we can use a `@app.route` decorator to set a route that has a function and is run when accessed. Simply, when we access our route it will run our function that will take input data from the front end and record it and store it to the database.
@@ -148,14 +160,14 @@ class Info(db.Model):
 ```python
 @app.route('/add_info', methods=['POST']) #using flask app.route to set route for /add_info with ability to post
 def add_info(): #defining add_info function
-   info_data = request.get_json() #parses data to json object
+    info_data = request.get_json() #parses data to json object
 
-   new_info = Info(name=info_data['name'], age=info_data['age'], language=info_data['language'])
-   #^setting new_info variable = Info model (database) with different columns
-   db.session.add(new_info) #passes state to database
-   db.session.commit() #finalizes changes to database
+    new_info = Info(name=info_data['name'], age=info_data['age'], language=info_data['language'])
+    #^setting new_info variable = Info model (database) with different columns
+    db.session.add(new_info) #passes state to database
+    db.session.commit() #finalizes changes to database
 
-   return 'Done', 201 #confirmation message on sucess
+    return 'Done', 201 #confirmation message on sucess
 ```
 
 ## After creating the `/add_info` route we have a way to add information to the database but now we need to receive the information to display on the screen. Again we will use the `@app.route` decorator but this time when our function is called we want to return a json object array of our current records in our database. We will do this by first searching (query) the database and setting it equal to a variable, then setting each of the columns and their information = infos.
@@ -163,20 +175,20 @@ def add_info(): #defining add_info function
 ```python
 @app.route('/info') #setting route where function can be accessed
 def info(): #defining the function
-   info_list = Info.query.all() #searching through the database
-   infos = [] #setting 'infos' to an empty array
+    info_list = Info.query.all() #searching through the database
+    infos = [] #setting 'infos' to an empty array
 
-   for info in info_list: #for loop is used for iterating over the sequence
+    for info in info_list: #for loop is used for iterating over the sequence
       infos.append({'name': info.name, 'age' : info.age, 'language' : info.language}) #adds different records to array
 
-   return jsonify({'info': infos}) #converts array to json object
+    return jsonify({'info': infos}) #converts array to json object
 ```
 
 ## Now that we have both of our routes the last thing to do in our app.py is to add a way to run the app. Because `__name__` is the same as `__main__` we can use it an if statement that runs the app if its true.
 
 ```python
 if __name__ == '__main__': #checking if __name__ = '__main__'
-   app.run(debug=True) #if true then run the app with debug=true (reloads server on changes)
+    app.run(debug=True) #if true then run the app with debug=true (reloads server on changes)
 ```
 
 ## All of that looks like this all together...
@@ -191,34 +203,34 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 class Info(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   name = db.Column(db.String(50))
-   age = db.Column(db.Integer)
-   language = db.Column(db.String(50))
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    age = db.Column(db.Integer)
+    language = db.Column(db.String(50))
 
 @app.route('/add_info', methods=['POST'])
 def add_info():
-   info_data = request.get_json()
+    info_data = request.get_json()
 
-   new_info = Info(name=info_data['name'], age=info_data['age'], language=info_data['language'])
+    new_info = Info(name=info_data['name'], age=info_data['age'], language=info_data['language'])
 
-   db.session.add(new_info)
-   db.session.commit()
+    db.session.add(new_info)
+    db.session.commit()
 
-   return 'Done', 201
+    return 'Done', 201
 
 @app.route('/info')
 def info():
-   info_list = Info.query.all()
-   infos = []
+    info_list = Info.query.all()
+    infos = []
 
-   for info in info_list:
+    for info in info_list:
       infos.append({'name': info.name, 'age' : info.age, 'language' : info.language})
 
-   return jsonify({'info': infos})
+    return jsonify({'info': infos})
 
 if __name__ == '__main__':
-   app.run(debug=True)
+    app.run(debug=True)
 ```
 
 ## Our app.py is now done! Although we still need to create our database.db this can be done through the terminal and is the last step besides running the project that needs to be done on the backend. In order to create the database go back to the terminal (make sure your env is activated) and make sure you are in the directory with your app.py. First open the python terminal through your terminal to do this run `py` on windows or `python` on mac/linux. Your terminal will show `>>>` before your text that means you are in the python terminal. The next step is to import the database from your app.py, to do this run `from app import db`. After you have imported your db run `db.create_all()` this will access your model and create the columns that you have added. After this is done you can run `exit()` to exit the python prompt.
@@ -244,6 +256,9 @@ exit()
 ## The application will be launched on [localhost:5000](http://localhost:5000/). You will see a "Not Found" page don't panic this is what is suppose to happen. The reason that there is no content is because we never returned any html and this is because we are using react to return the front end. If you want to test your database you can make GET and POST requests with [Postman](https://www.postman.com/downloads/), but I will not be covering how to use Postman here.
 
 ## The python side of things or the backend of the project is now finished now we have to configure the front end of the project using ReactJS.
+
+</section>
+<section>
 
 # React
 
@@ -317,7 +332,7 @@ python-react/
 }
 ```
 
-## After making the changes you can close your package.json because we do not need to make anymore changes. The next thing we are going to do is configure our `App.js`. The purpose of our `App.js` will be to create a GET request on load, and pass that information as a prop as well as display our components (`DisplayInfo.js` and `InfoForm.js`). To quickly setup our `App.js` and remove unwanted elements we will first remove line one which is `import logo from './logo.svg';` this is just a template image but we will not be using it, you can also delete it from the filesytem. In its place on line 1 we will import react with the useState and useEffect hooks, to do this add `import React, {useState, useEffect} from "react";`. Now we need to import our components in order to do this add `import DisplayInfo from "./components/DisplayInfo";` and `import InfoForm from "./components/InfoForm";` to lines 3 & 4. Lastly, we will also delete the return content so that we can add our own.
+## After making the changes you can close your package.json because we do not need to make anymore changes. The next thing we are going to do is configure our `App.js`. The purpose of our `App.js` will be to create a GET request on load, and pass that information as a prop as well as display our components (`DisplayInfo.js` and `InfoForm.js`). To quickly setup our `App.js` and remove unwanted elements we will first remove line one which is `import logo from './logo.svg';` this is just a template image but we will not be using it, you can also delete it from the filesytem. In its place on line 1 we will import react with the [`useState`](https://reactjs.org/docs/hooks-state.html) and [`useEffect`](https://reactjs.org/docs/hooks-effect.html) hooks, to do this add `import React, {useState, useEffect} from "react";`. Now we need to import our components in order to do this add `import DisplayInfo from "./components/DisplayInfo";` and `import InfoForm from "./components/InfoForm";` to lines 3 & 4. Lastly, we will also delete the return content so that we can add our own.
 
 ```jsx -r-[app.py]/copy/
 import React, { useState, useEffect } from "react";
@@ -428,3 +443,177 @@ const DisplayInfo = ({ infos }) => {
 
 export default DisplayInfo;
 ```
+
+## Our `DisplayInfo.js` component is now finished and will display all current records in the database. But now we need a way to let users add their own custom records to the database. That is why we have the `InfoForm.js` component, this component will have 3 input fields each connected to a variable which will then all individually be passed as POST requests to the backend server under the `/add_info` route.
+
+## First like the previous component we need to manually set it up because it is currently blank. This process is the same as before so you can just copy the code snippet from below. The only differences from this component than the last is that we are importing the `useState` hook, passing the `onNewInfo` prop and renamed the arrow function and export to match the name of our component.
+
+```jsx -r-[InfoForm.js]/copy/
+import React, { useState } from "react";
+
+const InfoForm = ({ onNewInfo }) => {
+  return <div></div>;
+};
+
+export default InfoForm;
+```
+
+## Now we are going to use the `useState` hook to create 3 variables, `name`, `age`, and `language`. These variables will be used to record the information that the user enters into the input fields and will later be used to pass those current states to the corresponding column in the database. All of the variables will have a default value of an empty string because the value of the string will be assigned by the user.
+
+```jsx -r-{4-6}[InfoForm.js]/copy/
+import React, { useState } from "react";
+
+const InfoForm = ({ onNewInfo }) => {
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [language, setLanguage] = useState("");
+
+  return <div></div>;
+};
+
+export default InfoForm;
+```
+
+## We now need to create our form with our 3 input fields and our submit button. Each input field will represent 1 of the 3 variables above and will inherit and change their value. At the end of the form there will be a button that will submit the form and create a post request to the backend.
+
+## We will start with the 3 input fields. Each input field will have a `type` this filters what can be typed in the input field, a `placeholder` which is the text or message that is displayed when the field is empty (usually present to give directions), a `value` which is the text that is in the input field, we will set each input field to have 1 of the 3 variables in order to show what the user is typing, and a `onChange` event, this will use the `useState` secondary variable function to set the primary value to the text in the input field. In order to start this we need to wrap our input fields in a form tag this will link the input fields with the button at the end of the form. Next we simply add the input fields with the different attributes.
+
+```jsx [InfoForm.js]/copy/
+<form>
+  <input
+    type="text"
+    placeholder="Your Name"
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+  />
+  <input
+    type="number"
+    placeholder="Your Age"
+    value={age}
+    onChange={(e) => setAge(e.target.value)}
+  />
+  <input
+    type="text"
+    placeholder="Favorite Code Language"
+    value={language}
+    onChange={(e) => setLanguage(e.target.value)}
+  />
+</form>
+```
+
+## In our same form tag we need to add a button. We want this button to do 5 things.
+
+- Fetch the `/add_info` route from our backend
+- Create a POST request to the backend flask to add state data
+- Convert that POST request (`info`) to JSON so the database can use it
+- Pass `Info` through `onNewInfo` prop
+- Clear the input fields
+
+## We also need our `onClick` arrow function to be asynchronous and await or wait for our route fetch before proceeding. You can learn more about async and await [here](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await).
+
+```jsx [InfoForm.js]/copy/
+<button
+  onClick={async () => {
+    //setting onClick action to arrow function with async
+    const info = { name, age, language }; //setting info to our 3 variables
+    const response = await fetch("/add_info", {
+      //setting variable of "response" to fetch route "/add_info"
+      method: "POST", //using method POST to add information to database
+      headers: {
+        "Content-Type": "application/json", //used so application knows that response is JSON
+      },
+      body: JSON.stringify(info), //converts strings to JSON object
+    });
+
+    if (response.ok) {
+      //if everything worked...
+      console.log("response worked!"); //showing response in log for dev confirmation
+      onNewInfo(info); //passing info into "onNewInfo" prop
+      setName(""); //clears "name" field
+      setAge(0); //clears "age" field
+      setLanguage(""); //clears "language" field
+    }
+  }}
+>
+  submit
+</button>
+```
+
+## We can now combine our button with the rest of the form. The full `InfoForm.js` should look like this.
+
+```jsx -r-[InfoForm.js]/copy/
+import React, { useState } from "react";
+
+const InfoForm = ({ onNewInfo }) => {
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [language, setLanguage] = useState("");
+
+  return (
+    <form>
+      <input
+        type="text"
+        placeholder="Your Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="Your Age"
+        value={age}
+        onChange={(e) => setAge(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Favorite Code Language"
+        value={language}
+        onChange={(e) => setLanguage(e.target.value)}
+      />
+      <button
+        onClick={async () => {
+          const info = { name, age, language };
+          const response = await fetch("/add_info", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(info),
+          });
+
+          if (response.ok) {
+            console.log("response worked!");
+            onNewInfo(info);
+            setName("");
+            setAge(0);
+            setLanguage("");
+          }
+        }}
+      >
+        submit
+      </button>
+    </form>
+  );
+};
+
+export default InfoForm;
+```
+
+</section>
+
+<section>
+
+# Finishing Up
+
+## With all of that in place we have now finished both our backend (python/flask) and our frontend (react) so lets fire it up!
+
+## Make sure your `app.py` is running properly then start your react app with `npm start` when you are in your project directory. This will launch a server on [localhost:3000](http://localhost:3000). When you go to your localhost you should see this.
+
+<img
+  src={props.images[0].publicURL}
+  style={{
+    width: "100%",
+    height: "100%",
+  }}
+/>
+
+</section>

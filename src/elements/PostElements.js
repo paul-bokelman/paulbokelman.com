@@ -4,7 +4,12 @@ export const PostWrapper = styled.main`
   margin: 6% 23%;
   z-index: 10;
 
-  //mdx themes
+  /* ::selection {
+  background-color: cyan;
+} */
+  section {
+    margin-top: 2rem;
+  }
 
   h1,
   h2,
@@ -131,8 +136,11 @@ export const PostWrapper = styled.main`
     color: ${(props) => props.theme.colors.primary};
     margin: 1rem 0 1rem 2rem;
   }
-
+  li::marker {
+    content: "➜";
+  }
   li {
+    padding-inline-start: 1ch;
     margin: 0.25rem 0;
     font-size: 1.3rem;
   }
@@ -189,6 +197,10 @@ export const PostWrapper = styled.main`
       margin-top: 0.3rem;
     }
   }
+  /* 
+  img:not(:first-child) {
+    margin-top: 2rem;
+  } */
 
   @media ${(props) => props.theme.breakpoints.tablet} {
     margin: 22% 0%;

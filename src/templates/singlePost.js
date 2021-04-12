@@ -7,24 +7,23 @@ import {
   FeatureImage,
   Seo,
   ReadingProgress,
+  Contents,
 } from "../components";
 
 const SinglePost = ({ data }) => {
   const target = createRef();
+  console.log(data);
   const featureImage =
     data.mdx.frontmatter.featureImage.childImageSharp !== null
       ? data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData
       : data.mdx.frontmatter.featureImage.publicURL;
-
   const seoImage = data.mdx.frontmatter.featureImage.publicURL;
 
   useEffect(() => {
     const anchors = document
       .getElementById("container")
       .getElementsByTagName("a");
-    console.log(anchors);
     for (let i = 0; i < anchors.length; i++) {
-      console.log(anchors);
       anchors[i].setAttribute("target", "_blank");
     }
   }, []);
@@ -38,9 +37,11 @@ const SinglePost = ({ data }) => {
       />
       <Post>
         <div ref={target}>
-          <h1 style={{ fontSize: "80px", marginBottom: "1vw" }}>
-            {data.mdx.frontmatter.title}
-          </h1>
+          <section>
+            <h1 style={{ fontSize: "80px", marginBottom: "1vw" }}>
+              {data.mdx.frontmatter.title}
+            </h1>
+          </section>
           <p style={{ fontSize: "20px", marginTop: "1vw" }}>
             {data.mdx.frontmatter.date} / ~ {data.mdx.timeToRead} min read
           </p>
@@ -56,10 +57,13 @@ const SinglePost = ({ data }) => {
               alt={featureImage}
             />
           )}
-          <MDXRenderer>{data.mdx.body}</MDXRenderer>
+          <MDXRenderer images={data.mdx.frontmatter.images}>
+            {data.mdx.body}
+          </MDXRenderer>
         </div>
       </Post>
       <ReadingProgress target={target} />
+      <Contents />
     </Container>
   );
 };
@@ -81,6 +85,9 @@ export const pageQuery = graphql`
           childImageSharp {
             gatsbyImageData
           }
+        }
+        images {
+          publicURL
         }
       }
     }

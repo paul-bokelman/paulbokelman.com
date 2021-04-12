@@ -83,7 +83,7 @@
   display: block;
   margin-right: -0.85em;
   margin-left: -0.85em;
-  padding: 0.15rem 1em 0.15rem 0.75em;
+  padding: 0.15rem 1em 0.15rem 0.35em; /* 0.75 */
   border-left: 0.5em solid #a74aff;
 }
 

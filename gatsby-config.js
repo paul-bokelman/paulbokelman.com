@@ -32,6 +32,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-mdx`,
+    `gatsby-plugin-smoothscroll`,
     {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
