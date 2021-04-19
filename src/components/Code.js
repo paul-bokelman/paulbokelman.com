@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { useStore } from "../components";
+import { CodeWrapper, UpperCode } from "../elements";
 import Highlight, { defaultProps } from "prism-react-renderer";
+import Prism from "prism-react-renderer/prism";
 import rangeParser from "parse-numeric-range";
-import theme from "prism-react-renderer/themes/dracula"; //CHANGE THEME
-import { MdContentCopy } from "react-icons/md";
-import { IoIosCheckmark } from "react-icons/io";
+import Dark from "prism-react-renderer/themes/palenight";
+import Light from "prism-react-renderer/themes/github";
+
+(typeof global !== "undefined" ? global : window).Prism = Prism;
+require("prismjs/components/prism-solidity");
 export const Code = ({ codeString, language, metastring, ...props }) => {
+  const dark = useStore((state) => state.dark);
+
   const [copied, setCopied] = useState(false);
   const calculateLinesToHighlight = (meta) => {
     const RE = /{([\d,-]+)}/;
@@ -18,10 +25,11 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
   };
 
   const getFileName = (meta) => {
+    console.log(meta);
     const regex = /\[(.*)\]+/g;
-    if (meta !== undefined) {
-      return regex.exec(meta)[1];
-    }
+    const res = regex.exec(meta);
+    console.log(res);
+    return res !== null ? res[1] : null;
   };
 
   const getCopyable = (meta) => {
@@ -52,63 +60,70 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
 
   const shouldHighlightLine = calculateLinesToHighlight(metastring);
   const fileName = getFileName(metastring);
+  console.log(fileName);
   const copyable = getCopyable(metastring);
   const renderLineNumber = getRenderLineNumbers(metastring);
 
   return (
-    <Highlight
-      {...defaultProps}
-      code={codeString}
-      language={language}
-      theme={theme}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <div
-          className={`gatsby-highlight ${
-            fileName !== undefined ? "fileName" : null
-          }`}
-          data-language={language}
-        >
-          {fileName !== undefined ? (
-            <div className="upper">
-              <div className="displayFile">{fileName}</div>
-              {copyable ? (
-                <>
-                  {copied ? (
-                    <>
-                      <IoIosCheckmark className="checkIcon" />
-                      <span>Copied!</span>
-                    </>
-                  ) : (
-                    <MdContentCopy
-                      className="copyIcon"
-                      onClick={copyFunction}
-                    />
-                  )}
-                </>
-              ) : null}
-            </div>
-          ) : null}
-          <pre className={className} style={{ ...style }}>
-            {tokens.map((line, index) => {
-              const lineProps = getLineProps({ line, key: index });
-              if (shouldHighlightLine(index)) {
-                lineProps.className = `${lineProps.className} highlight-line`;
-              }
-              return (
-                <div key={index} {...lineProps}>
-                  {renderLineNumber ? (
-                    <span className="line-number">{index + 1}</span>
-                  ) : null}
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
-                  ))}
-                </div>
-              );
-            })}
-          </pre>
-        </div>
-      )}
-    </Highlight>
+    <CodeWrapper>
+      <Highlight
+        {...defaultProps}
+        code={codeString}
+        language={language}
+        theme={!dark ? Light : Dark}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <div
+            className={`gatsby-highlight ${
+              fileName !== null ? "fileName" : null
+            }`}
+            data-language={language}
+          >
+            {fileName !== null ? (
+              <UpperCode
+                bg={
+                  !dark
+                    ? Light.plain.backgroundColor
+                    : Dark.plain.backgroundColor
+                }
+                current={!dark ? "light" : "dark"}
+              >
+                <div>{fileName}</div>
+                {copyable ? (
+                  <div>
+                    {copied ? (
+                      <span className="copied">Copied!</span>
+                    ) : (
+                      <span className="copy" onClick={copyFunction}>
+                        copy
+                      </span>
+                      // <MdContentCopy onClick={copyFunction} />
+                    )}
+                  </div>
+                ) : null}
+              </UpperCode>
+            ) : null}
+            <pre className={className} style={{ ...style }}>
+              {tokens.map((line, index) => {
+                const lineProps = getLineProps({ line, key: index });
+                if (shouldHighlightLine(index)) {
+                  lineProps.className = `${lineProps.className} highlight-line`;
+                }
+                return (
+                  <div key={index} {...lineProps}>
+                    {renderLineNumber ? (
+                      <span className="line-number">{index + 1}</span>
+                    ) : null}
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token, key })} />
+                    ))}
+                  </div>
+                );
+              })}
+            </pre>
+          </div>
+        )}
+      </Highlight>
+    </CodeWrapper>
   );
 };

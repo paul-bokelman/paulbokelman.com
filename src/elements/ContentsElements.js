@@ -27,4 +27,7 @@ export const ContentsWrapper = styled.div`
   li:hover {
     filter: brightness(110%);
   }
+  .current {
+    color: ${(props) => props.theme.colors.primary};
+  }
 `;

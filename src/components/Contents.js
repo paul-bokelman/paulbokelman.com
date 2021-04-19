@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ContentsWrapper } from "../elements";
 import scrollTo from "gatsby-plugin-smoothscroll";
 import Scrollspy from "react-scrollspy";
-import "../static/main.css";
+// import "../static/main.css";
 export const Contents = () => {
   const [headers, setHeaders] = useState();
   const [scrollItems, setScrollItems] = useState();
@@ -18,17 +18,17 @@ export const Contents = () => {
     console.log(sections);
     console.log(headers);
     for (let i = 0; i < sections.length; i++) {
-      if (headers[i].outerText.includes("&")) {
-        const current = headers[i].outerText.split(" & ").join("");
+      if (headers[i + 1].outerText.includes("&")) {
+        const current = headers[i + 1].outerText.split(" & ").join("");
         scrollItems.push(current);
         sections[i].id = current;
       } else {
-        const current = headers[i].outerText.split(" ").join("");
+        const current = headers[i + 1].outerText.split(" ").join("");
         scrollItems.push(current);
 
         sections[i].id = current;
       }
-      headerText.push(headers[i].outerText);
+      headerText.push(headers[i + 1].outerText);
     }
     setHeaders(headerText);
     setScrollItems(scrollItems);

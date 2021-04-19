@@ -11,10 +11,6 @@ export const PostWrapper = styled.main`
     margin-top: 2rem;
   }
 
-  p {
-    color: ${(props) => props.theme.colors.primary};
-  }
-
   h1,
   h2,
   h3,
@@ -40,14 +36,15 @@ export const PostWrapper = styled.main`
     font-weight: 400;
   }
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     line-height: 1.875rem;
     font-weight: 400;
   }
   h3 {
-    font-size: 1.375rem;
-    line-height: 1.625rem;
-    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.975rem;
+    font-weight: 400;
+    text-transform: uppercase;
   }
   h4 {
     font-size: 1.25rem;
@@ -77,7 +74,7 @@ export const PostWrapper = styled.main`
   }
 
   a {
-    color: ${(props) => props.theme.colors.link};
+    color: ${(props) => props.theme.colors.accent};
     text-decoration: underline;
     transition: 0.2s ease-in-out;
     &:hover {
@@ -103,7 +100,8 @@ export const PostWrapper = styled.main`
     padding-left: 1.4rem;
     position: relative;
     text-align: left;
-    background-color: ${(props) => props.theme.colors.codeBG};
+    background-color: ${(props) => props.theme.colors.accentBG};
+    border-radius: 0.6rem;
   }
   blockquote::before {
     content: "";
@@ -111,21 +109,21 @@ export const PostWrapper = styled.main`
     left: 0;
     width: 4px;
     height: 100%;
-    background: ${(props) => props.theme.colors.code};
+    background: ${(props) => props.theme.colors.accent};
     /* border-radius: 1px / 2px; */
   }
 
   blockquote p {
-    color: ${(props) => props.theme.colors.code};
+    color: ${(props) => props.theme.colors.accent};
     font-size: 1rem;
     line-height: 2.125rem;
-    max-width: 38rem;
+    max-width: 90%;
     font-weight: 400;
     /* margin: 0rem auto; */
   }
 
   /* blockquote strong {
-    color: ${(props) => props.theme.colors.code};
+    color: ${(props) => props.theme.colors.accent};
     top: -5rem;
     font-size: 1.6rem;
     max-width: 38rem;
@@ -141,9 +139,20 @@ export const PostWrapper = styled.main`
     color: ${(props) => props.theme.colors.primary};
     margin: 1rem 0 1rem 2rem;
   }
-  li::marker {
+  ul li::marker {
     content: "➜";
+    padding: 10px;
+    background-color: ${(props) => props.theme.colors.accentBG};
+    color: ${(props) => props.theme.colors.accent};
   }
+
+  ol li::marker {
+    color: ${(props) => props.theme.colors.accent};
+  }
+
+  /* li ul li::marker {
+    color: ${(props) => props.theme.colors.accent};
+  } */
   li {
     padding-inline-start: 1ch;
     margin: 0.25rem 0;
@@ -153,8 +162,8 @@ export const PostWrapper = styled.main`
   code {
     /* font-family: ${(props) => props.theme.fonts.code}; */
     font-size: 1.2rem;
-    color: ${(props) => props.theme.colors.code};
-    background-color: ${(props) => props.theme.colors.codeBG};
+    color: ${(props) => props.theme.colors.accent};
+    background-color: ${(props) => props.theme.colors.accentBG};
     border-radius: 5px;
     padding: 2px 8px;
     white-space: nowrap; // Wrap

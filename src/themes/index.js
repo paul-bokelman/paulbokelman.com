@@ -1,3 +1,3 @@
-export * from "./light";
-export * from "./dark";
+export * from "./Light";
+export * from "./Dark";
 export * from "./CustomThemeProvider";

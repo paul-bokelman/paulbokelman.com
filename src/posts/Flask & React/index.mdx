@@ -15,7 +15,7 @@ excerpt: Use the flask framework as a backend to a React application.
 
 # Overview
 
-## This tutorial will show how to utilize the Flask framework for backend and ReactJS for front end. This example will show how to use Flask and SQLAlchemy to create a simple database that the front end React can access and modify.
+## This tutorial will show you how to utilize Flask and ReactJS together to create a full stack web application. This example will show how to use Flask and SQLAlchemy to create a simple database that the front end React can access and modify.
 
 ## In this specific project we will be creating 3 input fields that will **"POST"** information in a database created in SQLAlchemy. The project will also **"GET"** information from the database and display all previous records of information as well as the new record.
 
@@ -334,7 +334,7 @@ python-react/
 
 ## After making the changes you can close your package.json because we do not need to make anymore changes. The next thing we are going to do is configure our `App.js`. The purpose of our `App.js` will be to create a GET request on load, and pass that information as a prop as well as display our components (`DisplayInfo.js` and `InfoForm.js`). To quickly setup our `App.js` and remove unwanted elements we will first remove line one which is `import logo from './logo.svg';` this is just a template image but we will not be using it, you can also delete it from the filesytem. In its place on line 1 we will import react with the [`useState`](https://reactjs.org/docs/hooks-state.html) and [`useEffect`](https://reactjs.org/docs/hooks-effect.html) hooks, to do this add `import React, {useState, useEffect} from "react";`. Now we need to import our components in order to do this add `import DisplayInfo from "./components/DisplayInfo";` and `import InfoForm from "./components/InfoForm";` to lines 3 & 4. Lastly, we will also delete the return content so that we can add our own.
 
-```jsx -r-[app.py]/copy/
+```jsx -r-[App.js]/copy/
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import DisplayInfo from "./components/DisplayInfo";
@@ -373,7 +373,7 @@ useEffect(() => {
 
 ## After we have identified and imported our components we need to pass props to them. This will allow our components to have access to variables defined in our main application. You can pass props by setting a name for them and then setting it to the variable you want to pass, this happens all inside of your component in your jsx. Because we want access to the `infos` variable defined above in our `DisplayInfo` component we need to pass it with props to do this can can simply import the component then pass `infos` as "infos" at the end it looks `<DisplayInfo infos={infos}/>`. Now our `DisplayInfo` component will have access to `Infos` after we import the props. The next thing that we need to do is pass a function prop into the `<InfoForm />` this function will be responsible for handling what happens when we have a new POST request the way we can do this is as follows, `<InfoForm onNewInfo={(info) => setInfo((currentInfo) => [info, ...currentInfo])}/>`.
 
-```jsx -r-{19-24}[app.py]/copy/
+```jsx -r-{19-24}[App.js]/copy/
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import DisplayInfo from "./components/DisplayInfo";

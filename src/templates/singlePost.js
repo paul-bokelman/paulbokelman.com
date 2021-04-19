@@ -4,10 +4,10 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import {
   Container,
   Post,
-  FeatureImage,
   Seo,
   ReadingProgress,
   Contents,
+  MetaInfo,
 } from "../components";
 
 const SinglePost = ({ data }) => {
@@ -18,7 +18,6 @@ const SinglePost = ({ data }) => {
       ? data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData
       : data.mdx.frontmatter.featureImage.publicURL;
   const seoImage = data.mdx.frontmatter.featureImage.publicURL;
-
   useEffect(() => {
     const anchors = document
       .getElementById("container")
@@ -37,26 +36,12 @@ const SinglePost = ({ data }) => {
       />
       <Post>
         <div ref={target}>
-          <section>
-            <h1 style={{ fontSize: "80px", marginBottom: "1vw" }}>
-              {data.mdx.frontmatter.title}
-            </h1>
-          </section>
-          <p style={{ fontSize: "20px", marginTop: "1vw" }}>
-            {data.mdx.frontmatter.date} / ~ {data.mdx.timeToRead} min read
-          </p>
-          {typeof featureImage !== "string" ? (
-            <FeatureImage fixed={featureImage} />
-          ) : (
-            <img
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-              src={featureImage}
-              alt={featureImage}
-            />
-          )}
+          <MetaInfo
+            title={data.mdx.frontmatter.title}
+            date={data.mdx.frontmatter.date}
+            time={data.mdx.timeToRead}
+            featureImage={featureImage}
+          />
           <MDXRenderer images={data.mdx.frontmatter.images}>
             {data.mdx.body}
           </MDXRenderer>

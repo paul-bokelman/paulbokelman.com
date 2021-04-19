@@ -1,26 +1,18 @@
-import React, { useState, useContext } from "react";
+import React from "react";
+import { useStore } from "../components";
 import { ThemeToggleWrapper } from "../elements";
 import { BiMoon, BiSun } from "react-icons/bi";
-import { Theme } from "../themes";
-import { graphql, useStaticQuery } from "gatsby";
 
 export const ThemeToggle = () => {
-  const { theme, changeTheme } = useContext(Theme);
-  // const data = useStaticQuery(graphql`
-  //   query {
-  //     themeIcon: file(relativePath: { eq: "themeIcon.svg" }) {
-  //       publicURL
-  //     }
-  //   }
-  // `);
-  console.log(theme);
+  const toggleDarkMode = useStore((state) => state.toggleDarkMode);
+  const dark = useStore((state) => state.dark);
   return (
     <ThemeToggleWrapper>
       {/* <img src={data.themeIcon.publicURL} alt="themeIcon" /> */}
-      {!theme === false ? (
-        <BiSun onClick={() => changeTheme()} />
+      {!dark ? (
+        <BiSun onClick={() => toggleDarkMode()} />
       ) : (
-        <BiMoon onClick={() => changeTheme()} />
+        <BiMoon onClick={() => toggleDarkMode()} />
       )}
     </ThemeToggleWrapper>
   );

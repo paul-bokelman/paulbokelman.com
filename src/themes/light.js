@@ -1,22 +1,15 @@
-export const light = {
+export const Light = {
   fonts: {
     main: "Crimson Text, serif",
     secondary: "Open Sans, sans-serif",
     code: "Roboto Mono, monospaced",
   },
   colors: {
-    main2: "#e5f1fa",
-    dark1: "#1e1e1f",
-    dark2: "#414244",
-    dark3: "#a1a2a5",
-    light1: "#F9FAFB", //f7f7f7
-    light2: "#fcfcfc",
     background: "#fff",
     primary: "#000",
     secondary: "#C8C8C8",
-    link: "#A74AFF",
-    code: "#A74AFF",
-    codeBG: "#a74aff17",
+    accent: "#A74AFF",
+    accentBG: "#a74aff17",
   },
   breakpoints: {
     mobile: "only screen and (max-width: 50rem)",

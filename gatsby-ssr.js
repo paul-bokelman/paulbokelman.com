@@ -1,10 +1,10 @@
 import React from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
-import { CustomThemeProvider, light } from "./src/themes";
+import { CustomThemeProvider } from "./src/themes";
 import { preToCodeBlock } from "mdx-utils";
-import { Table, Code } from "./src/components";
-import "./language-tabs.css";
+import { Table, Code, F, Peek } from "./src/components";
+// import "./language-tabs.css";
 
 const GlobalStyles = createGlobalStyle`
 * {
@@ -16,7 +16,15 @@ const GlobalStyles = createGlobalStyle`
 body, html {
     font-family: ${(props) => props.theme.fonts.main};
     height: 100%;
-    background-color: ${(props) => props.theme.colors.light1};
+    background-color: ${(props) => props.theme.colors.background};
+    transition: 0.2s ease-in-out;
+    /* body::-webkit-scrollbar {
+    width: 0.6em;
+  }
+    body::-webkit-scrollbar-thumb {
+    border-radius: 0.4rem;
+    background-color: ${(props) => props.theme.colors.accent};
+  } */
 }
 
 `;
@@ -31,6 +39,8 @@ const components = {
     return <pre {...preProps} />;
   },
   wrapper: ({ children }) => <>{children}</>,
+  F,
+  Peek,
 };
 
 export const wrapRootElement = ({ element }) => (
