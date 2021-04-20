@@ -33,9 +33,12 @@ export const FolderWrapper = styled.div`
     backdrop-filter: blur(3px);
     border: 1px solid rgba(255, 255, 255, 0.18);
     ul {
-      color: #f5ea56;
       margin: 0.5rem;
       margin-left: 0px;
+      a {
+        color: #f5ea56;
+        text-decoration: none;
+      }
       li {
         font-family: monospace;
         padding-left: 0px;

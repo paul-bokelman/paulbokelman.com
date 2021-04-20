@@ -42,7 +42,10 @@ const SinglePost = ({ data }) => {
             time={data.mdx.timeToRead}
             featureImage={featureImage}
           />
-          <MDXRenderer images={data.mdx.frontmatter.images}>
+          <MDXRenderer
+            images={data.mdx.frontmatter.images}
+            cr={data.mdx.frontmatter.currentRepo}
+          >
             {data.mdx.body}
           </MDXRenderer>
         </div>
@@ -65,6 +68,7 @@ export const pageQuery = graphql`
         excerpt
         slug
         title
+        currentRepo
         featureImage {
           publicURL
           childImageSharp {

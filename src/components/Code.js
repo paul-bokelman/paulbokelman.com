@@ -4,9 +4,7 @@ import { CodeWrapper, UpperCode } from "../elements";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import Prism from "prism-react-renderer/prism";
 import rangeParser from "parse-numeric-range";
-import Dark from "prism-react-renderer/themes/palenight";
-import Light from "prism-react-renderer/themes/github";
-
+import { Dark, Light } from "../syntax";
 (typeof global !== "undefined" ? global : window).Prism = Prism;
 require("prismjs/components/prism-solidity");
 export const Code = ({ codeString, language, metastring, ...props }) => {
@@ -25,10 +23,8 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
   };
 
   const getFileName = (meta) => {
-    console.log(meta);
     const regex = /\[(.*)\]+/g;
     const res = regex.exec(meta);
-    console.log(res);
     return res !== null ? res[1] : null;
   };
 
@@ -60,7 +56,6 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
 
   const shouldHighlightLine = calculateLinesToHighlight(metastring);
   const fileName = getFileName(metastring);
-  console.log(fileName);
   const copyable = getCopyable(metastring);
   const renderLineNumber = getRenderLineNumbers(metastring);
 

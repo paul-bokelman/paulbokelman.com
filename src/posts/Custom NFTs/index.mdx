@@ -12,6 +12,7 @@ images:
     ganachePrivateKey.png,
   ]
 excerpt: Customize, build, and deploy a decentralized app (dapp) to sell your own NFTs on the ethereum blockchain with React, Solidity, and Pinata.
+currentRepo: "custom-nfts"
 ---
 
 #### Finished Product - [here](https://github.com/Paul-Bokelman/custom-nfts)
@@ -345,9 +346,7 @@ npm start
 
 ## At this point we need to work with Solidity and Web3. We are going to use Solidity to write a `mint` function that will allow the user to create a new nft token and transfer it to their account. In order to actually access our function we need to use Web3 to preform the frontend interactions with the smart contract. If you have never worked with Solidity or Web3 it's okay because they are very easy to get started with and understand the basics of.
 
-<!-- <F files={["Migrations.sol", "SimpleStorage.sol"]}>contracts</F> -->
-
-## You may have noticed by now that we a contracts folder outside of our client folder that contains two Solidity (.sol) files. The only file we are going to change in this folder is the `SimpleStorage.sol`, this is where our minting logic will happen.
+## You may have noticed by now that we a <F cr={props.cr} files={[{name: "Migrations.sol", path: "contracts/Migrations.sol"}, {name: "SimpleStorage.sol", path: "contracts/SimpleContract.sol"}]}>contracts</F> folder outside of our client folder that contains two Solidity (.sol) files. The only file we are going to change in this folder is the `SimpleStorage.sol`, this is where our minting logic will happen.
 
 ## Right now the `SimpleStorage.sol` file has two functions, a <Peek>set()</Peek> function which sets the global variable `storedData` to the value passed into it and the <Peek>get()</Peek> which simply returns the value when called.
 
@@ -375,7 +374,7 @@ npm install @openzeppelin/contracts
 
 ## At this point we can now open the `SimpleStorage.sol` file and start writing our function. The first thing we want to do is to delete all of the current contents of the file so that it is completely blank and rename it to `SimpleContract.sol`. Because we renamed our file we have to refactor some other files that may think its missing.
 
-## In our <F files={["1_initial_migration.js", "2_deploy_contracts.js"]}>Migrations</F> folder our `2_deploy_contracts.js` should look like this. And our `InitWeb3.js` file should look like this.
+## In our <F cr={props.cr} files={[{name: "1_initial_migration.js", path: "migrations/1_initial_migration.js"}, {name: "2_deploy_contracts.js", path: "migrations/2_deploy_contracts.js"}]}>Migrations</F> folder our `2_deploy_contracts.js` should look like this. And our `InitWeb3.js` file should look like this.
 
 ```js -r-[2_deploy_contracts.js]/copy/
 const SimpleContract = artifacts.require("./SimpleContract.sol");
@@ -421,7 +420,7 @@ export async function loadBlockchainData() {
 ## Now lets hop back into our `SimpleContract.sol`. We can quickly set up our contract by first declaring our version of Solidity, importing our OpenZeppelin contracts and declaring our contract name whilst utilizing the contracts imported.
 
 ```sol -r-[SimpleContract.sol]/copy/
-pragma solidity >=0.6.0 <0.8.0;
+pragma solidity 0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
