@@ -32,6 +32,10 @@ export const FolderWrapper = styled.div`
     box-shadow: 0 8px 32px 0 #f5ea5617;
     backdrop-filter: blur(3px);
     border: 1px solid rgba(255, 255, 255, 0.18);
+
+    @media ${(props) => props.theme.breakpoints.tablet} {
+      display: none;
+    }
     ul {
       margin: 0.5rem;
       margin-left: 0px;
