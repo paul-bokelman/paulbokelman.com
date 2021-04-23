@@ -26,7 +26,7 @@ const SinglePost = ({ data }) => {
       anchors[i].setAttribute("target", "_blank");
     }
   }, []);
-
+  console.log(data.mdx.frontmatter.currentRepo);
   return (
     <Container>
       <Seo

@@ -5,7 +5,6 @@ import { IoLogoJavascript } from "react-icons/io5";
 
 export const F = ({ children, files, cr }) => {
   console.log(files);
-  const path = "test";
   const [isOpen, setIsOpen] = useState(false);
   console.log(files);
   const getExtensionIcon = (extension) => {
@@ -27,7 +26,8 @@ export const F = ({ children, files, cr }) => {
             return (
               <li key={index}>
                 <a
-                  href={`https://github.com/Paul-Bokelman/${cr}/blob/main/${file.path}`}
+                  // href={`https://github.com/Paul-Bokelman/${cr}/blob/main/${file.path}`}
+                  href={`https://github.com/Paul-Bokelman/${cr}/${file.path}`}
                   rel="noopener noreferrer"
                   target="_blank"
                 >

@@ -45,8 +45,19 @@ export const Contents = () => {
           {headers.map((text, index) => (
             <li key={index}>
               <p
+                role="presentation"
+                key={index}
                 style={{ cursor: "pointer" }}
                 onClick={() => {
+                  scrollTo(
+                    `#${
+                      text.includes("&")
+                        ? text.split(" & ").join("")
+                        : text.split(" ").join("")
+                    }`
+                  );
+                }}
+                onKeyDown={() => {
                   scrollTo(
                     `#${
                       text.includes("&")

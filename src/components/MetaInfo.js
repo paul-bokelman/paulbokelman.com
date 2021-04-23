@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FeatureImage } from "../components";
 import { MetaInfoWrapper, ReaderSwitcher } from "../elements";
 import { RiSpeedFill, RiPlayFill } from "react-icons/ri";

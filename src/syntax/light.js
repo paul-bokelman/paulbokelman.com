@@ -19,7 +19,6 @@ export const Light = {
     {
       types: ["builtin", "changed", "keyword"],
       style: {
-        color: "rgb(215, 58, 73)",
         color: "#e3116c",
       },
     },

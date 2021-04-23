@@ -8,12 +8,115 @@ excerpt: Create a simple and very flexible theme switcher with zustand and style
 currentRepo: "theme-switcher"
 ---
 
-#### Final Product - [here](https://www.example.com) ADD LINK
+#### [Project Repo](https://github.com/Paul-Bokelman/theme-switcher)
 
 <section>
 
-# Background
+# Overview
 
-## I always...
+## We will be using 2 very useful react libraries in order to quickly create a very simple yet very flexible theme switcher for your application. We will use `zustand` and `styled-components` in order to make this possible.
+
+- [`zustand`](https://github.com/pmndrs/zustand) - "A small, fast and scaleable bearbones state-management solution. Has a comfy api based on hooks, isn't boilerplatey or opinionated, but still just enough to be explicit and flux-like."
+- [`styled-components`](https://styled-components.com/) - "Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress."
+
+## Why `zustand` ?
+
+- The reason that I chose zustand for this is because I see it as a much simplier replacement to reacts `useContext` & `createContext` hooks. Zustand also provides redux devtools so you can view the current state in the chrome console, as well as a simple way to persist the current state across renders which is very helpful in creating a theme switcher.
+
+## Why `styled-components` ?
+
+- Previously when I had worked on theme switchers it always felt so hacky to pass values to a css file based on what a state is, or use an html data tag in order to switch the css depending on state/theme, but styled-components has lots of useful modules that make this process enjoyable, readable, and most of all flexible. With styled-components you can make "theme" files that contain values, you can then use those values dynamically in "styled" components which allow for fully capable css as well as javascript.
+
+</section>
+
+<section>
+
+# Getting Started
+
+## The very first thing we need to do is create a new project with [`create-react-app`](https://github.com/facebook/create-react-app).
+
+```bash
+npx create-react-app theme-switcher
+```
+
+## After the project has been created we need to install `zustand`, `styled-components`, and `react-icons`.
+
+```bash
+cd theme-switcher
+npm i zustand styled-components react-icons
+```
+
+## Now we can open up our new project in our code editor, by either running `code .` in the terminal or manually opening the folder inside of the code editor.
+
+## Once opened we can delete most of the boilerplate code in the `App.js` file and then boot up the development server!
+
+```jsx -r-[App.js]/copy/
+import React from "react";
+function App() {
+  return (
+    <div>
+      <h1>Hello World!</h1>
+    </div>
+  );
+}
+
+export default App;
+```
+
+```bash
+npm start
+```
+
+## If you copied the snippet from above you should see "Hello World!" displayed [localhost:3000](http://localhost:3000).
+
+</section>
+
+<section>
+
+# Zustand
+
+## At this point we can start utilizing `zustand`. In order to get started create a <F cr={props.cr} files={[{name: "index.js", path: "tree/main/src/components/index.js"}, {name: "state.js", path: "tree/main/src/components/state.js"}]}>components</F> folder and add a `index.js` as well as a `state.js` inside.
+
+## Lets start with the `index.js` file. This particular file is just for exporting all of the components directly from the folder so imported them is easier in other files.
+
+```jsx -r-[index.js]/copy/
+export * from "./state";
+```
+
+## Thats all for the `index.js` for the time being so lets move onto the `state.js` file. The first thing that we need to do is declare a `store` variable that is an object that contains a `dark` boolean and a function to change the value of `dark` to the opposite of what it currently is. We also need to import a module called `create` from zustand which we will use to wrap `store` when exporting as a hook.
+
+```jsx -r-[index.js]/copy/
+import create from "zustand";
+
+let store = (set) => ({
+  dark: false,
+  toggleDarkMode: () => set((state) => ({ dark: !state.dark })),
+});
+
+export const useStore = create(store);
+```
+
+> **NOTE:** The `set` function merges state.
+
+## At this point we could use this hook in our other components perfectly fine but we want the state to utilize the redux devtools as well as persist the state across renders. To do this we just need to import `devtools` and `persist` from zustand/middleware then wrap `store` in both of them.
+
+```jsx -r-{2,9-10}[index.js]/copy/
+import create from "zustand";
+import { devtools, persist } from "zustand/middleware";
+
+let store = (set) => ({
+  dark: false,
+  toggleDarkMode: () => set((state) => ({ dark: !state.dark })),
+});
+
+store = devtools(store);
+store = persist(store, { name: "user_settings" });
+
+export const useStore = create(store);
+```
+
+> **NOTE:** The `persist` function works by storing the value in local storage so the "name" key in the object passed in represents what it is called, this bean said the object is completely optional.
+
+## Our `state.js` is now finished so we can close it and move onto our components that will utilize our custom `useStore` hook.
 
 </section>

@@ -89,7 +89,12 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
                     {copied ? (
                       <span className="copied">Copied!</span>
                     ) : (
-                      <span className="copy" onClick={copyFunction}>
+                      <span
+                        className="copy"
+                        onClick={copyFunction}
+                        onKeyDown={copyFunction}
+                        role="presentation"
+                      >
                         copy
                       </span>
                       // <MdContentCopy onClick={copyFunction} />
