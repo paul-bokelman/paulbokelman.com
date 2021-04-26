@@ -2,11 +2,13 @@
 title: Theme-switcher
 slug: theme-switcher
 date: 2020-04-07
-featureImage: image.jpg
-images: []
+featureImage: cover.gif
+images: [bare.png]
 excerpt: Create a simple and very flexible theme switcher with zustand and styled-components.
 currentRepo: "theme-switcher"
 ---
+
+import { folders } from "./folders.js";
 
 #### [Project Repo](https://github.com/Paul-Bokelman/theme-switcher)
 
@@ -75,7 +77,7 @@ npm start
 
 # Zustand
 
-## At this point we can start utilizing `zustand`. In order to get started create a <F cr={props.cr} files={[{name: "index.js", path: "tree/main/src/components/index.js"}, {name: "state.js", path: "tree/main/src/components/state.js"}]}>components</F> folder and add a `index.js` as well as a `state.js` inside.
+## At this point we can start utilizing `zustand`. In order to get started create a <F folder={folders.components}>components</F> folder and add a `index.js` as well as a `state.js` inside.
 
 ## Lets start with the `index.js` file. This particular file is just for exporting all of the components directly from the folder so imported them is easier in other files.
 
@@ -117,6 +119,208 @@ export const useStore = create(store);
 
 > **NOTE:** The `persist` function works by storing the value in local storage so the "name" key in the object passed in represents what it is called, this bean said the object is completely optional.
 
-## Our `state.js` is now finished so we can close it and move onto our components that will utilize our custom `useStore` hook.
+## Our `state.js` is now finished so we can close it and move onto our component that will utilize our custom `useStore` hook.
+
+## Create a file called `Toggle.js` in the <F folder={folders.components}>components</F> folder. This file will be used to check if the current state of `dark` is <Bool>true</Bool> or <Bool>false</Bool> and conditionally render the light and dark icons that both have the ability to change the theme with the `toggleDarkMode` function that we created in the `state.js`.
+
+## This being said, the first thing we need to do is import react and our new custom `useStore` hook to allow for us to access the state.
+
+```jsx -r-[Toggle.js]/copy/
+import React from "react";
+import { useStore } from "../components";
+
+export const Toggle = () => {
+  return (
+    <div>
+      <h1>Hello Toggle!</h1>
+    </div>
+  );
+};
+```
+
+## In order to access our state for our `dark` boolean and our `toggleDarkMode` function we have to set a variable to our `useStore` hook but also pass in a arrow function in order to access our certain state because its an object. We also need to bind the `toggleDarkMode` to an onClick event on the main div so whenever it is clicked the state of `dark` will change.
+
+```jsx -r-{5-6,8}[Toggle.js]/copy/
+import React from "react";
+import { useStore } from "../components";
+
+export const Toggle = () => {
+  const dark = useStore((state) => state.dark);
+  const toggleDarkMode = useStore((state) => state.toggleDarkMode);
+  return (
+    <div onClick={() => toggleDarkMode()}>
+      <h1>Hello Toggle!</h1>
+    </div>
+  );
+};
+```
+
+## Now we can add the icons that will conditionally render depending on the state of `dark`. In order to do this we need to install and import [`react-icons`](https://react-icons.github.io/react-icons/). In order to get beautiful sun and moon icons to use.
+
+```bash
+npm install react-icons
+```
+
+```jsx
+import { BiMoon, BiSun } from "react-icons/bi";
+```
+
+## We now have access to the `BiMoon` and `BiSun` components (icons). We can now conditionally render them by using a simple ternary operator that checks if `dark` is <Bool>true</Bool> or <Bool>false</Bool>.
+
+```jsx -r-{9}[Toggle.js]/copy/
+import React from "react";
+import { useStore } from "../components";
+import { BiMoon, BiSun } from "react-icons/bi";
+
+export const Toggle = () => {
+  const dark = useStore((state) => state.dark);
+  const toggleDarkMode = useStore((state) => state.toggleDarkMode);
+  return (
+    <div onClick={() => toggleDarkMode()}>{dark ? <BiMoon /> : <BiSun />}</div>
+  );
+};
+```
+
+</section>
+
+<section>
+
+# Styled-components
+
+## At this point we have a fully functional toggler just with no styling, thats what we will be using styled-components for.
+
+## The very first thing that we need to do is create a <F folder={folders.themes}>themes</F> folder that contains a `index.js`, `dark.js`, and `light.js`. The `index.js` just exports the files from the folder, the `dark.js` file will be our colors for when the theme is dark and our `light.js` will be our colors for when the theme is light.
+
+## Both files will have identical layouts and are very simple, the only difference will be the exported variable names as well as a the color values. These color values will be what we will be accessing in our styled components and depending on which theme is rendered there will be a different value.
+
+```js -r-[dark.js]/copy/
+export const dark = {
+  colors: {
+    background: "#17191C",
+    icon: "#5686F5",
+    iconBG: "#5686F517",
+  },
+};
+```
+
+```js -r-[light.js]/copy/
+export const light = {
+  colors: {
+    background: "#fbd982",
+    icon: "#ffffff",
+    iconBG: "#ffffff17",
+  },
+};
+```
+
+## Both files are objects that contain a color object which contains 3 different keys. When we are working with our styled components we will be able to access these keys using props.
+
+## Now we need to create a <F folder={folders.elements}>elements</F> folder inside this folder we need to create a `index.js` file as well as a `Icon.js` file which will hold all of our icon styles.
+
+## Like before our `index.js` file is just there to export the files inside the folder.
+
+```js -r-[index.js]/copy/
+export * from "./Icon";
+```
+
+## Now lets get to our `Icon.js`. Using styled-components is very easy, the first thing we are going to do is import the library then export a variable called `IconWrapper` and set it equal to `styled.div`and end with 2 backticks.
+
+```js -r-[Icon.js]/copy/
+import styled from "styled-components";
+
+export const IconWrapper = styled.div``;
+```
+
+## Inside the backticks we can write any acceptable css and anything wrapped by the `IconWrapper` component will become a div with the styles we assign. All we are going to do is center the icons, make them bigger, change the cursor on hover, and assign the `icon` color variable from our theme files.
+
+```js -r-[Icon.js]/copy/
+import styled from "styled-components";
+
+export const IconWrapper = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  font-size: 8rem;
+  color: ${(props) => props.theme.colors.icon};
+`;
+```
+
+## Our `Icon.js` is now complete so we can close it and navigate to the `Toggle.js` file, import it, then wrap our icons in it.
+
+```jsx -r-{3,10,12}[Toggle.js]/copy/
+import React from "react";
+import { useStore } from "../components";
+import { IconWrapper } from "../elements";
+import { BiMoon, BiSun } from "react-icons/bi";
+
+export const Toggle = () => {
+  const dark = useStore((state) => state.dark);
+  const toggleDarkMode = useStore((state) => state.toggleDarkMode);
+  return (
+    <IconWrapper onClick={() => toggleDarkMode()}>
+      {dark ? <BiMoon /> : <BiSun />}
+    </IconWrapper>
+  );
+};
+```
+
+## Right now if we were to run our app everything would break because we need to distribute the themes to the entire app as well as assigning some global styles. To do all of this we need to go into our `App.js` file.
+
+## Once in our `App.js` we need to do a couple of things. The first thing we need to do is import our `Toggle` and `useStore` components, our `light` and `dark` themes, and `ThemeProvider` as well as `createGlobalStyle` from styled-components. Now we can simply create a simple global style for our app which just assigns the background color and gives our app a smooth transition. We also need to include the `GlobalStyle` and `Toggle` components wrapped by the `ThemeProvider` component in the return.
+
+```jsx -r-[App.js]/copy/
+import React from "react";
+import { Toggle, useStore } from "./components";
+import { light, dark } from "./themes";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+function App() {
+  const GlobalStyle = createGlobalStyle`
+  body {
+    transition-duration: 0.3s;
+    background-color: ${(props) => props.theme.colors.background};
+  }
+`;
+
+  return (
+    <ThemeProvider>
+      <GlobalStyle />
+      <Toggle />
+    </ThemeProvider>
+  );
+}
+
+export default App;
+```
+
+## The very last thing to do is to pass the conditionally pass a specific theme to the `ThemeProvider` component as a prop by checking the current state of `dark` by using our `useStore` hook.
+
+```jsx -r-{12,15}[App.js]/copy/
+import React from "react";
+import { Toggle, useStore } from "./components";
+import { light, dark } from "./themes";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+function App() {
+  const GlobalStyle = createGlobalStyle`
+  body {
+    transition-duration: 0.3s;
+    background-color: ${(props) => props.theme.colors.background};
+  }
+`;
+  const Dark = useStore((state) => state.dark);
+
+  return (
+    <ThemeProvider theme={Dark ? dark : light}>
+      <GlobalStyle />
+      <Toggle />
+    </ThemeProvider>
+  );
+}
+
+export default App;
+```
+
+## Just like that we are done! We now have a fully functional theme switcher that can easily be changed through the theme files!
 
 </section>

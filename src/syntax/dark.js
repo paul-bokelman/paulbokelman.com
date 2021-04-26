@@ -73,6 +73,12 @@ export const Dark = {
         fontStyle: "italic",
       },
     },
+    // {
+    //   types: ["controls"],
+    //   style: {
+    //     color: "#7DCFFF",
+    //   },
+    // },
     {
       types: ["doctype"],
       style: {

@@ -19,7 +19,7 @@ export const ProgressBackground = styled.div`
   height: 20%;
   left: 30px;
   top: 38%;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.progress};
   z-index: -5;
   @media ${(props) => props.theme.breakpoints.tablet} {
     display: none;

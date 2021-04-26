@@ -37,7 +37,7 @@ module.exports = {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ["Crimson Text", "Open Sans", "roboto mono"],
+          families: ["Crimson Text", "Open Sans", "Roboto Mono"],
         },
       },
     },

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useStore } from "../components";
+import { useUserStore } from "../components";
 import { CodeWrapper, UpperCode } from "../elements";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import Prism from "prism-react-renderer/prism";
@@ -8,7 +8,7 @@ import { Dark, Light } from "../syntax";
 (typeof global !== "undefined" ? global : window).Prism = Prism;
 require("prismjs/components/prism-solidity");
 export const Code = ({ codeString, language, metastring, ...props }) => {
-  const dark = useStore((state) => state.dark);
+  const dark = useUserStore((state) => state.dark);
 
   const [copied, setCopied] = useState(false);
   const calculateLinesToHighlight = (meta) => {

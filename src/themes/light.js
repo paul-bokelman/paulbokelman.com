@@ -1,29 +1,24 @@
 export const Light = {
   fonts: {
-    main: "Crimson Text, serif",
-    secondary: "Open Sans, sans-serif",
+    main: "Euclid Circular A, Arial, sans-serif",
     code: "Roboto Mono, monospaced",
   },
   colors: {
-    background: "#fff",
-    primary: "#000",
-    secondary: "#C8C8C8",
-    accent: "#A74AFF",
-    accentBG: "#a74aff17",
+    background: "#F9FAFC",
+    primary: "#25265e",
+    secondary: "#25265eb3",
+    progress: "#803bc017",
+    accent: "#6501e5",
+    accentBG: "#6501e517",
+    folder: {
+      color: "#6BCCF9",
+      background: "#6BCCF927",
+    },
   },
   breakpoints: {
     mobile: "only screen and (max-width: 50rem)",
     tablet: "only screen and (max-width: 65rem)",
   },
-  // spacings: {
-  //   xxSmall: ".25rem",
-  //   xSmall: ".5rem",
-  //   small: "1rem",
-  //   medium: "2rem",
-  //   large: "3rem",
-  //   xLarge: "4rem",
-  //   xxLarge: "6rem",
-  // },
 
   weight: {
     regular: "400",

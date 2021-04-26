@@ -37,18 +37,18 @@ export const MetaInfo = ({ title, date, time, featureImage }) => {
           />
         </ReaderSwitcher> */}
       </MetaInfoWrapper>
-      {typeof featureImage !== "string" ? (
+      {/* {typeof featureImage !== "string" ? (
         <FeatureImage fixed={featureImage} />
-      ) : (
-        <img
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-          src={featureImage}
-          alt={featureImage}
-        />
-      )}
+      ) : ( */}
+      <img
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+        src={featureImage}
+        alt={featureImage}
+      />
+      {/* )} */}
     </div>
   );
 };

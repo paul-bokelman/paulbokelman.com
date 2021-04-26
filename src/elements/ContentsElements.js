@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const ContentsWrapper = styled.div`
-  font-family: ${(props) => props.theme.fonts.secondary};
-  font-weight: ${(props) => props.theme.weight.bold};
+  font-family: ${(props) => props.theme.fonts.main};
+  font-weight: ${(props) => props.theme.weight.regular};
   position: fixed;
   overflow-wrap: break-word;
   max-width: 12rem;
@@ -28,6 +28,8 @@ export const ContentsWrapper = styled.div`
     filter: brightness(110%);
   }
   .current {
+    font-weight: ${(props) => props.theme.weight.bold};
+
     color: ${(props) => props.theme.colors.primary};
   }
 `;

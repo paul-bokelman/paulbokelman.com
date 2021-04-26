@@ -7,8 +7,9 @@ export const FolderWrapper = styled.div`
   z-index: 100;
   code {
     font-size: 1.2rem !important;
-    color: #f5ea56 !important;
-    background-color: #f5ea5617 !important;
+    color: ${(props) => props.theme.colors.folder.color} !important;
+    background-color: ${(props) =>
+      props.theme.colors.folder.background} !important;
     border-radius: 5px !important;
     padding: 2px 8px !important;
     white-space: nowrap !important;
@@ -18,47 +19,47 @@ export const FolderWrapper = styled.div`
       position: relative;
       top: 2px;
       margin-right: 6px;
-      fill: #f5ea56;
+      fill: ${(props) => props.theme.colors.folder.color};
     }
   }
   div {
-    display: inline-block;
-    width: 300%;
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
+    /* width: 200%; */
+    overflow: hidden;
     position: absolute;
     top: 2.3rem;
-    background: #f5ea5617;
+    background: ${(props) => props.theme.colors.folder.background};
     padding: 0px 0px !important;
     border-radius: 5px;
-    box-shadow: 0 8px 32px 0 #f5ea5617;
+    box-shadow: 0 8px 32px 0 ${(props) => props.theme.colors.folder.background};
     backdrop-filter: blur(3px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    /* border: 1px solid rgba(255, 255, 255, 0.18); */
 
     @media ${(props) => props.theme.breakpoints.tablet} {
       display: none;
     }
-    ul {
+
+    a {
+      white-space: nowrap;
       margin: 0.5rem;
-      margin-left: 0px;
-      a {
-        color: #f5ea56;
-        text-decoration: none;
-      }
-      li {
-        font-family: monospace;
-        padding-left: 0px;
-        margin: 0rem 1rem;
-        font-size: 1.1rem;
-        margin-right: 30px;
-      }
-      li::marker {
-        content: "";
-      }
+      font-family: monospace;
+      font-size: 1.1rem;
+      color: ${(props) => props.theme.colors.folder.color};
+      text-decoration: none;
       svg {
         position: relative;
         width: 13px;
         height: 13px;
         top: 1px;
         margin-right: 6px;
+      }
+      .external {
+        position: relative;
+        top: 3px;
+        left: 7px;
+        width: 20px;
+        height: 20px;
       }
     }
   }

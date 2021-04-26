@@ -15,8 +15,6 @@ export const Contents = () => {
     const sections = document
       .getElementById("container")
       .getElementsByTagName("section");
-    console.log(sections);
-    console.log(headers);
     for (let i = 0; i < sections.length; i++) {
       if (headers[i + 1].outerText.includes("&")) {
         const current = headers[i + 1].outerText.split(" & ").join("");

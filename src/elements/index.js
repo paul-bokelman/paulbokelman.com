@@ -13,3 +13,4 @@ export * from "./MetaInfoElements";
 export * from "./CodeElements";
 export * from "./FolderElements";
 export * from "./PeekElements";
+export * from "./BoolElements";

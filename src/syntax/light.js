@@ -1,7 +1,7 @@
 export const Light = {
   plain: {
     color: "#24292e",
-    backgroundColor: "#f6f8fa",
+    backgroundColor: "#edf0f3",
   },
   styles: [
     {

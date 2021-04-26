@@ -3,7 +3,8 @@ import { createGlobalStyle } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import { CustomThemeProvider } from "./src/themes";
 import { preToCodeBlock } from "mdx-utils";
-import { Table, Code, F, Peek } from "./src/components";
+import { Table, Code, F, Peek, Bool } from "./src/components";
+import "./src/fonts/fonts.css";
 // import "./language-tabs.css";
 
 const GlobalStyles = createGlobalStyle`
@@ -41,6 +42,7 @@ const components = {
   wrapper: ({ children }) => <>{children}</>,
   F,
   Peek,
+  Bool,
 };
 
 export const wrapRootElement = ({ element }) => (

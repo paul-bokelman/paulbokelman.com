@@ -8,15 +8,19 @@ import {
   ReadingProgress,
   Contents,
   MetaInfo,
+  usePostStore,
 } from "../components";
-
 const SinglePost = ({ data }) => {
+  const { setRepo } = usePostStore();
   const target = createRef();
-  console.log(data);
-  const featureImage =
-    data.mdx.frontmatter.featureImage.childImageSharp !== null
-      ? data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData
-      : data.mdx.frontmatter.featureImage.publicURL;
+  // console.log(data);
+  const featureImage = data.mdx.frontmatter.featureImage.publicURL;
+
+  // const featureImage =
+  // data.mdx.frontmatter.featureImage.childImageSharp !== null
+  //   ? data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData
+  //   : data.mdx.frontmatter.featureImage.publicURL;
+
   const seoImage = data.mdx.frontmatter.featureImage.publicURL;
   useEffect(() => {
     const anchors = document
@@ -26,7 +30,10 @@ const SinglePost = ({ data }) => {
       anchors[i].setAttribute("target", "_blank");
     }
   }, []);
-  console.log(data.mdx.frontmatter.currentRepo);
+  useEffect(() => {
+    setRepo(data.mdx.frontmatter.currentRepo);
+  }, [data.mdx.frontmatter.currentRepo]);
+
   return (
     <Container>
       <Seo
@@ -42,10 +49,7 @@ const SinglePost = ({ data }) => {
             time={data.mdx.timeToRead}
             featureImage={featureImage}
           />
-          <MDXRenderer
-            images={data.mdx.frontmatter.images}
-            cr={data.mdx.frontmatter.currentRepo}
-          >
+          <MDXRenderer images={data.mdx.frontmatter.images}>
             {data.mdx.body}
           </MDXRenderer>
         </div>
