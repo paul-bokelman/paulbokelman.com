@@ -3,12 +3,7 @@ import { FaReact } from "react-icons/fa";
 import { RiSpeedFill, RiCloseFill } from "react-icons/ri"; // RiPlayFill
 import { BiDetail, BiDotsHorizontalRounded } from "react-icons/bi";
 import { FiSlash } from "react-icons/fi";
-import {
-  ExplainTagWrapper,
-  ExtraTags,
-  MetaInfoWrapper,
-  Tag,
-} from "../elements"; // ReaderSwitcher
+import { ExtraTags, MetaInfoWrapper, Tag } from "../elements"; // ReaderSwitcher
 import { useUserStore } from "."; // FeatureImage
 // import ReactTooltip from "react-tooltip";
 

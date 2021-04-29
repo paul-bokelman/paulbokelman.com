@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Progress, ProgressBackground, ProgressText } from "../elements";
+import { Progress, ProgressBackground } from "../elements"; //ProgressText
 export const ReadingProgress = ({ target }) => {
   const [readingProgress, setReadingProgress] = useState(0);
   const scrollListener = () => {

@@ -32,7 +32,7 @@ const SinglePost = ({ data }) => {
   }, []);
   useEffect(() => {
     setRepo(data.mdx.frontmatter.currentRepo);
-  }, [data.mdx.frontmatter.currentRepo]);
+  }, [data.mdx.frontmatter.currentRepo, setRepo]);
 
   return (
     <Container>
@@ -77,9 +77,9 @@ export const pageQuery = graphql`
         tags
         featureImage {
           publicURL
-          childImageSharp {
-            gatsbyImageData
-          }
+          # childImageSharp {
+          #   gatsbyImageData
+          # }
         }
         images {
           publicURL
