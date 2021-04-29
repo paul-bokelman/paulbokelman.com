@@ -1,5 +1,5 @@
-import create from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import create from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 
 let user = (set) => ({
   dark: false,
@@ -7,12 +7,12 @@ let user = (set) => ({
 });
 
 const post = (set) => ({
-  repo: "",
+  repo: '',
   setRepo: (repo) => set({ repo }),
 });
 
 user = devtools(user);
-user = persist(user, { name: "user_settings" });
+user = persist(user, { name: 'user_settings' });
 
 export const useUserStore = create(user);
 export const usePostStore = create(post);

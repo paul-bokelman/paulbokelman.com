@@ -20,18 +20,18 @@ exports.createPages = async function ({ actions, graphql }) {
   // const numPages = Math.ceil(data.allMdx.edges.length / postPerPage);
 
   actions.createPage({
-    path: "/",
-    component: require.resolve("./src/templates/AllPosts.js"),
+    path: '/',
+    component: require.resolve('./src/templates/allPosts.jsx'),
     context: { data },
   });
 
-  //creates single blogpost
+  // creates single blogpost
   data.allMdx.edges.forEach((edge) => {
-    const slug = edge.node.frontmatter.slug;
-    const id = edge.node.id;
+    const { slug } = edge.node.frontmatter;
+    const { id } = edge.node;
     actions.createPage({
       path: slug,
-      component: require.resolve("./src/templates/SinglePost.js"),
+      component: require.resolve('./src/templates/singlePost.jsx'),
       context: { id },
     });
   });

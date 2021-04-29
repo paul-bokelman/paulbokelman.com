@@ -1,11 +1,10 @@
-import React from "react";
-import { createGlobalStyle } from "styled-components";
-import { MDXProvider } from "@mdx-js/react";
-import { CustomThemeProvider } from "./src/themes";
-import { preToCodeBlock } from "mdx-utils";
-import { Table, Code, F, Peek, Bool } from "./src/components";
-import "./src/fonts/fonts.css";
-// import "./language-tabs.css";
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
+import { MDXProvider } from '@mdx-js/react';
+import { preToCodeBlock } from 'mdx-utils';
+import { CustomThemeProvider } from './src/themes';
+import { Table, Code, F, Peek, Bool } from './src/components';
+import './src/fonts/fonts.css';
 
 const GlobalStyles = createGlobalStyle`
 * {
@@ -35,6 +34,7 @@ const components = {
   pre: (preProps) => {
     const props = preToCodeBlock(preProps);
     if (props) {
+      // eslint-disable-next-line react/jsx-filename-extension
       return <Code {...props} />;
     }
     return <pre {...preProps} />;
