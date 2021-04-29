@@ -1,10 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: 'My MDX Blog',
-    description: 'This is a random blog thing',
-    url: 'https://youtube.com',
-    image: '/office.jpg',
-    author: 'Paul Bokelman',
+    title: "My MDX Blog",
+    description: "This is a random blog thing",
+    url: "https://youtube.com",
+    image: "/office.jpg",
+    author: "Paul Bokelman",
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -34,10 +34,10 @@ module.exports = {
     `gatsby-plugin-mdx`,
     `gatsby-plugin-smoothscroll`,
     {
-      resolve: 'gatsby-plugin-web-font-loader',
+      resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ['Crimson Text', 'Open Sans', 'Roboto Mono'],
+          families: ["Crimson Text", "Open Sans", "Roboto Mono"],
         },
       },
     },
@@ -46,7 +46,7 @@ module.exports = {
     //   options: {
     //     fonts: [
     //       `roboto mono`,
-    //       `Crimson Text\:400, 400i, 600, 600i, 700, 700i, 900`,
+    //       `Crimson Text\:400, 400i, 600, 600i, 700, 700i, 900`, // you can also specify font weights and styles
     //     ],
     //     display: "swap",
     //   },

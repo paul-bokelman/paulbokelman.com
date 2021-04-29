@@ -38,7 +38,7 @@ export const Light = {
     {
       types: ["attr-name", "variable"],
       style: {
-        color: "rgb(58, 186, 255)",
+        color: "rgb(156, 220, 254)",
       },
     },
     {

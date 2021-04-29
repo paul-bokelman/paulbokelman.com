@@ -56,8 +56,8 @@ export const FolderWrapper = styled.div`
       }
       .external {
         position: relative;
-        top: 5px;
-        left: 2px;
+        top: 3px;
+        left: 7px;
         width: 20px;
         height: 20px;
       }

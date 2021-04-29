@@ -8,14 +8,13 @@ export const MetaInfoWrapper = styled.div`
   }
   div:last-child {
     float: right;
-    white-space: nowrap;
     text-align: right;
-    width: 16rem;
-    height: auto;
-    overflow-x: scroll;
-  }
-  div:last-child::-webkit-scrollbar {
-    display: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;
 
@@ -32,7 +31,8 @@ const handleTagType = (theme, tag) => {
         default:
           return "  color: #ff7373 !important; background: #ff737328;";
       }
-    case "dark":
+
+    default:
       switch (tag) {
         case "react":
           return `color: #61DBFB !important; background: #61DBFB17;`;
