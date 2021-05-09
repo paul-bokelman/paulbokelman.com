@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import { CustomThemeProvider } from "./src/themes";
 import { preToCodeBlock } from "mdx-utils";
-import { Table, Code, F, Peek, Bool } from "./src/components";
+import { Table, Code, F, C, Peek, Bool } from "./src/components";
 import "./src/fonts/fonts.css";
 // import "./language-tabs.css";
 
@@ -19,6 +19,9 @@ body, html {
     height: 100%;
     background-color: ${(props) => props.theme.colors.background};
     transition: 0.2s ease-in-out;
+    textarea {
+    display: none;
+    }
     /* body::-webkit-scrollbar {
     width: 0.6em;
   }
@@ -43,6 +46,7 @@ const components = {
   F,
   Peek,
   Bool,
+  C,
 };
 
 export const wrapRootElement = ({ element }) => (

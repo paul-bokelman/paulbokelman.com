@@ -222,6 +222,7 @@ export const PostWrapper = styled.main`
 
   img {
     margin-top: 1.5vw;
+    border-radius: 0.6rem;
   }
 
   @media ${(props) => props.theme.breakpoints.tablet} {

@@ -16,3 +16,4 @@ export * from "./Folder";
 export * from "./Peek";
 export * from "./state";
 export * from "./Bool";
+export * from "./Console";

@@ -107,10 +107,6 @@ export const CodeWrapper = styled.div`
   .fileName {
     margin-top: 4.3rem;
   }
-  textarea {
-    position: absolute;
-    left: -100%;
-  }
 
   pre::-webkit-scrollbar {
     height: 0.7em;

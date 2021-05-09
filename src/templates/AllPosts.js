@@ -27,9 +27,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             excerpt
             featureImage {
-              childrenImageSharp {
-                gatsbyImageData
-              }
+              publicURL
             }
           }
         }

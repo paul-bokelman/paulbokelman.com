@@ -5,6 +5,8 @@ import Highlight, { defaultProps } from "prism-react-renderer";
 import Prism from "prism-react-renderer/prism";
 import rangeParser from "parse-numeric-range";
 import { Dark, Light } from "../syntax";
+import { FiClipboard } from "react-icons/fi";
+import { GoCheck } from "react-icons/go";
 (typeof global !== "undefined" ? global : window).Prism = Prism;
 require("prismjs/components/prism-solidity");
 export const Code = ({ codeString, language, metastring, ...props }) => {
@@ -87,7 +89,9 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
                 {copyable ? (
                   <div>
                     {copied ? (
-                      <span className="copied">Copied!</span>
+                      <span className="copied">
+                        <GoCheck />
+                      </span>
                     ) : (
                       <span
                         className="copy"
@@ -95,7 +99,7 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
                         onKeyDown={copyFunction}
                         role="presentation"
                       >
-                        copy
+                        <FiClipboard />
                       </span>
                       // <MdContentCopy onClick={copyFunction} />
                     )}

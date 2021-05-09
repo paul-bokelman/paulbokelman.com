@@ -27,9 +27,9 @@ export const MetaInfo = ({ title, date, time, featureImage, tags }) => {
   return (
     <div>
       <MetaInfoWrapper>
-        <h1 style={{ fontSize: "80px", marginBottom: "1vw" }}>{title}</h1>
+        <h1 style={{ fontSize: "4rem", marginBottom: "1vw" }}>{title}</h1>
         <span>
-          {date} /{time} min read
+          {date} / {time} min read
         </span>
         <div>
           {tags.map((tag, index) => {

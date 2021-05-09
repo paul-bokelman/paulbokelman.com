@@ -35,11 +35,7 @@ export const Contents = () => {
   return (
     <ContentsWrapper>
       {headers !== undefined ? (
-        <Scrollspy
-          // style={{ position: "fixed", left: "200px" }}
-          items={scrollItems}
-          currentClassName="current"
-        >
+        <Scrollspy items={scrollItems} currentClassName="current">
           {headers.map((text, index) => (
             <li key={index}>
               <p

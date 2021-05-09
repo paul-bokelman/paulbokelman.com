@@ -1,10 +1,10 @@
 ---
-title: Theme-switcher
+title: Theme-switcher with Zustand and Styled-components
 slug: theme-switcher
 date: 2020-04-07
 featureImage: cover.gif
 images: [bare.png]
-excerpt: Create a simple and very flexible theme switcher with zustand and styled-components.
+excerpt: Learn the basics of Zustand and Styled-components to put together a very simple yet flexible application wide theme-switcher in less than 10 minutes.
 currentRepo: "theme-switcher"
 tags: ["detailed", "react"]
 ---
@@ -17,18 +17,18 @@ import { folders } from "./folders.js";
 
 # Overview
 
-## We will be using 2 very useful react libraries in order to quickly create a very simple yet very flexible theme switcher for your application. We will use `zustand` and `styled-components` in order to make this possible.
+## We will be using 2 very useful react libraries in order to quickly create a simple, yet very flexible theme switcher for your application. We will use `zustand` and `styled-components` in order to make this possible.
 
-- [`zustand`](https://github.com/pmndrs/zustand) - "A small, fast and scaleable bearbones state-management solution. Has a comfy api based on hooks, isn't boilerplatey or opinionated, but still just enough to be explicit and flux-like."
+- [`zustand`](https://github.com/pmndrs/zustand) - "A small, fast and scalable bare bones state-management solution. Has a comfy api based on hooks, isn't boilerplatey or opinionated, but still just enough to be explicit and flux-like."
 - [`styled-components`](https://styled-components.com/) - "Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress."
 
 ## Why `zustand` ?
 
-- The reason that I chose zustand for this is because I see it as a much simplier replacement to reacts `useContext` & `createContext` hooks. Zustand also provides redux devtools so you can view the current state in the chrome console, as well as a simple way to persist the current state across renders which is very helpful in creating a theme switcher.
+- The reason that I chose zustand for this is because I see it as a much simpler replacement to reacts `useContext` & `createContext` hooks. Zustand also provides redux devtools so you can view the current state in the chrome console, as well as a simple way to persist the current state across renders which is very helpful in creating a theme switcher.
 
 ## Why `styled-components` ?
 
-- Previously when I had worked on theme switchers it always felt so hacky to pass values to a css file based on what a state is, or use an html data tag in order to switch the css depending on state/theme, but styled-components has lots of useful modules that make this process enjoyable, readable, and most of all flexible. With styled-components you can make "theme" files that contain values, you can then use those values dynamically in "styled" components which allow for fully capable css as well as javascript.
+- Previously when I had worked on theme switchers, it always felt so hacky to pass values to a css file based on what the state is, or use an html data tag in order to switch the css depending on state/theme, but styled-components has many useful modules that make this process enjoyable, readable, and most of all flexible. With styled-components, you can make "theme" files that contain values, you can then use those values dynamically in "styled" components which allow for fully capable css as well as javascript.
 
 </section>
 
@@ -80,13 +80,13 @@ npm start
 
 ## At this point we can start utilizing `zustand`. In order to get started create a <F folder={folders.components}>components</F> folder and add a `index.js` as well as a `state.js` inside.
 
-## Lets start with the `index.js` file. This particular file is just for exporting all of the components directly from the folder so imported them is easier in other files.
+## Let's start with the `index.js` file. This particular file is just for exporting all the components directly from the folder, so importing them is easier in other files.
 
 ```jsx -r-[index.js]/copy/
 export * from "./state";
 ```
 
-## Thats all for the `index.js` for the time being so lets move onto the `state.js` file. The first thing that we need to do is declare a `store` variable that is an object that contains a `dark` boolean and a function to change the value of `dark` to the opposite of what it currently is. We also need to import a module called `create` from zustand which we will use to wrap `store` when exporting as a hook.
+## That's all for the `index.js` for the time being, so let's move onto the `state.js` file. The first thing that we need to do is to declare a `store` variable that is an object that contains a `dark` boolean and a function to change the value of `dark` to the opposite of what it currently is. We also need to import a module called `create` from `zustand` which we will use to wrap `store` when exporting it as a hook.
 
 ```jsx -r-[index.js]/copy/
 import create from "zustand";
@@ -101,7 +101,7 @@ export const useStore = create(store);
 
 > **NOTE:** The `set` function merges state.
 
-## At this point we could use this hook in our other components perfectly fine but we want the state to utilize the redux devtools as well as persist the state across renders. To do this we just need to import `devtools` and `persist` from zustand/middleware then wrap `store` in both of them.
+## At this point we could use this hook in our other components perfectly fine but we want the state to utilize the redux devtools as well as persist the state across renders. To do this, we just need to import `devtools` and `persist` from zustand/middleware then wrap `store` in both of them.
 
 ```jsx -r-{2,9-10}[index.js]/copy/
 import create from "zustand";
@@ -120,11 +120,11 @@ export const useStore = create(store);
 
 > **NOTE:** The `persist` function works by storing the value in local storage so the "name" key in the object passed in represents what it is called, this bean said the object is completely optional.
 
-## Our `state.js` is now finished so we can close it and move onto our component that will utilize our custom `useStore` hook.
+## Our `state.js` is now finished so we can close it and move on to our component that will utilize our custom `useStore` hook.
 
-## Create a file called `Toggle.js` in the <F folder={folders.components}>components</F> folder. This file will be used to check if the current state of `dark` is <Bool>true</Bool> or <Bool>false</Bool> and conditionally render the light and dark icons that both have the ability to change the theme with the `toggleDarkMode` function that we created in the `state.js`.
+## Create a file called `Toggle.js` in the <F folder={folders.components}>components</F> folder. This file will be used to check if the current state of `dark` is <Bool>true</Bool> or <Bool>false</Bool> and conditionally render the light and dark icons. These both have the ability to change the theme with the `toggleDarkMode` function that we created in the `state.js`.
 
-## This being said, the first thing we need to do is import react and our new custom `useStore` hook to allow for us to access the state.
+## The first thing we need to do is to import react and our new custom `useStore` hook to allow us to access the state.
 
 ```jsx -r-[Toggle.js]/copy/
 import React from "react";
@@ -139,7 +139,7 @@ export const Toggle = () => {
 };
 ```
 
-## In order to access our state for our `dark` boolean and our `toggleDarkMode` function we have to set a variable to our `useStore` hook but also pass in a arrow function in order to access our certain state because its an object. We also need to bind the `toggleDarkMode` to an onClick event on the main div so whenever it is clicked the state of `dark` will change.
+## In order to access the state for our `dark` boolean and our `toggleDarkMode` function, we have to assign a variable to our `useStore` hook but also pass in an arrow function in order to access the dark boolean from the state object. We also need to bind the `toggleDarkMode` to an onClick event in the parent div so whenever it is clicked the state of `dark` will switch.
 
 ```jsx -r-{5-6,8}[Toggle.js]/copy/
 import React from "react";
@@ -156,7 +156,7 @@ export const Toggle = () => {
 };
 ```
 
-## Now we can add the icons that will conditionally render depending on the state of `dark`. In order to do this we need to install and import [`react-icons`](https://react-icons.github.io/react-icons/). In order to get beautiful sun and moon icons to use.
+## Now we can add the icons that will conditionally render depending on the state of `dark`. To do this, we need to install and import [`react-icons`](https://react-icons.github.io/react-icons/) in order to get the beautiful sun and moon icons to use.
 
 ```bash
 npm install react-icons
@@ -188,11 +188,11 @@ export const Toggle = () => {
 
 # Styled-components
 
-## At this point we have a fully functional toggler just with no styling, thats what we will be using styled-components for.
+## At this point we have a fully functional toggler but without styling. That's what we will be using styled-components for.
 
-## The very first thing that we need to do is create a <F folder={folders.themes}>themes</F> folder that contains a `index.js`, `dark.js`, and `light.js`. The `index.js` just exports the files from the folder, the `dark.js` file will be our colors for when the theme is dark and our `light.js` will be our colors for when the theme is light.
+## The very first thing that we need to do is to create a <F folder={folders.themes}>themes</F> folder that contains an `index.js`, `dark.js`, and `light.js`. The `index.js` just exports the files from the folder, the `dark.js` file will be our colors for when the theme is dark and our `light.js` will be our colors for when the theme is light.
 
-## Both files will have identical layouts and are very simple, the only difference will be the exported variable names as well as a the color values. These color values will be what we will be accessing in our styled components and depending on which theme is rendered there will be a different value.
+## Both files will have identical layouts and are very simple, the only difference will be the exported variable names as well as the color values. We will be accessing these color values in our styled components and depending on which theme is rendered there will be a different value.
 
 ```js -r-[dark.js]/copy/
 export const dark = {
@@ -214,9 +214,9 @@ export const light = {
 };
 ```
 
-## Both files are objects that contain a color object which contains 3 different keys. When we are working with our styled components we will be able to access these keys using props.
+## Both files are objects that contain a color object which, in turn, contains 3 different keys. When we are working with our styled components, we will be able to access these keys using props.
 
-## Now we need to create a <F folder={folders.elements}>elements</F> folder inside this folder we need to create a `index.js` file as well as a `Icon.js` file which will hold all of our icon styles.
+## Now we need to create a <F folder={folders.elements}>elements</F> folder. Inside this folder we need to create an `index.js` file as well as an `Icon.js` file which will hold all our icon styles.
 
 ## Like before our `index.js` file is just there to export the files inside the folder.
 
@@ -224,7 +224,7 @@ export const light = {
 export * from "./Icon";
 ```
 
-## Now lets get to our `Icon.js`. Using styled-components is very easy, the first thing we are going to do is import the library then export a variable called `IconWrapper` and set it equal to `styled.div`and end with 2 backticks.
+## Now let's get to our `Icon.js` component. Using `styled-components` is very easy. The first thing we are going to do is to import `styled` from `styled-components` then export a variable named `IconWrapper` and set it equal to `styled.div` and end with 2 backticks.
 
 ```js -r-[Icon.js]/copy/
 import styled from "styled-components";
@@ -232,7 +232,7 @@ import styled from "styled-components";
 export const IconWrapper = styled.div``;
 ```
 
-## Inside the backticks we can write any acceptable css and anything wrapped by the `IconWrapper` component will become a div with the styles we assign. All we are going to do is center the icons, make them bigger, change the cursor on hover, and assign the `icon` color variable from our theme files.
+## Inside the backticks we can write any acceptable css and anything wrapped by the `IconWrapper` component will become a div with the styles we assign. All we are going to do is to center the icons, make them bigger, change the cursor on hover, and assign the `icon` color variable from our theme files.
 
 ```js -r-[Icon.js]/copy/
 import styled from "styled-components";
@@ -267,9 +267,9 @@ export const Toggle = () => {
 };
 ```
 
-## Right now if we were to run our app everything would break because we need to distribute the themes to the entire app as well as assigning some global styles. To do all of this we need to go into our `App.js` file.
+## Right now if we were to run our app everything would break because we need to distribute the themes to the entire app as well as assigning some global styles. To do all of this, we need to go into our `App.js` file.
 
-## Once in our `App.js` we need to do a couple of things. The first thing we need to do is import our `Toggle` and `useStore` components, our `light` and `dark` themes, and `ThemeProvider` as well as `createGlobalStyle` from styled-components. Now we can simply create a simple global style for our app which just assigns the background color and gives our app a smooth transition. We also need to include the `GlobalStyle` and `Toggle` components wrapped by the `ThemeProvider` component in the return.
+## Once in our `App.js` we need to do a couple of things. The first thing we need to do is import our `Toggle` and `useStore` components, our `light` and `dark` themes, and `ThemeProvider` as well as `createGlobalStyle` from `styled-components`. Now we can create a simple global style for our app which just assigns the background color and gives our app a smooth transition. We also need to include the `GlobalStyle` and `Toggle` components wrapped by the `ThemeProvider` component in the return.
 
 ```jsx -r-[App.js]/copy/
 import React from "react";
@@ -295,7 +295,7 @@ function App() {
 export default App;
 ```
 
-## The very last thing to do is to pass the conditionally pass a specific theme to the `ThemeProvider` component as a prop by checking the current state of `dark` by using our `useStore` hook.
+## The very last thing to do is to conditionally pass a specific theme to the `ThemeProvider` component as a prop by checking the current state of `dark` by using our `useStore` hook.
 
 ```jsx -r-{12,15}[App.js]/copy/
 import React from "react";
