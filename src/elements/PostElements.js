@@ -39,14 +39,14 @@ export const PostWrapper = styled.main`
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     color: ${(props) => props.theme.colors.primary};
     /* line-height: 2.5rem; */
     /* font-family: ${(props) => props.theme.fonts.secondary}; */
     font-weight: 600;
   }
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.125rem;
     line-height: 1.875rem;
     font-weight: 400;
   }
@@ -164,12 +164,12 @@ export const PostWrapper = styled.main`
   li {
     padding-inline-start: 1ch;
     margin: 0.25rem 0;
-    font-size: 1.3rem;
+    font-size: 1.125rem;
   }
 
   code {
     /* font-family: ${(props) => props.theme.fonts.code}; */
-    font-size: 1.2rem;
+    font-size: 1.125rem;
     color: ${(props) => props.theme.colors.accent};
     background-color: ${(props) => props.theme.colors.accentBG};
     border-radius: 5px;

@@ -1,12 +1,12 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Container, Seo, TopicCycle } from "../components"; //FeatureImage
+import { Container, Seo, PostPreview } from "../components"; //FeatureImage
 
 const AllPosts = ({ data }) => {
   const posts = data.allMdx.edges;
   return (
     <Container>
-      <TopicCycle posts={posts} />
+      <PostPreview posts={posts} />
       <Seo />
       {/* <FeatureImage /> */}
     </Container>
@@ -26,6 +26,7 @@ export const pageQuery = graphql`
             title
             date(formatString: "MMMM DD, YYYY")
             excerpt
+            tags
             featureImage {
               publicURL
             }

@@ -8,7 +8,7 @@ export * from "./Code";
 export * from "./Seo";
 
 export * from "./ThemeToggle";
-export * from "./TopicCycle";
+export * from "./PostPreview";
 export * from "./Progress";
 export * from "./Contents";
 export * from "./MetaInfo";

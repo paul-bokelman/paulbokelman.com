@@ -6,7 +6,7 @@ export * from "./PostElements";
 export * from "./TableElements";
 
 export * from "./ThemeToggleElements";
-export * from "./TopicCycleElements";
+export * from "./PostPreviewElements";
 export * from "./ProgressElements";
 export * from "./ContentsElements";
 export * from "./MetaInfoElements";

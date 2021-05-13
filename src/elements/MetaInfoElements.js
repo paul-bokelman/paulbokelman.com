@@ -40,6 +40,8 @@ const handleTagType = (theme, tag) => {
           return "color: #fff373 !important; background: #fff37317;";
         case "detailed":
           return "color: #96ff73 !important; background: #96ff7317;";
+        case "informative":
+          return "color: #2db36a !important; background: #2db36a17;";
         default:
           return "  color: #ff7373 !important; background: #ff737317;";
       }
@@ -47,9 +49,9 @@ const handleTagType = (theme, tag) => {
 };
 
 export const Tag = styled.span`
-  font-weight: 500;
   position: relative;
   font-size: 0.7rem !important;
+  font-weight: 500;
   margin-left: 0.4rem;
   border-radius: 15px;
   padding: 2px 8px;
