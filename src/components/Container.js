@@ -4,7 +4,7 @@ import { Nav, Footer } from "../components";
 export const Container = ({ children }) => {
   return (
     <ContainerWrapper id="container">
-      {/* <Nav /> */}
+      <Nav />
       {children}
       {/* <Footer /> */}
     </ContainerWrapper>
