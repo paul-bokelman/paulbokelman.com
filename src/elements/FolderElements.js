@@ -6,7 +6,7 @@ export const FolderWrapper = styled.div`
   position: relative;
   z-index: 100;
   code {
-    font-size: 1.2rem !important;
+    font-size: 1.125rem !important;
     color: ${(props) => props.theme.colors.folder.color} !important;
     background-color: ${(props) =>
       props.theme.colors.folder.background} !important;

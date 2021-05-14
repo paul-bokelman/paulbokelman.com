@@ -13,7 +13,7 @@ tags: ["fast", "react"]
 
 # Overview
 
-## When my blog was in early development, I was constantly looking for important features to add and one feature that would always stick out to me was a table of contents to navigate through the different sections of the post. At the time, I really had no clue how to approach this but I knew for certain that I wanted to figure it out myself without the help of a video or blog post.
+When my blog was in early development, I was constantly looking for important features to add and one feature that would always stick out to me was a table of contents to navigate through the different sections of the post. At the time, I really had no clue how to approach this but I knew for certain that I wanted to figure it out myself without the help of a video or blog post.
 
 </section>
 
@@ -21,18 +21,18 @@ tags: ["fast", "react"]
 
 # Getting Started
 
-## After some trial and error, I came up with the solution of just grabbing all of the h1 tags (main headers for each post), getting their text contents, pushing each of the text contents into an array to display, and assigning each an id that would later be used to navigate to. With the array, I could just map over the values making each of them a link that points to their corresponding section with the ids.
+After some trial and error, I came up with the solution of just grabbing all of the h1 tags (main headers for each post), getting their text contents, pushing each of the text contents into an array to display, and assigning each an id that would later be used to navigate to. With the array, I could just map over the values making each of them a link that points to their corresponding section with the ids.
 
-## So in short what needs to be done?
+So in short what needs to be done?
 
 - Get all h1 elements & text contents
 - Give each h1 element a unique id
 - Push text contents to an array
 - Display contents of the array as links to each id
 
-## With that being said let's quickly setup the project. I am going to use react, but this can be done in any js framework or in vanilla javascript as well.
+With that being said let's quickly setup the project. I am going to use react, but this can be done in any js framework or in vanilla javascript as well.
 
-## All I am going to do to start is to create a new react project by running `create-react-app` then delete everything in the `App.js` and `App.css` files and start with the bare minimum.
+All I am going to do to start is to create a new react project by running `create-react-app` then delete everything in the `App.js` and `App.css` files and start with the bare minimum.
 
 ```jsx -r-[App.js]/copy/
 import React from "react";
@@ -59,7 +59,7 @@ export default App;
 
 # Getting headers
 
-## Before we get into the javascript and getting the elements, we actually need some elements to pull from the html. Usually these elements would be dynamically generated from the markdown but in the interest of keeping things simple I am going to just hard code them.
+Before we get into the javascript and getting the elements, we actually need some elements to pull from the html. Usually these elements would be dynamically generated from the markdown but in the interest of keeping things simple I am going to just hard code them.
 
 ```jsx [App.js]/copy/
 // 'container' id in order to search children in larger project
@@ -75,9 +75,9 @@ return (
 );
 ```
 
-## With our elements in place we can now query the document for all h1 tags inside of the element with the id of container.
+With our elements in place we can now query the document for all h1 tags inside of the element with the id of container.
 
-## Because we want this action to take place before the user sees anything, this will be placed in the `useEffect` hook provided by react.
+Because we want this action to take place before the user sees anything, this will be placed in the `useEffect` hook provided by react.
 
 ```jsx -r-{1,5-10}[App.js]/copy/
 import React, { useEffect } from "react";
@@ -105,9 +105,9 @@ function App() {
 export default App;
 ```
 
-## If you check in the console you will see <C file="App.js:8">HTMLCollection(6) [h1, h1, h1, h1, h1, h1]</C> These are our 6 h1s that we previously made. For the time being they are useless but if you access the dropdown for an individual element, you may notice an `outerText` property, this property contains the text wrapped by the header and is what we need.
+If you check in the console you will see <C file="App.js:8">HTMLCollection(6) [h1, h1, h1, h1, h1, h1]</C> These are our 6 h1s that we previously made. For the time being they are useless but if you access the dropdown for an individual element, you may notice an `outerText` property, this property contains the text wrapped by the header and is what we need.
 
-## In order to access this property for each element in the array we can use a simple for loop that just gets the `outerText` then pushes it to another array. Also in the for loop we need to assign each header with its own id.
+In order to access this property for each element in the array we can use a simple for loop that just gets the `outerText` then pushes it to another array. Also in the for loop we need to assign each header with its own id.
 
 ```jsx -r-{10-16}[App.js]/copy/
 import React, { useEffect } from "react";
@@ -142,7 +142,7 @@ function App() {
 export default App;
 ```
 
-## Console: <C file="App.js:15">(6) ["React", "Ruby", "Python", "JavaScript", "Java", "C"]</C><C file="App.js:16">HTMLCollection(6) [h1#React, h1#Ruby, h1#Python, h1#JavaScript, h1#Java, h1#C]</C> These are the outputs from our console logs.
+Console: <C file="App.js:15">(6) ["React", "Ruby", "Python", "JavaScript", "Java", "C"]</C><C file="App.js:16">HTMLCollection(6) [h1#React, h1#Ruby, h1#Python, h1#JavaScript, h1#Java, h1#C]</C> These are the outputs from our console logs.
 
 </section>
 
@@ -150,9 +150,9 @@ export default App;
 
 # Displaying headers
 
-## In order to display our headers, we first need to use the `useState` hook from react in order to extract the `headerText` array from the `useEffect` function.
+In order to display our headers, we first need to use the `useState` hook from react in order to extract the `headerText` array from the `useEffect` function.
 
-## If you are familiar with the `useState` hook, you will know this is a very easy task. All we need to do is import the hook from react and then use it to set the value. Then we will map over that value in the return.
+If you are familiar with the `useState` hook, you will know this is a very easy task. All we need to do is import the hook from react and then use it to set the value. Then we will map over that value in the return.
 
 ```jsx -r-{1,5,16,20-26}[App.js]/copy/
 import React, { useState, useEffect } from "react";
@@ -194,7 +194,7 @@ function App() {
 export default App;
 ```
 
-## As of now our page should look like this:
+As of now our page should look like this:
 
 <img
   src={props.images[0].publicURL}
@@ -204,7 +204,7 @@ export default App;
   }}
 />
 
-## But these mapped values don't do anything because they are just paragraph tags, we need to convert them into list item links in order to provide functionality and make styling them easier. Each link will point to their corresponding id so that when clicked the user will be redirected to where that id is on the page.
+But these mapped values don't do anything because they are just paragraph tags, we need to convert them into list item links in order to provide functionality and make styling them easier. Each link will point to their corresponding id so that when clicked the user will be redirected to where that id is on the page.
 
 ```jsx -r-{23-27}[App.js]/copy/
 import React, { useState, useEffect } from "react";
@@ -250,7 +250,7 @@ function App() {
 export default App;
 ```
 
-## You will now notice if you click on any of the items the url will change to go to that id which means that all of the functionality is now complete.
+You will now notice if you click on any of the items the url will change to go to that id which means that all of the functionality is now complete.
 
 </section>
 
@@ -258,15 +258,15 @@ export default App;
 
 # Scrollspy
 
-## A very handy library that I found was [`react-scrollspy`](https://www.npmjs.com/package/react-scrollspy) which, as the name implies, checks which elements you are currently viewing.
+A very handy library that I found was [`react-scrollspy`](https://www.npmjs.com/package/react-scrollspy) which, as the name implies, checks which elements you are currently viewing.
 
 ```bash
 npm install react-scrollspy
 ```
 
-## `react-scrollspy` provides a very handy prop called `currentClassName` which allows us to assign a special class to the corresponding element in the table of contents that is currently being viewed on the page.
+`react-scrollspy` provides a very handy prop called `currentClassName` which allows us to assign a special class to the corresponding element in the table of contents that is currently being viewed on the page.
 
-## The Scrollspy component itself is an unordered list (ul) which is why we are displaying each element as a list item. With this being said, all we need to do after importing `Scrollspy` from `react-scrollspy` is to wrap it around our mapped values, give it the headers through the `items` prop, and give it the class of 'current' through the `currentClassName` prop.
+The Scrollspy component itself is an unordered list (ul) which is why we are displaying each element as a list item. With this being said, all we need to do after importing `Scrollspy` from `react-scrollspy` is to wrap it around our mapped values, give it the headers through the `items` prop, and give it the class of 'current' through the `currentClassName` prop.
 
 ```jsx
 import Scrollspy from "react-scrollspy";
@@ -296,7 +296,7 @@ return (
 );
 ```
 
-## At this point our `App.js` is now done and should look like this:
+At this point our `App.js` is now done and should look like this:
 
 ```jsx -r-[App.js]/copy/
 import React, { useState, useEffect } from "react";
@@ -346,7 +346,7 @@ function App() {
 export default App;
 ```
 
-## The last thing to do is to add some basic styling in order to see it in action.
+The last thing to do is to add some basic styling in order to see it in action.
 
 ```css [App.css]/copy/
 h1 {
@@ -368,7 +368,7 @@ a {
 }
 ```
 
-## Keep in mind this styling is just to show the functionality explicitly.
+Keep in mind this styling is just to show the functionality explicitly.
 
 </section>
 
@@ -376,7 +376,7 @@ a {
 
 # Wrapping Up
 
-## Our table of contents is now finished and should look like this with the provided styling:
+Our table of contents is now finished and should look like this with the provided styling:
 
 <img
   src={props.images[1].publicURL}
@@ -386,7 +386,7 @@ a {
   }}
 />
 
-## For those that just skipped to the end and want the code:
+For those that just skipped to the end and want the code:
 
 ```jsx -r-[App.js]/copy/
 import React, { useState, useEffect } from "react";

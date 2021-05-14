@@ -4,22 +4,11 @@ export const PostWrapper = styled.main`
   margin: 6% 23%;
   z-index: 10;
 
-  /* ::selection {
-  background-color: cyan;
-} */
   section {
     margin-top: 2rem;
   }
 
-  /* h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: ${(props) => props.theme.colors.primary};
-  } */
-
+  p,
   h2,
   h3,
   h4,
@@ -30,6 +19,7 @@ export const PostWrapper = styled.main`
   }
 
   h1:not(:first-child),
+  p,
   h2,
   h3,
   h4,
@@ -41,8 +31,6 @@ export const PostWrapper = styled.main`
   h1 {
     font-size: 1.5rem;
     color: ${(props) => props.theme.colors.primary};
-    /* line-height: 2.5rem; */
-    /* font-family: ${(props) => props.theme.fonts.secondary}; */
     font-weight: 600;
   }
   h2 {
@@ -77,8 +65,6 @@ export const PostWrapper = styled.main`
     font-size: 1.125rem;
     line-height: 1.875rem;
     font-weight: 400;
-    color: ${(props) => props.theme.colors.dark2};
-    margin-top: 2rem;
   }
 
   a {
@@ -110,36 +96,33 @@ export const PostWrapper = styled.main`
     text-align: left;
     background-color: ${(props) => props.theme.colors.accentBG};
     border-radius: 0.6rem;
-  }
-  blockquote::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: ${(props) => props.theme.colors.accent};
-    /* border-radius: 1px / 2px; */
-  }
-
-  blockquote p {
-    color: ${(props) => props.theme.colors.accent};
-    font-size: 1rem;
-    line-height: 2.125rem;
-    max-width: 90%;
-    font-weight: 400;
-    /* margin: 0rem auto; */
-  }
-
-  /* blockquote strong {
-    color: ${(props) => props.theme.colors.accent};
-    top: -5rem;
-    font-size: 1.6rem;
-    max-width: 38rem;
-    font-weight: 600;
-  } */
-
-  blockquote a {
-    font-weight: bold;
+    p {
+      color: ${(props) => props.theme.colors.accent};
+      font-size: 1rem;
+      line-height: 2.125rem;
+      max-width: 98%;
+      font-weight: 400;
+      &:first-child {
+        font-weight: bold;
+        font-size: 1.3rem;
+        padding-top: 0.8rem;
+        margin-bottom: -1rem;
+      }
+      &:last-child {
+        padding-bottom: 0.8rem;
+      }
+    }
+    a {
+      font-weight: bold;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: ${(props) => props.theme.colors.accent};
+    }
   }
 
   ul,
