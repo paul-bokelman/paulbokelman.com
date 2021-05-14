@@ -1,4 +1,4 @@
-exports.createPages = async function ({ actions, graphql }) {
+exports.createPages = async function({ actions, graphql }) {
   const { data } = await graphql(`
     query {
       allMdx(sort: { fields: frontmatter___date, order: DESC }) {

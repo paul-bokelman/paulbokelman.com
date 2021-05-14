@@ -61,7 +61,7 @@ export const Tag = styled.span`
   ${({ tag, theme }) => handleTagType(theme, tag)};
   svg {
     position: relative;
-    top: 1px;
+    top: 2px;
     right: 2px;
     margin-right: 0.1rem;
   }
