@@ -13,23 +13,14 @@ import {
 const SinglePost = ({ data }) => {
   const { setRepo } = usePostStore();
   const target = createRef();
-  // console.log(data);
   const featureImage = data.mdx.frontmatter.featureImage.publicURL;
-
-  // const featureImage =
-  // data.mdx.frontmatter.featureImage.childImageSharp !== null
-  //   ? data.mdx.frontmatter.featureImage.childImageSharp.gatsbyImageData
-  //   : data.mdx.frontmatter.featureImage.publicURL;
-
   const seoImage = data.mdx.frontmatter.featureImage.publicURL;
   useEffect(() => {
     const blockquotes = document
       .getElementById("container")
       .getElementsByTagName("blockquote");
     for (let i = 0; i < blockquotes.length; i++) {
-      console.log(blockquotes[i].innerHTML);
       blockquotes[i].innerHTML = `<p>NOTE</p>${blockquotes[i].innerHTML}`;
-      console.log(blockquotes[i].innerHTML);
     }
     const anchors = document
       .getElementById("container")
@@ -85,9 +76,6 @@ export const pageQuery = graphql`
         tags
         featureImage {
           publicURL
-          # childImageSharp {
-          #   gatsbyImageData
-          # }
         }
         images {
           publicURL

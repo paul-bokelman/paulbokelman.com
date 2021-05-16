@@ -10,9 +10,38 @@ export const Light = {
     progress: "#803bc017",
     accent: "#6501e5",
     accentBG: "#6501e517",
-    folder: {
-      color: "#6BCCF9",
-      background: "#6BCCF927",
+    utils: {
+      tags: {
+        colors: {
+          react: "#28b6da",
+          fast: "#e3d10b",
+          detailed: "#2db36a",
+          informative: "#2db36a",
+        },
+        background: {
+          react: "#34d0f728",
+          fast: "#fbe92b28",
+          detailed: "#4efe1428",
+          informative: "#2db36a17",
+        },
+      },
+      display: {
+        link: {
+          react: "#60dbfa",
+
+          firebase: "#FFCB2B",
+        },
+        colors: {
+          react: "#ffffff",
+        },
+        background: {
+          react: "#60DBFA",
+        },
+      },
+      folder: {
+        color: "#6BCCF9",
+        background: "#6BCCF927",
+      },
     },
   },
   breakpoints: {

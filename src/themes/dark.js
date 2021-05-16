@@ -11,9 +11,38 @@ export const Dark = {
     accent: "#5686F5",
     accentBG: "#5686F517",
 
-    folder: {
-      color: "#f5ea56",
-      background: "#f5ea5617",
+    utils: {
+      tags: {
+        colors: {
+          react: "#61DBFB",
+          fast: "#fff373",
+          detailed: "#96ff73",
+          informative: "#2db36a",
+        },
+        background: {
+          react: "#61DBFB17",
+          fast: "#fff37317",
+          detailed: "#96ff7317",
+          informative: "#2db36a17",
+        },
+      },
+      display: {
+        link: {
+          react: "#60dbfa",
+
+          firebase: "#FFCB2B",
+        },
+        colors: {
+          react: "#60DBFA",
+        },
+        background: {
+          react: "#1F2229",
+        },
+      },
+      folder: {
+        color: "#f5ea56",
+        background: "#f5ea5617",
+      },
     },
   },
   breakpoints: {

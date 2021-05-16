@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { MetaInfoWrapper } from "../elements";
-import { GetTags } from "../functions";
-// import ReactTooltip from "react-tooltip";
+import { GetTags } from ".";
 
 export const MetaInfo = ({ title, date, time, featureImage, tags }) => {
-  // const [isFast, setLength] = useState(false);
-
   return (
     <div>
       <MetaInfoWrapper>
@@ -14,35 +11,8 @@ export const MetaInfo = ({ title, date, time, featureImage, tags }) => {
           {date} / {time} min read
         </span>
         {GetTags(tags)}
-        {/* <ReaderSwitcher>
-          {isFast ? (
-            <span
-              aria-hidden="true"
-              data-tip="content type: fast"
-              onClick={() => setLength(!isFast)}
-            >
-              <RiSpeedFill />
-            </span>
-          ) : (
-            <span
-              aria-hidden="true"
-              data-tip="content type: all"
-              onClick={() => setLength(!isFast)}
-            >
-              <RiPlayFill />
-            </span>
-          )}
-          <ReactTooltip
-            place="left"
-            effect="solid"
-            className="current"
-            arrowColor="random"
-          />
-        </ReaderSwitcher> */}
       </MetaInfoWrapper>
-      {/* {typeof featureImage !== "string" ? (
-        <FeatureImage fixed={featureImage} />
-      ) : ( */}
+
       <img
         style={{
           width: "100%",
@@ -51,7 +21,6 @@ export const MetaInfo = ({ title, date, time, featureImage, tags }) => {
         src={featureImage}
         alt={featureImage}
       />
-      {/* )} */}
     </div>
   );
 };

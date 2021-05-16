@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import { CustomThemeProvider } from "./src/themes";
 import { preToCodeBlock } from "mdx-utils";
-import { Table, Code, F, C, Peek, Bool, CS } from "./src/components";
+import { Code, F, C, Peek, Bool, CS, Display } from "./src/components";
 import "./src/fonts/fonts.css";
 // import "./language-tabs.css";
 
@@ -27,7 +27,6 @@ body, html {
 `;
 
 const components = {
-  table: Table,
   pre: (preProps) => {
     const props = preToCodeBlock(preProps);
     if (props) {
@@ -41,6 +40,7 @@ const components = {
   Bool,
   C,
   CS,
+  Display,
 };
 
 export const wrapRootElement = ({ element }) => (

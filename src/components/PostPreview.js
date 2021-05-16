@@ -1,7 +1,7 @@
 import React from "react";
 import { PostPreviewWrapper, Card } from "../elements";
 import { Link } from "gatsby";
-import { GetTags } from "../functions";
+import { GetTags } from ".";
 export const PostPreview = ({ posts }) => {
   return (
     <PostPreviewWrapper>
