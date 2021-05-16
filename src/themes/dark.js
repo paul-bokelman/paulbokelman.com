@@ -29,18 +29,30 @@ export const Dark = {
       display: {
         link: {
           react: "#60dbfa",
+          vite: "#faa91a",
           styledcomponents: "#CE69A7",
+          zustand: "#F56D2C",
+          reactquery: "#FF4154",
           firebase: "#FFCB2B",
+          netlify: "#499EBE",
         },
         colors: {
           react: "#60DBFA",
+          vite: "none",
           styledcomponents: "#FFD048",
+          zustand: "none",
+          reactquery: "none",
           firebase: "#FFCB2B",
+          netlify: "#499EBE",
         },
         background: {
           react: "#1F2229",
+          vite: "linear-gradient(120deg,rgb(250, 169, 26) 0%,rgba(254, 221, 53, 1) 100%)",
           styledcomponents: "#CE69A7",
+          zustand: "#F56D2C",
+          reactquery: "#FF4154",
           firebase: "#009BE7",
+          netlify: "#1A1A30",
         },
       },
       folder: {

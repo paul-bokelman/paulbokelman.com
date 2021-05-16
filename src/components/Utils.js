@@ -23,6 +23,9 @@ import {
   Tag,
   ExtraTags,
 } from "../elements";
+import Vite from "../static/svg/vite.inline.svg";
+import Zustand from "../static/svg/zustand.inline.svg";
+import Reactquery from "../static/svg/reactquery.inline.svg";
 
 /* -------------------------------------------------------------------------- */
 /*                  CONTENT SWITCHER (CS) & DISPLAY (Display)                 */
@@ -36,7 +39,7 @@ export const CS = ({ children }) => {
   const key = children[3];
   let link = header.props.children.props.children;
   link = link.replace(/-/g, "").toLowerCase();
-  console.log(link);
+  link = link === "netlify serverless functions" ? "netlify" : link;
   return (
     <CSWrapper content={isKey ? "fast" : "detailed"} link={link}>
       <div>
@@ -57,10 +60,18 @@ export const Display = ({ iconOf }) => {
     switch (iconOf) {
       case "react":
         return <FaReact />;
+      case "vite":
+        return <Vite className="custom" />;
       case "styledcomponents":
         return <SiStyledComponents />;
+      case "zustand":
+        return <Zustand />;
+      case "reactquery":
+        return <Reactquery />;
       case "firebase":
         return <IoLogoFirebase />;
+      case "netlify":
+        return <SiNetlify />;
       default:
         return <FaReact />;
     }

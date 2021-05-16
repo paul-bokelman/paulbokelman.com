@@ -28,19 +28,31 @@ export const Light = {
       display: {
         link: {
           react: "#60dbfa",
+          vite: "#faa91a",
           styledcomponents: "#CE69A7",
+          zustand: "#572C3D",
+          reactquery: "#FF4154",
           firebase: "#FFCB2B",
+          netlify: "#499EBE",
         },
         colors: {
-          react: "#ffffff",
-          styledcomponents: "#ffffff",
-          firebase: '#ffffff"',
+          react: "white",
+          vite: "none",
+          styledcomponents: "white",
+          zustand: "none",
+          reactquery: "white",
+          firebase: "white",
+          netlify: "white",
         },
         background: {
           react: "#60DBFA",
+          vite: "linear-gradient(120deg,rgb(250, 169, 26) 0%,rgba(254, 221, 53, 1) 100%)",
           styledcomponents: "#CE69A7",
-
+          zustand: "#572C3D",
+          reactquery: "#FF4154",
           firebase: "#FFCB2B",
+          netlify:
+            "linear-gradient(40deg, rgba(1,131,191,1) 0%, rgba(1,197,183,1) 100%)",
         },
       },
       folder: {

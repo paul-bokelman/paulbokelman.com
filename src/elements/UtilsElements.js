@@ -27,6 +27,8 @@ export const CSWrapper = styled.div`
     }
   }
   a {
+    ${(props) =>
+      console.log(props.theme.colors.utils.display.link[props.link])};
     color: ${(props) => props.theme.colors.utils.display.link[props.link]};
   }
   h3 {
@@ -51,9 +53,10 @@ export const DisplayWrapper = styled.div`
   margin-top: 2rem;
   margin-bottom: -1.4rem;
   border-radius: 0.6rem;
-  background-color: ${(props) =>
+  background: ${(props) =>
     props.theme.colors.utils.display.background[props.i]};
   svg {
+    width: 5.4rem;
     font-size: 5.4rem;
     position: absolute;
     top: 50%;
@@ -77,9 +80,6 @@ export const Tag = styled.span`
   cursor: pointer;
   text-transform: uppercase;
   top: -1px;
-  ${(props) => {
-    console.log(props.tag);
-  }}
   color: ${(props) =>
     props.theme.colors.utils.tags.colors[props.tag]} !important;
   background-color: ${(props) =>
