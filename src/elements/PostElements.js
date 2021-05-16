@@ -34,9 +34,11 @@ export const PostWrapper = styled.main`
     font-weight: 600;
   }
   h2 {
-    font-size: 1.125rem;
+    font-size: 1.3rem;
     line-height: 1.875rem;
-    font-weight: 400;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: -1.3rem;
   }
   h3 {
     font-size: 1.6rem;

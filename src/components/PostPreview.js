@@ -23,13 +23,6 @@ export const PostPreview = ({ posts }) => {
           </Card>
         </Link>
       ))}
-
-      {/* <PostInfo>
-        <img
-          src={posts[1].node.frontmatter.featureImage.publicURL}
-          alt={posts[1].node.frontmatter.featureImage.publicURL}
-        />
-      </PostInfo> */}
     </PostPreviewWrapper>
   );
 };

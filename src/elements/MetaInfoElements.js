@@ -28,6 +28,8 @@ const handleTagType = (theme, tag) => {
           return "color: #e3d10b !important; background: #fbe92b28;";
         case "detailed":
           return "color: #43d113 !important; background: #4efe1428;";
+        case "informative":
+          return "color: #2db36a !important; background: #2db36a17;";
         default:
           return "  color: #ff7373 !important; background: #ff737328;";
       }
