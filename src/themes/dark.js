@@ -29,14 +29,18 @@ export const Dark = {
       display: {
         link: {
           react: "#60dbfa",
-
+          styledcomponents: "#CE69A7",
           firebase: "#FFCB2B",
         },
         colors: {
           react: "#60DBFA",
+          styledcomponents: "#FFD048",
+          firebase: "#FFCB2B",
         },
         background: {
           react: "#1F2229",
+          styledcomponents: "#CE69A7",
+          firebase: "#009BE7",
         },
       },
       folder: {

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { FaFolder, FaEthereum, FaReact } from "react-icons/fa";
-import { IoLogoJavascript } from "react-icons/io5";
+import { IoLogoJavascript, IoLogoFirebase } from "react-icons/io5";
 import { BsArrowRightShort } from "react-icons/bs";
 import { AiFillCaretRight, AiFillEye } from "react-icons/ai";
 import { TiWarning } from "react-icons/ti";
 import { VscError } from "react-icons/vsc";
 import { FiSlash } from "react-icons/fi";
+import { SiStyledComponents, SiNetlify } from "react-icons/si";
 import { RiSpeedFill, RiCloseFill } from "react-icons/ri"; // RiPlayFill
 import {
   BiDetail,
@@ -33,9 +34,11 @@ export const CS = ({ children }) => {
   const display = children[1];
   const overview = children[2];
   const key = children[3];
-  const link = header.props.children.props.children;
+  let link = header.props.children.props.children;
+  link = link.replace(/-/g, "").toLowerCase();
+  console.log(link);
   return (
-    <CSWrapper content={isKey ? "fast" : "detailed"} link={link.toLowerCase()}>
+    <CSWrapper content={isKey ? "fast" : "detailed"} link={link}>
       <div>
         {header}
 
@@ -44,7 +47,7 @@ export const CS = ({ children }) => {
         </span>
       </div>
       {display}
-      {isKey ? overview : key}
+      {!isKey ? overview : key}
     </CSWrapper>
   );
 };
@@ -54,6 +57,10 @@ export const Display = ({ iconOf }) => {
     switch (iconOf) {
       case "react":
         return <FaReact />;
+      case "styledcomponents":
+        return <SiStyledComponents />;
+      case "firebase":
+        return <IoLogoFirebase />;
       default:
         return <FaReact />;
     }

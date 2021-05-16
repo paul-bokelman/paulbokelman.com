@@ -51,7 +51,6 @@ export const DisplayWrapper = styled.div`
   margin-top: 2rem;
   margin-bottom: -1.4rem;
   border-radius: 0.6rem;
-
   background-color: ${(props) =>
     props.theme.colors.utils.display.background[props.i]};
   svg {

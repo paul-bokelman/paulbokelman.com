@@ -28,14 +28,19 @@ export const Light = {
       display: {
         link: {
           react: "#60dbfa",
-
+          styledcomponents: "#CE69A7",
           firebase: "#FFCB2B",
         },
         colors: {
           react: "#ffffff",
+          styledcomponents: "#ffffff",
+          firebase: '#ffffff"',
         },
         background: {
           react: "#60DBFA",
+          styledcomponents: "#CE69A7",
+
+          firebase: "#FFCB2B",
         },
       },
       folder: {
