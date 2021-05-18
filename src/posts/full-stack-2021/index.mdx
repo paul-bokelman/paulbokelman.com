@@ -41,28 +41,42 @@ The three basic aspects of full stack development consist of 3 main sections, fr
       Components are the building blocks of any React application, and a single
       app usually consists of multiple components. A component is essentially a
       piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      reusable parts that can be processed separately. Learn more about{" "}
+      <a href="https://reactjs.org/docs/components-and-props.html">
+        components
+      </a>
+      .
     </p>
     JSX
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Libraries
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      By using JSX we can simply write the "HTML" we all know and love straight
+      into our javascript files, this allows for really quick development and
+      relives all of the nightmares of having separated HTML from our
+      Javascript. Learn more about{" "}
+      <a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a>.
     </p>
     Virtual DOM
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      As defined by{" "}
+      <a href="https://en.wikipedia.org/wiki/Virtual_DOM">Wikipedia</a>, "A
+      virtual DOM is a lightweight JavaScript representation of the DOM used in
+      declarative web frameworks such as React, Vue.js, and Elm.[1] Updating the
+      virtual DOM is comparatively faster than updating the actual DOM, since
+      nothing has to be rendered onto the screen." Basically this means that the
+      development process is super painless because we can develop with really
+      fast realtime updates and such.
+    </p>
+    Libraries
+    <p>
+      One of Reacts game changers is its massive ecosystem of libraries to aid
+      you in your development process. Libraries can help with every aspect of
+      your project so you don't need to re-invent the wheel every time you add
+      new features. Some notable React libraries are,{" "}
+      <a href="https://reactrouter.com/">React router</a>,{" "}
+      <a href="https://tailwindcss.com/">Tailwind CSS</a>, and of course{" "}
+      <a href="https://styled-components.com/">Styled-components</a> &{" "}
+      <a href="https://github.com/pmndrs/zustand">Zustand</a> (my two personal
+      favorites).
     </p>
   </h3>
 </CS>
@@ -73,33 +87,50 @@ The three basic aspects of full stack development consist of 3 main sections, fr
   </h2>
   <Display iconOf="vite" />
   <p>
-    For me React is my go to javascript library for developing web applications
-    because of its advance component based structure as well as its provided
-    hooks that allow you easily to implement a multitude of things into your
-    components such as state. The development process for web applications as
-    never been easier.
+    Vite is a easy choice for me in most cases versus{" "}
+    <a href="https://reactjs.org/docs/create-a-new-react-app.html">
+      create-react-app
+    </a>
+    , <a href="https://nextjs.org/">next.js</a>, and <a href="https://www.gatsbyjs.com/">
+      gatsby
+    </a> (smaller applications) because its just incredibly quick, I mean really
+    just look at this <a href="https://twitter.com/amasad/status/1355379680275128321">
+      clip
+    </a> of a side by side comparison of create-react-app and Vite. Because Vite
+    is so quick it makes the developer experience and effort that much better.
   </p>
   <h3>
-    Incredibly fast
+    Esbuild
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      Under the hood Vite uses esbuild to pre-bundle packages and modules in
+      order to deliver that blazing fast speeds that it preforms at. The reason
+      this is so much faster than typical frameworks is because esbuild is built
+      in golang and not javascript which makes it just that much faster, I mean
+      look at these <a href="https://esbuild.github.io/">bench marks</a>. Learn
+      more about <a href="https://esbuild.github.io/">esbuild</a>.
     </p>
-    Static Site Generation
+    Native TS & JSX
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      Both Typescript and JSX are supported right out of the box with Vite, if
+      that wasn't enough get this, Vite also uses esbuild to transpile the
+      typescript and or jsx which means that it is about 20~30x faster than
+      vanilla transpilation. Learn more about Native{" "}
+      <a href="https://vitejs.dev/guide/features.html#typescript">TS</a> &{" "}
+      <a href="https://vitejs.dev/guide/features.html#jsx">JSX</a>.
     </p>
-    SSR
+    Hot Module Replacement (HMR)
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      As per the{" "}
+      <a href="https://vitejs.dev/guide/features.html#hot-module-replacement">
+        docs
+      </a>
+      , "Frameworks with HMR capabilities can leverage the API to provide instant,
+      precise updates without reloading the page or blowing away application state."
+      Basically this means that the hot reload time after making changes whilst developing
+      is incredibly fast which makes working on the application much easier and more
+      efficient. Learn more about <a href="https://vitejs.dev/guide/features.html#hot-module-replacement">
+        HMR
+      </a>.
     </p>
   </h3>
 </CS>
@@ -110,40 +141,48 @@ The three basic aspects of full stack development consist of 3 main sections, fr
   </h2>
   <Display iconOf="styledcomponents" />
   <p>
-    For me React is my go to javascript library for developing web applications
-    because of its advance component based structure as well as its provided
-    hooks that allow you easily to implement a multitude of things into your
-    components such as state. The development process for web applications as
-    never been easier.
+    By far my favorite library to use along side React is styled-components.
+    This library is very simple, basically styled-components allows you to write
+    javascript inside of css as well as create "styled" components (duh) which
+    are react components that have specific styles assigned to them.
   </p>
   <h3>
-    Components
+    Props
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      Probably one of the nicest and most useful features of styled-components
+      is that you can pass them props to then use to do whatever you want with,
+      for example, if we passed a prop of red and set it to false then in the
+      styled component we could check the value of that prop and render the
+      color accordingly. If this example didn't make sense or you want to learn
+      more,{" "}
+      <a href="https://styled-components.com/docs/basics#passed-props">
+        passing props in styled components
+      </a>
+      .
     </p>
-    JSX
+    Inheritance
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      A key feature of styled-components is its simple inheritance approach.
+      With component inheritance inside of the styles it makes it really easy to
+      create a base component like a button then just apply colors or other
+      attributes in a separate component to those base styles without rewriting
+      them. This approach to styling really streamlines the development process.
+      Learn more about{" "}
+      <a href="https://styled-components.com/docs/basics#extending-styles">
+        inheritance
+      </a>
+      .
     </p>
-    Libraries
+    Themes
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Virtual DOM
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      Themes is a very useful feature that we can utilize with
+      styled-components. Themes allow us to create separate files with all our
+      colors, fonts, sizes, etc... and pass them to the theme-provider then like
+      magic, we can use those colors through props in all of our styled
+      components! Theming is especially useful when working on a large scale
+      project where you want to keep all of your style attributes consistent and
+      or organized to later use. Learn more about{" "}
+      <a href="https://styled-components.com/docs/advanced#theming">themes</a>.
     </p>
   </h3>
 </CS>
