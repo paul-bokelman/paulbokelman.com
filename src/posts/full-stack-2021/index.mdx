@@ -193,40 +193,42 @@ The three basic aspects of full stack development consist of 3 main sections, fr
   </h2>
   <Display iconOf="zustand" />
   <p>
-    For me React is my go to javascript library for developing web applications
-    because of its advance component based structure as well as its provided
-    hooks that allow you easily to implement a multitude of things into your
-    components such as state. The development process for web applications as
-    never been easier.
+    Zustand is a very lightweight state management library that can easily be
+    scaled to any size of project you have. Zustand is one of my go to libraries
+    because of how simple the api and because of how simple and intuitive it is
+    to learn.
   </p>
   <h3>
-    Components
+    Simple API
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      Zustand's api is very simple to understand, basically all you have to do
+      to get started with is to set up a store with the <code>create</code>{" "}
+      function then just enter the state variables in the object. You can then
+      simply get your store function and change the state however you'd like in
+      your component because there is no wrapping provider necessary. Learn more
+      about the{" "}
+      <a href="https://github.com/pmndrs/zustand#first-create-a-store">
+        Zustand API
+      </a>
+      .
     </p>
-    JSX
+    No providers
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      Unlike other state management solutions such as Reacts own{" "}
+      <a href="https://reactjs.org/docs/context.html">Context API</a>, Zustand
+      doesn't need to have all the children receiving the state to be wrapped in
+      a context provider. This makes Zustand incredibly simple and flexible
+      because its just 1 less thing you have to worry about.
     </p>
-    Libraries
+    Transient updates
     <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Virtual DOM
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
+      Transient updates are a really cool and simple feature of Zustand,
+      basically what this means is that with large amounts of state changes the
+      component won't need to re-render with each state change. Learn more about{" "}
+      <a href="https://github.com/pmndrs/zustand#transient-updates-for-often-occuring-state-changes">
+        transient updates
+      </a>
+      .
     </p>
   </h3>
 </CS>
