@@ -154,7 +154,7 @@ export const PostWrapper = styled.main`
 
   code {
     /* font-family: ${(props) => props.theme.fonts.code}; */
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: ${(props) => props.theme.colors.accent};
     background-color: ${(props) => props.theme.colors.accentBG};
     border-radius: 5px;
@@ -195,6 +195,7 @@ export const PostWrapper = styled.main`
   }
 
   pre {
+    z-index: 100;
     overflow: auto;
     word-wrap: normal;
     white-space: pre;
@@ -206,6 +207,8 @@ export const PostWrapper = styled.main`
   }
 
   img {
+    width: 100%;
+    height: 100%;
     margin-top: 1.5vw;
     border-radius: 0.6rem;
   }

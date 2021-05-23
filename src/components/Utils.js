@@ -6,14 +6,14 @@ import { AiFillCaretRight, AiFillEye } from "react-icons/ai";
 import { TiWarning } from "react-icons/ti";
 import { VscError } from "react-icons/vsc";
 import { FiSlash } from "react-icons/fi";
-import { SiStyledComponents, SiNetlify } from "react-icons/si";
+import { SiStyledComponents, SiNetlify, SiTailwindcss } from "react-icons/si";
 import { RiSpeedFill, RiCloseFill } from "react-icons/ri"; // RiPlayFill
 import {
   BiDetail,
   BiDotsHorizontalRounded,
   BiInfoCircle,
 } from "react-icons/bi";
-import { usePostStore, useUserStore } from "../components";
+import { usePostStore, useUserStore, FunctionalButton } from "../components";
 import {
   FolderWrapper,
   ConsoleWrapper,
@@ -31,26 +31,47 @@ import Reactquery from "../static/svg/reactquery.inline.svg";
 /*                  CONTENT SWITCHER (CS) & DISPLAY (Display)                 */
 /* -------------------------------------------------------------------------- */
 
-export const CS = ({ children }) => {
-  const [isKey, setKey] = useState(false);
+export const CS = ({ children, variant }) => {
+  const [index, setIndex] = useState(0);
+  const content = ["overview", "key features", "code"];
+
+  const cycle = () => {
+    console.log(index);
+    if (index < 2) {
+      console.log(content[index]);
+      setIndex(index + 1);
+    } else {
+      setIndex(0);
+      console.log(content[index]);
+    }
+  };
   const header = children[0];
   const display = children[1];
   const overview = children[2];
   const key = children[3];
+  const code = children[4];
   let link = header.props.children.props.children;
   link = link.replace(/-/g, "").toLowerCase();
   link = link === "netlify serverless functions" ? "netlify" : link;
   return (
-    <CSWrapper content={isKey ? "fast" : "detailed"} link={link}>
+    <CSWrapper content={content[index]} link={link}>
       <div>
         {header}
-
-        <span onClick={() => setKey(!isKey)}>
-          {isKey ? "Key Features" : "Overview"}
-        </span>
+        <FunctionalButton
+          type="theme"
+          variant={variant}
+          numbers={[3, index + 1]}
+          onClick={cycle}
+        >
+          {content[index]}
+        </FunctionalButton>
       </div>
       {display}
-      {!isKey ? overview : key}
+      {content[index] === "overview"
+        ? overview
+        : content[index] === "key features"
+        ? key
+        : code}
     </CSWrapper>
   );
 };
@@ -64,6 +85,8 @@ export const Display = ({ iconOf }) => {
         return <Vite className="custom" />;
       case "styledcomponents":
         return <SiStyledComponents />;
+      case "tailwind":
+        return <SiTailwindcss />;
       case "zustand":
         return <Zustand />;
       case "reactquery":

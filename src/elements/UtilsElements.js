@@ -6,38 +6,36 @@ import styled from "styled-components";
 
 export const CSWrapper = styled.div`
   div {
-    -webkit-user-select: none;
+    /* -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
+    user-select: none; */
     h2 {
       text-align: left;
     }
-    span {
-      float: right;
-      cursor: pointer;
-      padding: 2px 8px;
-      font-size: 0.8rem;
-      border-radius: 4px;
-      font-weight: 500;
-      text-transform: uppercase;
-      color: ${(props) => props.theme.colors.utils.tags.colors[props.content]};
-      background-color: ${(props) =>
-        props.theme.colors.utils.tags.background[props.content]};
+    pre {
+      line-height: 1rem;
+      margin-top: 0.8rem;
     }
   }
   a {
-    ${(props) =>
-      console.log(props.theme.colors.utils.display.link[props.link])};
     color: ${(props) => props.theme.colors.utils.display.link[props.link]};
   }
-  h3 {
-    font-size: 1.4rem;
-    font-weight: 500;
-    text-transform: none;
-    p {
-      margin-top: 0.4rem;
-      margin-bottom: 0.4rem;
+  code {
+    color: ${(props) => props.theme.colors.utils.display.link[props.link]};
+    background-color: ${(props) =>
+      props.theme.colors.utils.display.link[props.link]}17;
+  }
+  div {
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      text-transform: none;
+      margin-bottom: -1.7rem;
+      margin-top: 1.2rem;
+      &:first-child {
+        margin-top: 2rem;
+      }
     }
   }
   ul {

@@ -39,13 +39,9 @@ export const Code = ({ codeString, language, metastring, ...props }) => {
   };
 
   const copyFunction = () => {
-    // const copyText = document.getElementById("myInput").textContent;
-    const textArea = document.createElement("textarea");
-    textArea.textContent = codeString;
-    document.body.append(textArea);
-    textArea.select();
-    document.execCommand("copy");
+    navigator.clipboard.writeText(codeString);
     setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const getRenderLineNumbers = (meta) => {

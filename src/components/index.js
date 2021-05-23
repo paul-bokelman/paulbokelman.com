@@ -13,3 +13,4 @@ export * from "./Contents";
 export * from "./MetaInfo";
 export * from "./state";
 export * from "./Utils";
+export * from "./BaseUtils";

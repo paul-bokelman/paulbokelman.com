@@ -3,7 +3,7 @@ title: My go to 2021 fullstack setup for developing web applications
 slug: 2021-full-stack
 date: 2021-05-10
 featureImage: feature.png
-images: [finished.gif]
+images: [react.png, styled-components.png]
 excerpt: A quick but informative post on my go to technologies for 2021 including my favorite tools and libraries for frontend and backend development as well as fast and simple deployment.
 currentRepo: "none"
 tags: ["informative", "react"]
@@ -23,227 +23,362 @@ The three basic aspects of full stack development consist of 3 main sections, fr
 
 # Frontend
 
-<CS>
-  <h2>
-    <a href="https://reactjs.org/">React</a>
-  </h2>
-  <Display iconOf="react" />
-  <p>
-    For me React is my go to javascript library for developing web applications
-    because of its advance component based structure as well as its provided
-    hooks that allow you easily to implement a multitude of things into your
-    components such as state. The development process for web applications as
-    never been easier.
-  </p>
-  <h3>
-    Components
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately. Learn more about{" "}
-      <a href="https://reactjs.org/docs/components-and-props.html">
-        components
-      </a>
-      .
-    </p>
-    JSX
-    <p>
-      By using JSX we can simply write the "HTML" we all know and love straight
-      into our javascript files, this allows for really quick development and
-      relives all of the nightmares of having separated HTML from our
-      Javascript. Learn more about{" "}
-      <a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a>.
-    </p>
-    Virtual DOM
-    <p>
-      As defined by{" "}
-      <a href="https://en.wikipedia.org/wiki/Virtual_DOM">Wikipedia</a>, "A
-      virtual DOM is a lightweight JavaScript representation of the DOM used in
-      declarative web frameworks such as React, Vue.js, and Elm.[1] Updating the
-      virtual DOM is comparatively faster than updating the actual DOM, since
-      nothing has to be rendered onto the screen." Basically this means that the
-      development process is super painless because we can develop with really
-      fast realtime updates and such.
-    </p>
-    Libraries
-    <p>
-      One of Reacts game changers is its massive ecosystem of libraries to aid
-      you in your development process. Libraries can help with every aspect of
-      your project so you don't need to re-invent the wheel every time you add
-      new features. Some notable React libraries are,{" "}
-      <a href="https://reactrouter.com/">React router</a>,{" "}
-      <a href="https://tailwindcss.com/">Tailwind CSS</a>, and of course{" "}
-      <a href="https://styled-components.com/">Styled-components</a> &{" "}
-      <a href="https://github.com/pmndrs/zustand">Zustand</a> (my two personal
-      favorites).
-    </p>
-  </h3>
+<CS variant="react">
+
+## [React](https://reactjs.org/)
+
+<Display iconOf="react" />
+
+For me React is my go to javascript library for developing web applications
+because of its advance component based structure as well as its provided
+hooks that allow you easily to implement a multitude of things into your
+components such as state. The development process for web applications as
+never been easier.
+
+<div>
+
+### Components
+
+Components are the building blocks of any React application, and a single
+app usually consists of multiple components. A component is essentially a
+piece of the user interface. React splits the UI into independent,
+reusable parts that can be processed separately. Learn more about [components](https://reactjs.org/docs/components-and-props.html).
+
+### JSX
+
+By using JSX we can simply write the "HTML" we all know and love straight
+into our javascript files, this allows for really quick development and
+relives all of the nightmares of having separated HTML from our
+Javascript. Learn more about [JSX](https://reactjs.org/docs/introducing-jsx.html).
+
+### Virtual DOM
+
+As defined by [Wikipedia](https://en.wikipedia.org/wiki/Virtual_DOM), "A
+virtual DOM is a lightweight JavaScript representation of the DOM used in
+declarative web frameworks such as React, Vue.js, and Elm.[1] Updating the
+virtual DOM is comparatively faster than updating the actual DOM, since
+nothing has to be rendered onto the screen." Basically this means that the
+development process is super painless because we can develop with really
+fast realtime updates and such.
+
+### Libraries
+
+One of Reacts game changers is its massive ecosystem of libraries to aid
+you in your development process. Libraries can help with every aspect of
+your project so you don't need to re-invent the wheel every time you add
+new features. Some notable React libraries are, [React router](https://reactrouter.com/), [Tailwind CSS](https://tailwindcss.com/), and of course [Styled-components](https://styled-components.com/") & [Zustand](https://github.com/pmndrs/zustand) (my two personal favorites).
+
+</div>
+
+<div>
+
+Here is a simple functional component in react. If you are familiar with javascript as well as HTML some parts of this component may look very familiar to you.
+
+```jsx -r-[SimpleReactComponent.js]/copy/
+import React from "react";
+
+const SimpleReactComponent = () => {
+  const name = "Paul Bokelman";
+  return (
+    <div>
+      <h1>Hello World</h1>
+      <p>My name is {name}!</p>
+    </div>
+  );
+};
+
+export default SimpleReactComponent;
+```
+
+The output of this component on the page is simply:
+
+<img
+  src={props.images[0].publicURL}
+  style={{
+    width: "100%",
+    height: "100%",
+  }}
+/>
+
+</div>
+
 </CS>
 
-<CS>
-  <h2>
-    <a href="https://vitejs.dev/">Vite</a>
-  </h2>
-  <Display iconOf="vite" />
-  <p>
-    Vite is a easy choice for me in most cases versus{" "}
-    <a href="https://reactjs.org/docs/create-a-new-react-app.html">
-      create-react-app
-    </a>
-    , <a href="https://nextjs.org/">next.js</a>, and <a href="https://www.gatsbyjs.com/">
-      gatsby
-    </a> (smaller applications) because its just incredibly quick, I mean really
-    just look at this <a href="https://twitter.com/amasad/status/1355379680275128321">
-      clip
-    </a> of a side by side comparison of create-react-app and Vite. Because Vite
-    is so quick it makes the developer experience and effort that much better.
-  </p>
-  <h3>
-    Esbuild
-    <p>
-      Under the hood Vite uses esbuild to pre-bundle packages and modules in
-      order to deliver that blazing fast speeds that it preforms at. The reason
-      this is so much faster than typical frameworks is because esbuild is built
-      in golang and not javascript which makes it just that much faster, I mean
-      look at these <a href="https://esbuild.github.io/">bench marks</a>. Learn
-      more about <a href="https://esbuild.github.io/">esbuild</a>.
-    </p>
-    Native TS & JSX
-    <p>
-      Both Typescript and JSX are supported right out of the box with Vite, if
-      that wasn't enough get this, Vite also uses esbuild to transpile the
-      typescript and or jsx which means that it is about 20~30x faster than
-      vanilla transpilation. Learn more about Native{" "}
-      <a href="https://vitejs.dev/guide/features.html#typescript">TS</a> &{" "}
-      <a href="https://vitejs.dev/guide/features.html#jsx">JSX</a>.
-    </p>
-    Hot Module Replacement (HMR)
-    <p>
-      As per the{" "}
-      <a href="https://vitejs.dev/guide/features.html#hot-module-replacement">
-        docs
-      </a>
-      , "Frameworks with HMR capabilities can leverage the API to provide instant,
-      precise updates without reloading the page or blowing away application state."
-      Basically this means that the hot reload time after making changes whilst developing
-      is incredibly fast which makes working on the application much easier and more
-      efficient. Learn more about <a href="https://vitejs.dev/guide/features.html#hot-module-replacement">
-        HMR
-      </a>.
-    </p>
-  </h3>
+<CS variant="vite">
+
+## [Vite](https://vitejs.dev/)
+
+<Display iconOf="vite" />
+
+Vite is a easy choice for me in most cases versus [create](https://reactjs.org/docs/create-a-new-react-app.html), [Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.com/) (for smaller applications) because its just incredibly quick, I mean really
+just look at this [clip](https://twitter.com/amasad/status/1355379680275128321) of a side by side comparison of create-react-app and Vite. Because Vite
+is so quick it makes the developer experience and effort that much better.
+
+<div>
+
+### Esbuild
+
+Under the hood Vite uses esbuild to pre-bundle packages and modules in
+order to deliver that blazing fast speeds that it preforms at. The reason
+this is so much faster than typical frameworks is because esbuild is built
+in golang and not javascript which makes it just that much faster, I mean
+look at these [bench marks](https://esbuild.github.io/). Learn
+more about [esbuild](https://esbuild.github.io/).
+
+### Native TS & JSX
+
+Both Typescript and JSX are supported right out of the box with Vite, if
+that wasn't enough get this, Vite also uses esbuild to transpile the
+typescript and or jsx which means that it is about 20~30x faster than
+vanilla transpilation. Learn more about Native [TS](https://vitejs.dev/guide/features.html#typescript) & [JSX](https://vitejs.dev/guide/features.html#jsx).
+
+### Hot Module Replacement (HMR)
+
+As per the
+[docs](https://vitejs.dev/guide/features.html#hot-module-replacement),
+"Frameworks with HMR capabilities can leverage the API to provide instant, precise
+updates without reloading the page or blowing away application state." Basically
+this means that the hot reload time after making changes whilst developing is incredibly
+fast which makes working on the application much easier and more efficient. Learn
+more about [HMR](https://vitejs.dev/guide/features.html#hot-module-replacement).
+
+</div>
+
+<div>
+
+If you are familiar with create-react-app you will notice that the process to setting up vite is very similar. After setting up the application you can do anything you normally would just alot faster!
+
+```bash [With npm]/copy/
+npm init @vitejs/app
+```
+
+```bash [With yarn]/copy/
+yarn create @vitejs/app
+```
+
+</div>
+
 </CS>
 
-<CS>
-  <h2>
-    <a href="https://styled-components.com/">Styled-components</a>
-  </h2>
-  <Display iconOf="styledcomponents" />
-  <p>
-    By far my favorite library to use along side React is styled-components.
-    This library is very simple, basically styled-components allows you to write
-    javascript inside of css as well as create "styled" components (duh) which
-    are react components that have specific styles assigned to them.
-  </p>
-  <h3>
-    Props
-    <p>
-      Probably one of the nicest and most useful features of styled-components
-      is that you can pass them props to then use to do whatever you want with,
-      for example, if we passed a prop of red and set it to false then in the
-      styled component we could check the value of that prop and render the
-      color accordingly. If this example didn't make sense or you want to learn
-      more,{" "}
-      <a href="https://styled-components.com/docs/basics#passed-props">
-        passing props in styled components
-      </a>
-      .
-    </p>
-    Inheritance
-    <p>
-      A key feature of styled-components is its simple inheritance approach.
-      With component inheritance inside of the styles it makes it really easy to
-      create a base component like a button then just apply colors or other
-      attributes in a separate component to those base styles without rewriting
-      them. This approach to styling really streamlines the development process.
-      Learn more about{" "}
-      <a href="https://styled-components.com/docs/basics#extending-styles">
-        inheritance
-      </a>
-      .
-    </p>
-    Themes
-    <p>
-      Themes is a very useful feature that we can utilize with
-      styled-components. Themes allow us to create separate files with all our
-      colors, fonts, sizes, etc... and pass them to the theme-provider then like
-      magic, we can use those colors through props in all of our styled
-      components! Theming is especially useful when working on a large scale
-      project where you want to keep all of your style attributes consistent and
-      or organized to later use. Learn more about{" "}
-      <a href="https://styled-components.com/docs/advanced#theming">themes</a>.
-    </p>
-  </h3>
+<CS variant="styledcomponents">
+
+## [Styled-components](https://styled-components.com/)
+
+<Display iconOf="styledcomponents" />
+
+By far my favorite library to use along side React is styled-components.
+This library is very simple, basically styled-components allows you to write
+javascript inside of css as well as create "styled" components (duh) which
+are react components that have specific styles assigned to them.
+
+<div>
+
+### Props
+
+Probably one of the nicest and most useful features of styled-components
+is that you can pass them props to then use to do whatever you want with,
+for example, if we passed a prop of red and set it to false then in the
+styled component we could check the value of that prop and render the
+color accordingly. If this example didn't make sense or you want to learn
+more, [passing props in styled components](https://styled-components.com/docs/basics#passed-props).
+
+### Inheritance
+
+A key feature of styled-components is its simple inheritance approach.
+With component inheritance inside of the styles it makes it really easy to
+create a base component like a button then just apply colors or other
+attributes in a separate component to those base styles without rewriting
+them. This approach to styling really streamlines the development process.
+Learn more about [inheritance](https://styled-components.com/docs/basics#extending-styles).
+
+### Themes
+
+Themes is a very useful feature that we can utilize with
+styled-components. Themes allow us to create separate files with all our
+colors, fonts, sizes, etc... and pass them to the theme-provider then like
+magic, we can use those colors through props in all of our styled
+components! Theming is especially useful when working on a large scale
+project where you want to keep all of your style attributes consistent and
+or organized to later use. Learn more about [themes](https://styled-components.com/docs/advanced#theming).
+
+</div>
+
+<div>
+
+Here is a simple example of using inheritance from styled-components to first make a parent component then child components with different styles and attributes.
+
+```jsx -r-[App.jsx]/copy/
+import React from "react";
+import styled from "styled-components";
+function App() {
+  const Button = styled.button`
+    // Main button template
+    color: #000000;
+    font-size: 2rem;
+    margin: 1rem;
+    padding: 0.25rem 1rem;
+    border: 3px solid #000000;
+    border-radius: 8px;
+    display: block;
+  `;
+
+  const BlueButton = styled(Button)`
+    // child button
+    color: #49b9ff;
+    border-color: #49b9ff;
+  `;
+
+  const RedButton = styled(Button)`
+    // child button
+    color: #ffffff;
+    border-color: transparent;
+    background-color: #ff4949;
+  `;
+
+  const GreenButton = styled(Button)`
+    // child button
+    padding: 0.25rem 5rem;
+    color: #57bd49;
+    border-color: #57bd49;
+  `;
+
+  // rendering components
+  return (
+    <div>
+      <Button>Button</Button>
+      <BlueButton>Blue Button</BlueButton>
+      <RedButton>Red Background Button</RedButton>
+      <GreenButton>Long Green Button</GreenButton>
+    </div>
+  );
+}
+
+export default App;
+```
+
+The output of this component should look like this:
+
+<img src={props.images[1].publicURL} />
+
+</div>
+
 </CS>
 
-<CS>
-  <h2>
-    <a href="https://github.com/pmndrs/zustand">Zustand</a>
-  </h2>
-  <Display iconOf="zustand" />
-  <p>
-    Zustand is a very lightweight state management library that can easily be
-    scaled to any size of project you have. Zustand is one of my go to libraries
-    because of how simple the api and because of how simple and intuitive it is
-    to learn.
-  </p>
-  <h3>
-    Simple API
-    <p>
-      Zustand's api is very simple to understand, basically all you have to do
-      to get started with is to set up a store with the <code>create</code>{" "}
-      function then just enter the state variables in the object. You can then
-      simply get your store function and change the state however you'd like in
-      your component because there is no wrapping provider necessary. Learn more
-      about the{" "}
-      <a href="https://github.com/pmndrs/zustand#first-create-a-store">
-        Zustand API
-      </a>
-      .
-    </p>
-    No providers
-    <p>
-      Unlike other state management solutions such as Reacts own{" "}
-      <a href="https://reactjs.org/docs/context.html">Context API</a>, Zustand
-      doesn't need to have all the children receiving the state to be wrapped in
-      a context provider. This makes Zustand incredibly simple and flexible
-      because its just 1 less thing you have to worry about.
-    </p>
-    Transient updates
-    <p>
-      Transient updates are a really cool and simple feature of Zustand,
-      basically what this means is that with large amounts of state changes the
-      component won't need to re-render with each state change. Learn more about{" "}
-      <a href="https://github.com/pmndrs/zustand#transient-updates-for-often-occuring-state-changes">
-        transient updates
-      </a>
-      .
-    </p>
-  </h3>
+<CS variant="tailwind">
+
+## [Tailwind](https://github.com/pmndrs/zustand)
+
+<Display iconOf="tailwind" />
+
+Tailwind is one of the newer additions to my list of favorite tech and for good reason. Tailwind css is referred to as a "utility-first" css framework that very basically provides thousands of helper classes with uniform styles to speed up your development exponentially. This being said I have found tailwind to be an amazing tool both in productivity as well as enjoyability when working on any sized project.
+
+<div>
+
+### Ultimate flexibility
+
+When you first install tailwind one thing it does is completely get rid of all basic styling applied to regular HTML elements. This is done in order to not have to override existing styles but because of this you can start on a completely blank slate and by using the wide variety of helper classes you can customize anything the way you like.
+
+### Predefined design system
+
+One thing that makes tailwind so powerful is that it has a very polished design system. Now this may not seem very important at first thought but when you get to use tailwind it really shows. With a predefined design system every class is catered towards a certain style so when you are building your application all the colors fit in together, the sizings look clean and proportional, etc.
+
+### Great documentation
+
+Tailwinds documentation is some of the best documentation I have ever seen for a framework, even if you are new to tailwind or have been using it for a while the documentation will always be a useful resource. Check out the [documentation](https://tailwindcss.com/docs).
+
+</div>
+
+<div>
+
+Getting started with tailwind is very simple, although setup instructions may differ depending on different frameworks, I will be using vite.
+
+With vite the installation process if very easy, all we need to do is run 2 commands and add 3 lines of code.
+
+First install the dependencies:
+
+```bash
+npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+```
+
+Next, generate the `tailwind.config.js` and `postcss.config.js` files:
+
+```bash
+npx tailwindcss init -p
+```
+
+Then in your main css file (connected to main file) include:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Now you can use tailwind anywhere in your application (without imports). Using tailwind is very simple, you simply use it as you would any regular css class.
+
+```html
+<div></div>
+```
+
+</div>
+
 </CS>
 
-<CS>
+<CS variant="zustand">
+
+## [Zustand](https://github.com/pmndrs/zustand)
+
+<Display iconOf="zustand" />
+
+Zustand is a very lightweight state management library that can easily be
+scaled to any size of project you have. Zustand is one of my go to libraries
+because of how simple the api and because of how simple and intuitive it is
+to learn.
+
+<div>
+
+### Simple API
+
+Zustand's api is very simple to understand, basically all you have to do
+to get started with is to set up a store with the `create`
+function then just enter the state variables in the object. You can then
+simply get your store function and change the state however you'd like in
+your component because there is no wrapping provider necessary. Learn more
+about the [Zustand API](https://github.com/pmndrs/zustand#first-create-a-store).
+
+### No providers
+
+Unlike other state management solutions such as Reacts own [Context API](https://reactjs.org/docs/context.html), Zustand doesn't need to have all the children receiving the state to be wrapped in a context provider. This makes Zustand incredibly simple and flexible
+because its just 1 less thing you have to worry about.
+
+### Transient updates
+
+Transient updates are a really cool and simple feature of Zustand,
+basically what this means is that with large amounts of state changes the
+component won't need to re-render with each state change. Learn more about [transient updates](https://github.com/pmndrs/zustand#transient-updates-for-often-occuring-state-changes).
+
+</div>
+
+<div>
+
+If you want to learn more about Zustand check out my [post](/theme-switcher) on creating a simple theme switcher with zustand and styled-components!
+
+</div>
+
+</CS>
+
+<CS variant="reactquery">
   <h2>
     <a href="https://react-query.tanstack.com/">React-Query</a>
   </h2>
   <Display iconOf="reactquery" />
   <p>
-    For me React is my go to javascript library for developing web applications
-    because of its advance component based structure as well as its provided
-    hooks that allow you easily to implement a multitude of things into your
-    components such as state. The development process for web applications as
-    never been easier.
+    React-query is the newest edition to my stack, at first I didn't see the importance of it but after using it for some projects I can't live without it. This very special library makes it as easy as can be to manage remote data
+
+```jsx
+const test = "test";
+```
+
   </p>
   <h3>
     Components
@@ -283,9 +418,9 @@ The three basic aspects of full stack development consist of 3 main sections, fr
 
 # Backend
 
-<CS>
+<!-- <CS>
   <h2>
-    <a href="https://firebase.google.com/">Firebase</a>
+    <a href="https://www.mongodb.com/1">MongoDB</a>
   </h2>
   <Display iconOf="firebase" />
   <p>
@@ -325,9 +460,51 @@ The three basic aspects of full stack development consist of 3 main sections, fr
       reusable parts that can be processed separately.
     </p>
   </h3>
+</CS> -->
+
+<CS variant="firebase">
+  <h2>
+    <a href="https://firebase.google.com/">Firebase</a>
+  </h2>
+  <Display iconOf="firebase" />
+  <p>
+    Firebase has many features but one of the most prominent is its cloud
+    firestore. For smaller projects firebase is a breeze. On top of the provided
+    api being super simple firebase
+  </p>
+  <h3>
+    Components
+    <p>
+      Components are the building blocks of any React application, and a single
+      app usually consists of multiple components. A component is essentially a
+      piece of the user interface. React splits the UI into independent,
+      reusable parts that can be processed separately.
+    </p>
+    JSX
+    <p>
+      Components are the building blocks of any React application, and a single
+      app usually consists of multiple components. A component is essentially a
+      piece of the user interface. React splits the UI into independent,
+      reusable parts that can be processed separately.
+    </p>
+    Libraries
+    <p>
+      Components are the building blocks of any React application, and a single
+      app usually consists of multiple components. A component is essentially a
+      piece of the user interface. React splits the UI into independent,
+      reusable parts that can be processed separately.
+    </p>
+    Virtual DOM
+    <p>
+      Components are the building blocks of any React application, and a single
+      app usually consists of multiple components. A component is essentially a
+      piece of the user interface. React splits the UI into independent,
+      reusable parts that can be processed separately.
+    </p>
+  </h3>
 </CS>
 
-<CS>
+<CS variant="netlify">
   <h2>
     <a href="https://www.netlify.com/products/functions/">
       Netlify serverless functions
@@ -383,7 +560,7 @@ It is a long established fact that a reader will be distracted by the readable c
 
 # Deployment
 
-<CS>
+<CS variant="netlify">
   <h2>
     <a href="https://www.netlify.com/">Netlify</a>
   </h2>

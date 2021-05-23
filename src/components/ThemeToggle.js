@@ -6,7 +6,6 @@ import { BiMoon, BiSun } from "react-icons/bi";
 export const ThemeToggle = () => {
   const [animating, setAnimate] = useState(false);
   const { dark, toggleDarkMode } = useUserStore();
-  console.log(dark);
   const animate = () => {
     setAnimate(true);
     toggleDarkMode();

@@ -55,6 +55,12 @@ export const CodeWrapper = styled.div`
     color: white;
   }
 
+  .gatsby-highlight pre[class~="language-sh"]::before {
+    content: "sh";
+    background: #212121;
+    color: white;
+  }
+
   .gatsby-highlight pre[class~="language-bash"]::before {
     content: "bash";
     background: #000000;

@@ -11,6 +11,25 @@ export const Dark = {
     accent: "#5686F5",
     accentBG: "#5686F517",
 
+    buttons: {
+      primary: {
+        color: "#96ff73",
+        background: "#96ff7317",
+      },
+      blue: {
+        color: "#619efb",
+        background: "#619efb17",
+      },
+      yellow: {
+        color: "#fff373",
+        background: "#fff37317",
+      },
+      danger: {
+        color: "#FF4154",
+        background: "#FF415417",
+      },
+    },
+
     utils: {
       tags: {
         colors: {
@@ -31,6 +50,7 @@ export const Dark = {
           react: "#60dbfa",
           vite: "#faa91a",
           styledcomponents: "#CE69A7",
+          tailwind: "#22D8F0",
           zustand: "#F56D2C",
           reactquery: "#FF4154",
           firebase: "#FFCB2B",
@@ -40,6 +60,7 @@ export const Dark = {
           react: "#60DBFA",
           vite: "none",
           styledcomponents: "#FFD048",
+          tailwind: "#f6f6f6",
           zustand: "none",
           reactquery: "none",
           firebase: "#FFCB2B",
@@ -49,6 +70,8 @@ export const Dark = {
           react: "#1F2229",
           vite: "linear-gradient(120deg,rgb(250, 169, 26) 0%,rgba(254, 221, 53, 1) 100%)",
           styledcomponents: "#CE69A7",
+          tailwind:
+            "linear-gradient(40deg, rgba(27,170,187,1) 0%, rgba(17,202,183,1) 100%)",
           zustand: "#F56D2C",
           reactquery: "#FF4154",
           firebase: "#009BE7",

@@ -62,7 +62,6 @@ const detailsQuery = graphql`
         title
         description
         author
-        image
       }
     }
   }

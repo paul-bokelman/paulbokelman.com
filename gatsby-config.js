@@ -1,9 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: "My MDX Blog",
-    description: "This is a random blog thing",
-    url: "https://youtube.com",
-    image: "/office.jpg",
+    title: "Paul Bokelman's Blog",
+    description: "Paul Bokelman's Blog",
+    url: "https://paulbokelman.com",
     author: "Paul Bokelman",
   },
   plugins: [
