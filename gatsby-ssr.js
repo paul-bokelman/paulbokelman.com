@@ -5,6 +5,7 @@ import { CustomThemeProvider } from "./src/themes";
 import { preToCodeBlock } from "mdx-utils";
 import { Code, F, C, Peek, Bool, CS, Display } from "./src/components";
 import "./src/fonts/fonts.css";
+import "./src/styles/global.css";
 // import "./language-tabs.css";
 
 const GlobalStyles = createGlobalStyle`
