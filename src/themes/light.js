@@ -33,6 +33,7 @@ export const Light = {
           tailwind: "#22D8F0",
           zustand: "#572C3D",
           reactquery: "#FF4154",
+          node: "#23B45D",
           firebase: "#FFCB2B",
           netlify: "#499EBE",
         },
@@ -43,6 +44,7 @@ export const Light = {
           tailwind: "#f6f6f6",
           zustand: "none",
           reactquery: "white",
+          node: "white",
           firebase: "white",
           netlify: "white",
         },
@@ -54,6 +56,7 @@ export const Light = {
             "linear-gradient(40deg, rgba(27,170,187,1) 0%, rgba(17,202,183,1) 100%)",
           zustand: "#572C3D",
           reactquery: "#FF4154",
+          node: "#23B45D",
           firebase: "#FFCB2B",
           netlify:
             "linear-gradient(40deg, rgba(1,131,191,1) 0%, rgba(1,197,183,1) 100%)",

@@ -9,12 +9,18 @@ import {
   Contents,
   MetaInfo,
   usePostStore,
+  useUserStore,
 } from "../components";
 const SinglePost = ({ data }) => {
   const { setRepo } = usePostStore();
+  const { dark } = useUserStore();
   const target = createRef();
-  const featureImage = data.mdx.frontmatter.featureImage.publicURL;
-  const seoImage = data.mdx.frontmatter.featureImage.publicURL;
+  const featureImage = dark
+    ? data.mdx.frontmatter.featureImage[0].publicURL
+    : data.mdx.frontmatter.featureImage[1].publicURL;
+  const seoImage = dark
+    ? data.mdx.frontmatter.featureImage[0].publicURL
+    : data.mdx.frontmatter.featureImage[1].publicURL;
   useEffect(() => {
     const blockquotes = document
       .getElementById("container")

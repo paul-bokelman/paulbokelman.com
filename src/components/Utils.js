@@ -6,6 +6,7 @@ import { AiFillCaretRight, AiFillEye } from "react-icons/ai";
 import { TiWarning } from "react-icons/ti";
 import { VscError } from "react-icons/vsc";
 import { FiSlash } from "react-icons/fi";
+import { FaNode } from "react-icons/fa";
 import { SiStyledComponents, SiNetlify, SiTailwindcss } from "react-icons/si";
 import { RiSpeedFill, RiCloseFill } from "react-icons/ri"; // RiPlayFill
 import {
@@ -52,7 +53,6 @@ export const CS = ({ children, variant }) => {
   const code = children[4];
   let link = header.props.children.props.children;
   link = link.replace(/-/g, "").toLowerCase();
-  link = link === "netlify serverless functions" ? "netlify" : link;
   return (
     <CSWrapper content={content[index]} link={link}>
       <div>
@@ -91,6 +91,8 @@ export const Display = ({ iconOf }) => {
         return <Zustand />;
       case "reactquery":
         return <Reactquery />;
+      case "node":
+        return <FaNode />;
       case "firebase":
         return <IoLogoFirebase />;
       case "netlify":

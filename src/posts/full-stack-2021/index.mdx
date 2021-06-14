@@ -2,8 +2,8 @@
 title: My go to 2021 fullstack setup for developing web applications
 slug: 2021-full-stack
 date: 2021-05-10
-featureImage: feature.png
-images: [react.png, styled-components.png]
+featureImage: [feature_dark.png, feature_light.png]
+images: [react.png, styled-components.png, tailwind.png]
 excerpt: A quick but informative post on my go to technologies for 2021 including my favorite tools and libraries for frontend and backend development as well as fast and simple deployment.
 currentRepo: "none"
 tags: ["informative", "react"]
@@ -94,6 +94,7 @@ The output of this component on the page is simply:
 
 <img
   src={props.images[0].publicURL}
+  alt="reactPreview"
   style={{
     width: "100%",
     height: "100%",
@@ -258,7 +259,7 @@ export default App;
 
 The output of this component should look like this:
 
-<img src={props.images[1].publicURL} />
+<img src={props.images[1].publicURL} alt="styledcomponents" />
 
 </div>
 
@@ -290,9 +291,7 @@ Tailwinds documentation is some of the best documentation I have ever seen for a
 
 <div>
 
-Getting started with tailwind is very simple, although setup instructions may differ depending on different frameworks, I will be using vite.
-
-With vite the installation process if very easy, all we need to do is run 2 commands and add 3 lines of code.
+Getting started with tailwind is very simple, although setup instructions may differ depending on different frameworks, I will be using vite. With vite the installation process if very easy, all we need to do is run 2 commands and add 3 lines of code.
 
 First install the dependencies:
 
@@ -306,7 +305,7 @@ Next, generate the `tailwind.config.js` and `postcss.config.js` files:
 npx tailwindcss init -p
 ```
 
-Then in your main css file (connected to main file) include:
+Then in your main css file (attached to root file) include:
 
 ```css
 @tailwind base;
@@ -314,7 +313,45 @@ Then in your main css file (connected to main file) include:
 @tailwind utilities;
 ```
 
-Now you can use tailwind anywhere in your application (without imports). Using tailwind is very simple, you simply use it as you would any regular css class.
+Now you can use tailwind anywhere in your application (without imports). Using tailwind is very simple, you simply use it as you would any regular css class. You can check out the documentation on tailwind to learn all of the different class names and conventions but here is a simple preview of tailwind in action with React.
+
+```jsx -r-[App.jsx]/copy/
+import React, { useState } from "react";
+import { CgSpinner } from "react-icons/cg";
+function App() {
+  const [loading, setLoading] = useState(false);
+  return (
+    <div className="h-screen bg-indigo-300 flex justify-center items-center">
+      <button
+        onClick={() => {
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
+        }}
+        type="submit"
+        disabled={loading ? true : false}
+        className="mt-4 w-44 flex-none bg-indigo-600 hover:bg-indigo-700 text-white text-lg 
+        leading-6 font-semibold py-2 px-6 border border-transparent rounded-xl focus:ring-2
+        focus:ring-offset-2 focus:ring-offset-indigo-300 focus:ring-indigo-700 
+        focus:outline-none transition-colors duration-200"
+      >
+        {loading ? (
+          <CgSpinner className="animate-spin inline h-5 w-5 relative -top-0.5" />
+        ) : (
+          "Submit"
+        )}
+      </button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+Below is just an image of the output although if you were to run the component yourself you'd see tailwinds simple animation library in action through the spinner icon.
+
+<img src={props.images[2].publicURL} alt="tailwindPreview" />
 
 </div>
 
@@ -364,48 +401,47 @@ If you want to learn more about Zustand check out my [post](/theme-switcher) on 
 </CS>
 
 <CS variant="reactquery">
-  <h2>
-    <a href="https://react-query.tanstack.com/">React-Query</a>
-  </h2>
-  <Display iconOf="reactquery" />
-  <p>
-    React-query is the newest edition to my stack, at first I didn't see the importance of it but after using it for some projects I can't live without it. This very special library makes it as easy as can be to manage remote data
 
-```jsx
-const test = "test";
+## [React-Query](https://react-query.tanstack.com/)
+
+<Display iconOf="reactquery" />
+
+React-query is the newest edition to my stack, at first I didn't see the importance of it but after using it for some projects I can't live without it. This very special library makes it as easy as can be to manage remote data through its advance hooks and features.
+
+<div>
+
+### Simple
+
+Thanks to the developers, React-Query is actually very simple to get started with. All you have to do is wrap your application the the React-Query context provider, then use the `useQuery` or `useMutation` hooks where ever you'd like. These hooks are also very simple, for example the `useQuery` hook can simply be used like this:
+
+```js
+const { data, isLoading, error } = useQuery("getUsers", () =>
+  // "getUsers" is name of query
+  axios.get("https://jsonplaceholder.typicode.com/users")
+); // fetch method and route
+
+// display users names
+data.map((user) => {
+console.log(user.name);
+}
 ```
 
-  </p>
-  <h3>
-    Components
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    JSX
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Libraries
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Virtual DOM
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-  </h3>
+### Advance synchronization
+
+One of the biggest pains when working with regular requests is that when displaying it the data may be outdated at times, React-Query solves this. As per custom configuration React-Query will refetch data, you can also manually refetch data with the `refetch()` function.
+
+### Automatic caching
+
+Something that is notoriously difficult when fetching your data without the help of libraries is caching the previous or incoming data and checking to see if specific data should be updated to favor performance. React-Query makes this very simple by literally automatically caching data in order to make your application much quicker and more enjoyable to use.
+
+</div>
+
+<div>
+
+React-Query is a very big topic so if you'd like to learn more check out the [documentation](https://react-query.tanstack.com/overview).
+
+</div>
+
 </CS>
 
 </section>
@@ -414,141 +450,157 @@ const test = "test";
 
 # Backend
 
-<!-- <CS>
-  <h2>
-    <a href="https://www.mongodb.com/1">MongoDB</a>
-  </h2>
-  <Display iconOf="firebase" />
-  <p>
-    For me React is my go to javascript library for developing web applications
-    because of its advance component based structure as well as its provided
-    hooks that allow you easily to implement a multitude of things into your
-    components such as state. The development process for web applications as
-    never been easier.
-  </p>
-  <h3>
-    Components
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    JSX
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Libraries
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Virtual DOM
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-  </h3>
-</CS> -->
+<CS variant="node">
+
+## [Node](https://nodejs.org/en/)
+
+<Display iconOf="node" />
+
+Without a doubt Node is one of the most important pieces of technology for
+web development although did you know that it can make backend development
+really simple? Typically setting up a node server is moderately tedious
+process although with the help of
+[Express](https://expressjs.com/) this process is made much
+more enjoyable and easy. Simply due to how simple the whole process of
+setting up a server is as well as the flexibility, Node is my number one
+pick for backend development.
+
+<div>
+
+### Fast
+
+Since Node is built off of Chrome's V8 JavaScript engine it is incredibly fast in executing code. On top of being built on the V8 engine, Node is also event driven and asynchronous this means that promises or incoming api data can be run in parallel which means that Node does not need to wait for a single request.
+
+### [Express](https://expressjs.com/)
+
+One of the big perks of using Node is that you have access to Express. Express is a very powerful yet minimalist javascript framework for Node that allows for very fast development whilst also allowing the developer to have all the freedom they want. Check out the third page of this section to see an example.
+
+### [Sequelize](https://sequelize.org/)
+
+Another great thing about Node is that you can use sequelize. As described on their website, Sequelize is a promise-based, Node.js ORM (Object-relational mapping) for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. This means that we can built and manipulate databases very easy through Node.
+
+</div>
+
+<div>
+
+Setting up a basic Node server is incredibly easy, first make a new folder then initialize the project and install the required dependencies. When you first initialize the project you will be prompted with lots of questions, after naming your project (first question) you can simply click enter on all of the rest.
+
+```bash
+mkdir nodeServer && cd nodeServer && npm init && npm install express
+```
+
+At this point we have installed of the required dependencies and can jump into the code and start configuring the project. We need to first create a javascript file named `index.js` in the root of the project, this file will contain our server code and will run when we start the program.
+
+Although in order to run the file through npm scripts we need to make a simple change to the `package.json`.
+
+```json -r-{7}[package.json]/copy/
+{
+  "name": "myserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
+```
+
+Now whenever we run the `npm start` command the script will run our `index.js` file with node and allow us to properly execute it. With that out of the way we can jump into the `index.js` file.
+
+We can set up a very simple server with just 8 lines of code.
+
+```js -r-[index.js]/copy/
+const express = require("express"); // importing express
+const app = express(); // using express through declaration
+
+app.get("/", (req, res) => {
+  // setting up a simple get route with route of "/"
+  res.send("Hello World!"); // when "/" is accessed the server will display "Hello World!"
+});
+
+app.listen(3000, () => {
+  // server location
+  console.log("Server is running"); // confirmation that server is running
+});
+```
+
+Our simple server will now display "Hello World!" on the screen whenever the root route is accessed, check it out [http://localhost:3000/](http://localhost:3000).
+
+This is an example of a very simple server although node has many things to offer one of which being route params.
+
+```js -r-{8-11}[index.js]/copy/
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.get("/param/:myparam", (req, res) => {
+  // colon notation represents a param, this means that "myparam" can be anything
+  const param = req.params.myparam; // setting variable to param for simplicity
+  res.send(`Your param is "${param}"`); // displaying param in response
+});
+
+app.listen(3000, () => {
+  console.log("Server is running");
+});
+```
+
+At this point if you went to [http://localhost:3000/param/check out my param](http://localhost:3000/param/check%20out%20my%20param) you would see "Your param is "check out my param"" displayed on the screen.
+
+If you'd like to learn more about Node be sure to look out for my upcoming post on using Node, Express, and Sequelize together to make a full fledged REST api.
+
+</div>
+
+</CS>
 
 <CS variant="firebase">
-  <h2>
-    <a href="https://firebase.google.com/">Firebase</a>
-  </h2>
-  <Display iconOf="firebase" />
-  <p>
-    Firebase has many features but one of the most prominent is its cloud
-    firestore. For smaller projects firebase is a breeze. On top of the provided
-    api being super simple firebase
-  </p>
-  <h3>
-    Components
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    JSX
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Libraries
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Virtual DOM
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-  </h3>
+
+## [Firebase](https://firebase.google.com/)
+
+<Display iconOf="firebase" />
+
+Although firebase has a plethora of features to offer for mobile and web development, for backend web development I find [Firestore](https://firebase.google.com/docs/firestore) a very close competitor to the likes of Node with sequelize. Firestore is a flexible and scalable NoSQL cloud database to store and sync data for client and server-side development. This means that all you need to do in order to set up a very simple database is to simply use the api, nothing else. This is what makes firestore so powerful, the fact that there is a very low learning curve and that its infinitely scalable.
+
+<div>
+
+[Key Features](https://firebase.google.com/docs/firestore) referenced from documentation.
+
+## Flexibility
+
+The Cloud Firestore data model supports flexible, hierarchical data structures. Store your data in documents, organized into collections. Documents can contain complex nested objects in addition to subcollections.
+
+## Expressive querying
+
+In Cloud Firestore, you can use queries to retrieve individual, specific documents or to retrieve all the documents in a collection that match your query parameters. Your queries can include multiple, chained filters and combine filtering and sorting. They're also indexed by default, so query performance is proportional to the size of your result set, not your data set.
+
+## Realtime updates
+
+Like Realtime Database, Cloud Firestore uses data synchronization to update data on any connected device. However, it's also designed to make simple, one-time fetch queries efficiently.
+
+## Offline support
+
+Cloud Firestore caches data that your app is actively using, so the app can write, read, listen to, and query data even if the device is offline. When the device comes back online, Cloud Firestore synchronizes any local changes back to Cloud Firestore.
+
+## Designed to scale
+
+Cloud Firestore brings you the best of Google Cloud's powerful infrastructure: automatic multi-region data replication, strong consistency guarantees, atomic batch operations, and real transaction support. We've designed Cloud Firestore to handle the toughest database workloads from the world's biggest apps.
+
+</div>
+
+<div>
+
+There is no reason the re-invent the wheel so if you would like to learn more about getting started check out the superb [documentation](https://firebase.google.com/docs/firestore/quickstart).
+
+</div>
+
 </CS>
-
-<CS variant="netlify">
-  <h2>
-    <a href="https://www.netlify.com/products/functions/">
-      Netlify serverless functions
-    </a>
-  </h2>
-  <Display iconOf="netlify" />
-  <p>
-    For me React is my go to javascript library for developing web applications
-    because of its advance component based structure as well as its provided
-    hooks that allow you easily to implement a multitude of things into your
-    components such as state. The development process for web applications as
-    never been easier.
-  </p>
-  <h3>
-    Components
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    JSX
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Libraries
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Virtual DOM
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-  </h3>
-</CS>
-
-<!-- ## Faker.js
-
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). -->
 
 </section>
 
@@ -557,47 +609,41 @@ It is a long established fact that a reader will be distracted by the readable c
 # Deployment
 
 <CS variant="netlify">
-  <h2>
-    <a href="https://www.netlify.com/">Netlify</a>
-  </h2>
-  <Display iconOf="netlify" />
-  <p>
-    For me React is my go to javascript library for developing web applications
-    because of its advance component based structure as well as its provided
-    hooks that allow you easily to implement a multitude of things into your
-    components such as state. The development process for web applications as
-    never been easier.
-  </p>
-  <h3>
-    Components
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    JSX
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Libraries
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-    Virtual DOM
-    <p>
-      Components are the building blocks of any React application, and a single
-      app usually consists of multiple components. A component is essentially a
-      piece of the user interface. React splits the UI into independent,
-      reusable parts that can be processed separately.
-    </p>
-  </h3>
+
+## [Netlify](https://www.netlify.com/)
+
+<Display iconOf="netlify" />
+
+In my mind there will never be an easier deployment process than that of netlify,
+not only is it incredibly fast they also offer a very generous amount of space when
+working on their free plan. Because of Netlifys Git-based workflow all you have to
+do to deploy a project is to simply login with your github and chose the repo, then
+your project will then be hosted on a public domain, seriously. Netlify also offers
+[Netlify Edge](https://www.netlify.com/products/edge/) and [Netlify Functions](https://www.netlify.com/products/functions/)
+but we will get more into that in the key features section.
+
+<div>
+
+### Blazing fast deployments
+
+As previously mentioned Netlify makes deploying projects to the web incredibly simple, its as simple as literally clicking 2 buttons after you've logged in. On top of this after deploying your project will be hosted on a prefix of Netlifys domain which means that it is accessible to anyone to see, so prototyping web applications to the public or for a small project is very easy.
+
+### Edge
+
+Learn more about [Edge](https://www.netlify.com/products/edge/).
+
+### Functions
+
+Learn more about [Functions](https://www.netlify.com/products/functions/).
+
+</div>
+
+<div>
+
+There really isn't any code to show for the deployment process because it is through github and so simple.
+
+</div>
+
 </CS>
 
 </section>

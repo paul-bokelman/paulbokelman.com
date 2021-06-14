@@ -2,7 +2,9 @@ import React from "react";
 import { PostPreviewWrapper, Card } from "../elements";
 import { Link } from "gatsby";
 import { GetTags } from ".";
+import { useUserStore } from ".";
 export const PostPreview = ({ posts }) => {
+  const { dark } = useUserStore();
   return (
     <PostPreviewWrapper>
       {posts.map((post) => (
@@ -16,8 +18,12 @@ export const PostPreview = ({ posts }) => {
               {GetTags(post.node.frontmatter.tags)}
             </div>
             <img
-              src={post.node.frontmatter.featureImage.publicURL}
-              alt={post.node.frontmatter.featureImage.publicURL}
+              src={
+                dark
+                  ? post.node.frontmatter.featureImage[0].publicURL
+                  : post.node.frontmatter.featureImage[1].publicURL
+              }
+              alt="feature image"
             />
             <h2>{post.node.frontmatter.excerpt}</h2>
           </Card>
