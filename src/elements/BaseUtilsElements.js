@@ -26,6 +26,8 @@ export const FunctionalButtonWrapper = styled.span`
           props.theme.colors.utils.display.link[props.variant]
         }17;
         }`;
+      default:
+        return "none";
     }
   }}
 `;

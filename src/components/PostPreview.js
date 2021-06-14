@@ -23,7 +23,11 @@ export const PostPreview = ({ posts }) => {
                   ? post.node.frontmatter.featureImage[0].publicURL
                   : post.node.frontmatter.featureImage[1].publicURL
               }
-              alt="feature image"
+              alt={
+                dark
+                  ? post.node.frontmatter.featureImage[0].publicURL
+                  : post.node.frontmatter.featureImage[1].publicURL
+              }
             />
             <h2>{post.node.frontmatter.excerpt}</h2>
           </Card>
